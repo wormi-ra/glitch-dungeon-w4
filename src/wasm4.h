@@ -59,6 +59,8 @@ WASM_EXPORT("update") void update ();
 // │                                                                           │
 // └───────────────────────────────────────────────────────────────────────────┘
 
+namespace w4 {
+
 /** Copies pixels to the framebuffer. */
 WASM_IMPORT("blit")
 void blit (const uint8_t* data, int32_t x, int32_t y, uint32_t width, uint32_t height, uint32_t flags);
@@ -140,3 +142,5 @@ WASM_IMPORT("trace") void trace (const char* str);
 /** Prints a message to the debug console. */
 __attribute__((__format__ (__printf__, 1, 2)))
 WASM_IMPORT("tracef") void tracef (const char* fmt, ...);
+
+}

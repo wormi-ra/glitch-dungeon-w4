@@ -7,5 +7,5 @@ void Audio::Tone::play(float volumeMultiplier) const {
         (static_cast<uint32_t>(static_cast<float>(this->volume.peak * volumeMultiplier)) << 8)
         | static_cast<uint32_t>(this->volume.sustain * volumeMultiplier)
     );
-    tone(this->frequency.value, this->duration.value, volume, this->flags);
+    w4::tone(this->frequency.value, this->duration.value, volume, this->flags);
 }

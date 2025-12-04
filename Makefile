@@ -13,7 +13,7 @@ WASM_OPT_FLAGS = -Oz --zero-filled-memory --strip-producers --enable-bulk-memory
 DEBUG = 0
 
 # Compilation flags
-CFLAGS = -W -Wall -Wextra -Werror -Wno-unused -Wconversion -Wsign-conversion -MMD -MP -fno-exceptions -mbulk-memory -fno-rtti
+CFLAGS = -W -Wall -Wextra -Wconversion -Wsign-conversion -MMD -MP -fno-exceptions -mbulk-memory -fno-rtti
 ifeq ($(DEBUG), 1)
 	CFLAGS += -DDEBUG -O0 -g
 else
@@ -58,11 +58,11 @@ all: build/cart.wasm
 build/cart.wasm: $(OBJECTS)
 	$(CXX) -o $@ $(OBJECTS) $(LDFLAGS)
 ifneq ($(DEBUG), 1)
-# ifeq (, $(shell command -v $(WASM_OPT)))
-# 	@echo Tip: $(WASM_OPT) was not found. Install it from binaryen for smaller builds!
-# else
-# 	$(WASM_OPT) $(WASM_OPT_FLAGS) $@ -o $@
-# endif
+ifeq (, $(shell command -v $(WASM_OPT)))
+	@echo Tip: $(WASM_OPT) was not found. Install it from binaryen for smaller builds!
+else
+	$(WASM_OPT) $(WASM_OPT_FLAGS) $@ -o $@
+endif
 endif
 
 # Compile C sources

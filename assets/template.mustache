@@ -1,0 +1,32 @@
+#include "Sheets.hpp"
+
+// TODO: move to .hpp
+namespace Data {
+{{#sprites}}
+    extern const Sheet {{rustName}};
+{{/sprites}}
+    extern const Sheet *TILESHEETS[];
+}
+
+{{#sprites}}
+static const uint8_t {{rustName}}_DATA[] = {
+    {{bytes}}
+};
+
+const Sheet Data::{{rustName}} {
+    {{width}}, {{height}}, 8, 8,
+    {{rustName}}_DATA
+};
+
+{{/sprites}}
+
+const Sheet *Data::TILESHEETS[] {
+    &Data::TILE_GREY,
+    &Data::TILE_RED,
+    &Data::TILE_GREEN,
+    &Data::TILE_ZERO,
+    &Data::TILE_BLUE,
+    &Data::TILE_GOLD,
+    &Data::TILE_NEGATIVE,
+    &Data::TILE_PINK
+};

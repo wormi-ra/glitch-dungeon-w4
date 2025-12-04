@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Audio/Sound.hpp"
-#include "Audio/LFO.hpp"
+#include "../Audio/Sound.hpp"
+#include "../Audio/LFO.hpp"
 
 namespace Sounds {
     extern const Audio::Sound BLIP;

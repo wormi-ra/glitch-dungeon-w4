@@ -1,6 +1,7 @@
 #include "wasm4.h"
-#include "Sounds.hpp"
-#include <cstdint>
+#include "Data/Sounds.hpp"
+#include "Data/Sheets.hpp"
+#include "strutils.hpp"
 
 static const uint8_t smiley[] = {
     0b11000011,
@@ -25,29 +26,12 @@ static const Audio::ISound *sounds[N_SOUNDS] = {
     &Sounds::LFO,
 };
 
-size_t strlen(const char *str) {
-    const char *ptr = str;
-    for (; *ptr != '\0' ; ptr++);
-    return (size_t)(ptr - str);
-}
-
-const char *itoa(uint32_t val, uint32_t base = 10){
-	
-	static char buf[32] = {'\0'};
-	
-	uint32_t i = 30;
-	if (val == 0)
-        return "0";
-	for(; val && i ; --i, val /= base)
-	
-		buf[i] = "0123456789abcdef"[val % base];
-	
-	return &buf[i+1];
-}
-
 void update () {
+    *DRAW_COLORS = 0x1234;
+    for (int i = 0; i < 7 ; i++)
+        Data::TILESHEETS[i]->blitSub(0, 16 + i*8, 16);
     *DRAW_COLORS = 2;
-    text(
+    w4::text(
         sounds[currentSound]->name(),
         SCREEN_SIZE / 2 - (int32_t)strlen(sounds[currentSound]->name()) / 2 * FONT_SIZE,
         48
@@ -79,8 +63,8 @@ void update () {
     } else {
         *DRAW_COLORS = 4;
     }
-    blit(smiley, 76, 76, 8, 8, BLIT_1BPP);
-    text("Press X to play", 16, 90);
-    text("Hold Z to freeze", 16, 104);
-    text(itoa(frame), 16, 160 - 8 - 16);
+    w4::blit(smiley, 76, 76, 8, 8, BLIT_1BPP);
+    w4::text("Press X to play", 16, 90);
+    w4::text("Hold Z to freeze", 16, 104);
+    w4::text(itoa(frame), 16, 160 - 8 - 16);
 }
