@@ -1,7 +1,7 @@
 #pragma once
 
 #include <cstdint>
-#include "wasm4.h"
+#include "wasm4.hpp"
 
 struct Sheet {
     uint32_t width;

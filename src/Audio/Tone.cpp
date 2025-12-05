@@ -1,5 +1,5 @@
 #include "Tone.hpp"
-#include "../wasm4.h"
+#include "../wasm4.hpp"
 #include <cstdint>
 
 void Audio::Tone::play(float volumeMultiplier) const {

@@ -1,11 +1,5 @@
 #include "strutils.hpp"
 
-size_t strlen(const char *str) {
-    const char *ptr = str;
-    for (; *ptr != '\0' ; ptr++);
-    return (size_t)(ptr - str);
-}
-
 const char *itoa(uint32_t val, uint32_t base) {
 	
 	static char buf[32] = {'\0'};

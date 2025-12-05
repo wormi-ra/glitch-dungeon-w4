@@ -14,21 +14,24 @@
 #include <new>
 #include <malloc.h>
 
-extern "C" void __cxa_pure_virtual() { while(1); }
+// Override pure virtual function implementation to reduce code size with abstract classes
+extern "C" void __cxa_pure_virtual() { 
+    while(1);
+}
 
-void* operator new(size_t size) {
+void* operator new(std::size_t size) {
     return malloc(size);
 }
  
-void* operator new[](size_t size) {
+void* operator new[](std::size_t size) {
     return malloc(size);
 }
  
-void operator delete(void* ptr) {
+void operator delete(void* ptr) noexcept {
     free(ptr);
 }
  
-void operator delete[](void* ptr) {
+void operator delete[](void* ptr) noexcept {
     free(ptr);
 }
  
@@ -38,7 +41,7 @@ void operator delete[](void* ptr) {
    rather than just eliminate exceptions.
  */
  
-void* operator new(size_t size, const std::nothrow_t&) noexcept {
+void* operator new(std::size_t size, const std::nothrow_t&) noexcept {
     return malloc(size);
 }
  

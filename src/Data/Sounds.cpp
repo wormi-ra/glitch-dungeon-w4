@@ -1,4 +1,4 @@
-#include "../wasm4.h"
+#include "../wasm4.hpp"
 #include "Sounds.hpp"
 
 const Audio::Sound Sounds::BLIP {

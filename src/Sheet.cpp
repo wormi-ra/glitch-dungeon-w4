@@ -1,5 +1,5 @@
 #include "Sheet.hpp"
-#include "wasm4.h"
+#include "wasm4.hpp"
 
 void Sheet::blitSub(uint32_t tileId, int32_t x, int32_t y, uint32_t flags) const
 {

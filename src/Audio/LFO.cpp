@@ -1,4 +1,4 @@
-#include "../wasm4.h"
+#include "../wasm4.hpp"
 #include "LFO.hpp"
 
 const char *Audio::LFO::name() const {
