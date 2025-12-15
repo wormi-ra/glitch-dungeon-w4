@@ -1,0 +1,15 @@
+#include "Zero.hpp"
+
+Glitch::Type Glitch::Zero::getType() const {
+    return Type::ZERO;
+}
+
+const uint32_t *Glitch::Zero::getPalette() const {
+    static const uint32_t palette[4] = {
+        0x000000,
+        0x822512,
+        0x3e44b3,
+        0xed9e3b,
+    };
+    return palette;
+}

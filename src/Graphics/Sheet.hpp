@@ -1,7 +1,8 @@
 #pragma once
 
 #include <cstdint>
-#include "wasm4.hpp"
+#include "../Graphics/Viewport.hpp"
+#include "../wasm4.hpp"
 
 struct Sheet {
     uint32_t width;
@@ -11,5 +12,5 @@ struct Sheet {
     const uint8_t *data;
     uint32_t flags = BLIT_2BPP;
 
-    void blitSub(uint32_t tileId, int32_t x, int32_t y, uint32_t flags = 0) const;
+    void blitSub(const Viewport &view, uint32_t tileId, Vector2<int32_t> position, uint32_t flags = 0) const;
 };
