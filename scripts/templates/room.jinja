@@ -1,0 +1,24 @@
+#include "Rooms.hpp"
+
+{% for room in rooms %}
+static const uint8_t {{ room.name }}_DATA[] {
+    {{ room.tile_data.data|join(', ') }}
+};
+
+const RoomData Data::{{ room.name }} {
+    .entities = { {{- room.entities|join(', ') -}} },
+    .data = {
+        .len = {{ room.tile_data.len }},
+        .data = {{ room.name }}_DATA,
+    }
+};
+
+{% endfor %}
+const RoomData Data::DUNGEON[6][6] {
+    {Data::ROOM_0_0, Data::ROOM_1_0, Data::ROOM_2_0, Data::ROOM_3_0, Data::ROOM_4_0, Data::ROOM_5_0},
+    {Data::ROOM_0_1, Data::ROOM_1_1, Data::ROOM_2_1, Data::ROOM_3_1, Data::ROOM_4_1, Data::ROOM_5_1},
+    {Data::ROOM_0_2, Data::ROOM_1_2, Data::ROOM_2_2, Data::ROOM_3_2, Data::ROOM_4_2, Data::ROOM_5_2},
+    {Data::ROOM_0_3, Data::ROOM_1_3, Data::ROOM_2_3, Data::ROOM_3_3, Data::ROOM_4_3, Data::ROOM_5_3},
+    {Data::ROOM_0_4, Data::ROOM_1_4, Data::ROOM_2_4, Data::ROOM_3_4, Data::ROOM_4_4, Data::ROOM_5_4},
+    {Data::ROOM_0_5, Data::ROOM_1_5, Data::ROOM_2_5, Data::ROOM_3_5, Data::ROOM_4_5, Data::ROOM_5_5},
+};

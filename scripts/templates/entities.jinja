@@ -1,0 +1,32 @@
+
+#include "Entities.hpp"
+
+const Data::EntityData *Data::ENTITIES[] {
+{% for entity in entities %}
+    // {{ loop.index - 1 }}
+    new Data::{{ entity.type }} {
+        {
+            Data::EntityData::Type::{{ entity.type|upper }},
+            { {{- entity.obj.x }}, {{ entity.obj.y -}} }
+        },
+    {% if entity.obj.room_x is defined and entity.obj.room_y is defined %}
+        { {{- entity.obj.room_x }}, {{ entity.obj.room_y -}} },
+    {% endif %}
+    {% if entity.obj.door_id is defined %}
+        {{ entity.obj.door_id }},
+    {% endif %}
+    {% if entity.obj.num_artifacts is defined %}
+        {{ entity.obj.num_artifacts }},
+    {% endif %}
+    {% if entity.obj.collection_id is defined %}
+        {{ entity.obj.collection_id }},
+    {% endif %}
+    {% if entity.obj.npc_id is defined %}
+        {{ entity.obj.npc_id }},
+    {% endif %}
+    {% if entity.obj.enemy_id is defined %}
+        {{ entity.obj.enemy_id }},
+    {% endif %}
+    },
+{% endfor%}
+};

@@ -5,6 +5,8 @@ namespace Data {
 {{#sprites}}
     extern const Sheet {{rustName}};
 {{/sprites}}
+
+    constexpr uint8_t TILESHEET_COUNT = 8;
     extern const Sheet *TILESHEETS[];
 }
 
@@ -20,7 +22,6 @@ const Sheet Data::{{rustName}} {
 };
 
 {{/sprites}}
-
 const Sheet *Data::TILESHEETS[] {
     &Data::TILE_GREY,
     &Data::TILE_RED,
