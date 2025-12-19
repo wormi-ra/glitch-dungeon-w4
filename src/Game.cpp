@@ -37,7 +37,6 @@ Player Game::player {};
 static Function<void()> loadCallback = nullptr;
 
 void Game::start() {
-    w4::trace("start");
     Game::setPalette(Game::player.glitch->getPalette());
     Game::loadRoom(0, 0);
 }
