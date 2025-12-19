@@ -16,11 +16,12 @@ uint8_t Tile::getId(uint8_t tileData) {
 DynamicArray<uint8_t> Room::decodeTiles(const RoomData::TileData &data) const {
     DynamicArray<uint8_t> tiles {};
 
+    tiles.reserve(15*20);
     for (uint16_t i = 0 ; i < data.len ; i += 2) {
         uint8_t size = data.data[i];
         uint8_t value = data.data[i + 1];
         for (uint8_t j = 0 ; j < size ; j++) {
-            tiles.push_back(value);
+            tiles.emplace_back(value);
         }
     }
     return tiles;
@@ -32,12 +33,12 @@ uint8_t Room::getTile(uint32_t x, uint32_t y) const {
 
 Room::Room(const RoomData *data)
     : data(data) {
+    this->entities.reserve(16);
     this->m_tiles = this->decodeTiles(data->data);
     for (const auto &id : this->data->entities) {
         auto &entity = Data::ENTITIES[id];
-        this->entities.push_back(entity->instantiate());
+        this->entities.emplace_back(entity->instantiate());
     }
-
 }
 
 Room::~Room() {

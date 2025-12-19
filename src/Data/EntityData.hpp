@@ -1,7 +1,7 @@
 #pragma once
 
 #include <cstdint>
-#include "../GameObjects/GameObject.hpp"
+#include "../GameObjects/Entity.hpp"
 #include "../Vector2.hpp"
 
 namespace Data {
@@ -17,7 +17,7 @@ namespace Data {
         Type type;
         Vector2<int16_t> position;
 
-        GameObject *instantiate() const;
+        IEntity *instantiate() const;
     };
 
     struct Door : public EntityData {

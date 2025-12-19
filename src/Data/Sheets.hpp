@@ -9,6 +9,7 @@ namespace Data {
     extern const Sheet ENEMY_SHEET;
     extern const Sheet NPC_SHEET;
     extern const Sheet PLAYER_SHEET;
+    extern const Sheet SPELL_ICONS;
     extern const Sheet TILE_BLUE;
     extern const Sheet TILE_GOLD;
     extern const Sheet TILE_GREEN;

@@ -7,6 +7,7 @@ class Enemy : public Entity<Data::Enemy> {
     public:
         Enemy(const Data::Enemy *data);
 
-        virtual uint16_t getDrawColor() const;
-        virtual void update();
+        virtual IEntity::Type getType() const override;
+        virtual uint16_t getDrawColor() const override;
+        virtual void update() override;
 };

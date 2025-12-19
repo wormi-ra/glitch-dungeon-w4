@@ -5,7 +5,7 @@
 #include "../GameObjects/NPC.hpp"
 #include "../GameObjects/Collection.hpp"
 
-GameObject *Data::EntityData::instantiate() const {
+IEntity *Data::EntityData::instantiate() const {
     switch (this->type) {
     case Type::DOOR:
         return new ::Door(static_cast<const Data::Door *>(this));

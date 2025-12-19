@@ -997,7 +997,7 @@ const Data::EntityData *Data::ENTITIES[] {
             Data::EntityData::Type::COLLECTION,
             {8, 24}
         },
-        22,
+        13,
     },
     // 117
     new Data::Door {
@@ -1066,7 +1066,7 @@ const Data::EntityData *Data::ENTITIES[] {
             Data::EntityData::Type::COLLECTION,
             {24, 16}
         },
-        22,
+        13,
     },
     // 125
     new Data::Collection {
@@ -1151,7 +1151,7 @@ const Data::EntityData *Data::ENTITIES[] {
             Data::EntityData::Type::COLLECTION,
             {128, 0}
         },
-        23,
+        14,
     },
     // 136
     new Data::Collection {
@@ -1230,7 +1230,7 @@ const Data::EntityData *Data::ENTITIES[] {
             Data::EntityData::Type::COLLECTION,
             {32, 96}
         },
-        30,
+        16,
     },
     // 146
     new Data::Collection {
@@ -1312,7 +1312,7 @@ const Data::EntityData *Data::ENTITIES[] {
             Data::EntityData::Type::COLLECTION,
             {88, 48}
         },
-        14,
+        11,
     },
     // 156
     new Data::Enemy {
@@ -1413,7 +1413,7 @@ const Data::EntityData *Data::ENTITIES[] {
             Data::EntityData::Type::COLLECTION,
             {32, 32}
         },
-        22,
+        13,
     },
     // 168
     new Data::Collection {
@@ -1421,7 +1421,7 @@ const Data::EntityData *Data::ENTITIES[] {
             Data::EntityData::Type::COLLECTION,
             {120, 24}
         },
-        22,
+        13,
     },
     // 169
     new Data::Collection {
@@ -1429,7 +1429,7 @@ const Data::EntityData *Data::ENTITIES[] {
             Data::EntityData::Type::COLLECTION,
             {0, 48}
         },
-        22,
+        13,
     },
     // 170
     new Data::Collection {
@@ -1437,7 +1437,7 @@ const Data::EntityData *Data::ENTITIES[] {
             Data::EntityData::Type::COLLECTION,
             {56, 16}
         },
-        22,
+        13,
     },
     // 171
     new Data::Collection {
@@ -1445,7 +1445,7 @@ const Data::EntityData *Data::ENTITIES[] {
             Data::EntityData::Type::COLLECTION,
             {16, 16}
         },
-        22,
+        13,
     },
     // 172
     new Data::Collection {
@@ -1453,7 +1453,7 @@ const Data::EntityData *Data::ENTITIES[] {
             Data::EntityData::Type::COLLECTION,
             {128, 32}
         },
-        22,
+        13,
     },
     // 173
     new Data::Collection {
@@ -1461,7 +1461,7 @@ const Data::EntityData *Data::ENTITIES[] {
             Data::EntityData::Type::COLLECTION,
             {56, 80}
         },
-        22,
+        13,
     },
     // 174
     new Data::Collection {
@@ -1469,7 +1469,7 @@ const Data::EntityData *Data::ENTITIES[] {
             Data::EntityData::Type::COLLECTION,
             {112, 104}
         },
-        22,
+        13,
     },
     // 175
     new Data::Collection {
@@ -1477,7 +1477,7 @@ const Data::EntityData *Data::ENTITIES[] {
             Data::EntityData::Type::COLLECTION,
             {104, 56}
         },
-        22,
+        13,
     },
     // 176
     new Data::Enemy {
@@ -1493,7 +1493,7 @@ const Data::EntityData *Data::ENTITIES[] {
             Data::EntityData::Type::COLLECTION,
             {24, 96}
         },
-        22,
+        13,
     },
     // 178
     new Data::Door {
@@ -1529,7 +1529,7 @@ const Data::EntityData *Data::ENTITIES[] {
             Data::EntityData::Type::COLLECTION,
             {72, 24}
         },
-        19,
+        12,
     },
     // 182
     new Data::Collection {
@@ -1545,7 +1545,7 @@ const Data::EntityData *Data::ENTITIES[] {
             Data::EntityData::Type::COLLECTION,
             {128, 40}
         },
-        30,
+        16,
     },
     // 184
     new Data::Door {
