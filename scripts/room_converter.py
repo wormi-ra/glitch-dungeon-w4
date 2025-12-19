@@ -5,6 +5,7 @@ import sys
 import json
 from typing import TextIO
 from jinja2 import Environment, FileSystemLoader, select_autoescape
+import re
 
 BASE_PATH = "assets/rooms/"
 JINJA_ENV = Environment(
@@ -50,6 +51,32 @@ def convert_tile(tile):
     return t | (c << 4)
 
 
+def convert_collection(entity):
+    mapping = {
+        0: 0,
+        1: 1,
+        2: 2,
+        3: 3,
+        4: 4,
+        5: 5,
+        6: 6,
+        7: 7,
+        8: 8,
+        9: 9,
+        10: 10,
+        14: 11,
+        19: 12,
+        22: 13,
+        23: 14,
+        24: 15,
+        30: 16
+    }
+    if entity["obj"]["collection_id"] is None:
+        entity["obj"]["collection_id"] = 0
+    entity["obj"]["collection_id"] = mapping[entity["obj"]["collection_id"]]
+    return entity
+
+
 def rle_encode(iterable, max = 255):
     groups = [        
         (len(g[i:i + max]), k)
@@ -65,8 +92,8 @@ def rle_encode(iterable, max = 255):
 def convert_entity(entity):
     entity["obj"]["x"] = round(entity["obj"]["x"])
     entity["obj"]["y"] = round(entity["obj"]["y"])
-    if (entity["type"] == "Collection" and entity["obj"]["collection_id"] is None):
-        entity["obj"]["collection_id"] = 0
+    if (entity["type"] == "Collection"):
+        entity = convert_collection(entity)
     return entity
 
 
@@ -93,7 +120,7 @@ def convert_room(room):
         "glitch_sequence": room["glitch_sequence"],
         "glitch_time_limit": room["glitch_time_limit"],
         "can_use_spellbook": room["can_use_spellbook"],
-        "bg_code": room["bg_code"] if "bg_code" in room else None,
+        "bg_code": json.dumps(room["bg_code"])[1:-1] if "bg_code" in room else None,
         "tile_data": {
             "len": len(data),
             "data": data

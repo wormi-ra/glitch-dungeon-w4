@@ -4,6 +4,10 @@ Glitch::Type Glitch::Negative::getType() const {
     return Type::NEGATIVE;
 }
 
+const char *Glitch::Negative::getName() const {
+    return "undefined";
+}
+
 const uint32_t *Glitch::Negative::getPalette() const {
     static const uint32_t palette[4] = {
         0x000000,

@@ -1,5 +1,18 @@
 #include "TextBox.hpp"
 
+void TextBox::setText(const char *text, uint32_t duration) {
+    this->text = text;
+    this->timer = duration;
+}
+
+void TextBox::update() {
+    if (this->timer == 0) {
+        this->text = nullptr;
+    } else {
+        this->timer--;
+    }
+}
+
 void TextBox::draw(const Viewport &view) const {
     if (this->text == nullptr)
         return;

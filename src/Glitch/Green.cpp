@@ -16,6 +16,10 @@ Glitch::Green::Green()
     };
 }
 
+const char *Glitch::Green::getName() const {
+    return "feather";
+}
+
 Glitch::Type Glitch::Green::getType() const {
     return Type::GREEN;
 }

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cstdint>
+#include "Rect.hpp"
 
 enum class Gamepad : uint8_t {
     gamepad1 = 0,
@@ -26,6 +27,10 @@ class Input {
         static bool isPressed(uint8_t key, Gamepad gamepad = Gamepad::gamepad1);
         static bool isPressedDown(uint8_t key, Gamepad gamepad = Gamepad::gamepad1);
         static bool isPressedUp(uint8_t key, Gamepad gamepad = Gamepad::gamepad1);
+        static Vector2<int16_t> getMouse();
+        static bool isClicked(IntRect rect, uint8_t buttons);
+        static bool isClickedDown(IntRect rect, uint8_t buttons);
+        static bool isClickedUp(IntRect rect, uint8_t buttons);
 
         static constexpr uint8_t GAMEPAD_COUNT = 4;
 
@@ -37,4 +42,6 @@ class Input {
 
         static uint8_t pressedThisFrame(Gamepad gamepad = Gamepad::gamepad1);
         static uint8_t unpressedThisFrame(Gamepad gamepad = Gamepad::gamepad1);
+        static uint8_t clickedThisFrame();
+        static uint8_t unclickedThisFrame();
 };

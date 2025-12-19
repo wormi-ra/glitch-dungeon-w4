@@ -4,6 +4,10 @@ Glitch::Type Glitch::Gold::getType() const {
     return Type::GOLD;
 }
 
+const char *Glitch::Gold::getName() const {
+    return "wall";
+}
+
 const uint32_t *Glitch::Gold::getPalette() const {
     static const uint32_t palette[4] = {
         0x000000,

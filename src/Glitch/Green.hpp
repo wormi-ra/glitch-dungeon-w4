@@ -7,7 +7,8 @@ namespace Glitch {
         public:
             Green();
 
-            Type getType() const override;
-            const uint32_t *getPalette() const override;
+            virtual Type getType() const override;
+            virtual const char *getName() const override;
+            virtual const uint32_t *getPalette() const override;
     };
 }

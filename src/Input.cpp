@@ -22,6 +22,10 @@ void Input::update() {
     Input::m_mouse.buttons = *MOUSE_BUTTONS;
 }
 
+Vector2<int16_t> Input::getMouse() {
+    return {Input::m_mouse.mouseX, Input::m_mouse.mouseY};
+}
+
 bool Input::isPressed(uint8_t key, Gamepad gamepad) {
     return key & Input::m_gamepad[static_cast<uint8_t>(gamepad)];
 }
@@ -32,6 +36,29 @@ bool Input::isPressedDown(uint8_t key, Gamepad gamepad) {
 
 bool Input::isPressedUp(uint8_t key, Gamepad gamepad) {
     return key & Input::unpressedThisFrame(gamepad);
+}
+
+bool Input::isClicked(IntRect rect, uint8_t buttons) {
+    return (buttons & Input::m_mouse.buttons)
+    && rect.contains({Input::m_mouse.mouseX, Input::m_mouse.mouseY});
+}
+
+bool Input::isClickedDown(IntRect rect, uint8_t buttons) {
+    return (buttons & Input::clickedThisFrame())
+    && rect.contains({Input::m_mouse.mouseX, Input::m_mouse.mouseY});
+}
+
+bool Input::isClickedUp(IntRect rect, uint8_t buttons) {
+    return (buttons & Input::unclickedThisFrame())
+    && rect.contains({Input::m_mouse.mouseX, Input::m_mouse.mouseY});
+}
+
+uint8_t Input::clickedThisFrame() {
+    return Input::m_mouse.buttons & (Input::m_mouse.buttons ^ Input::m_previousMouse.buttons);
+}
+
+uint8_t Input::unclickedThisFrame() {
+    return Input::m_previousMouse.buttons & (Input::m_mouse.buttons ^ Input::m_previousMouse.buttons);
 }
 
 uint8_t Input::pressedThisFrame(Gamepad gamepad) {

@@ -6,6 +6,13 @@ static const uint8_t {{ room.name }}_DATA[] {
 };
 
 const RoomData Data::{{ room.name }} {
+    .width = {{ room.width }},
+    .height = {{ room.height }},
+    .glitch_type = {{ room.glitch_type }},
+    .glitch_sequence = { {{- room.glitch_sequence|join(', ') -}} },
+    .glitch_time_limit = {{ room.glitch_time_limit }},
+    .can_use_spellbook = {{ room.can_use_spellbook|lower }},
+    {# .bg_code = "{{ room.bg_code|safe }}", #}
     .entities = { {{- room.entities|join(', ') -}} },
     .data = {
         .len = {{ room.tile_data.len }},

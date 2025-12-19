@@ -4,6 +4,10 @@ Glitch::Type Glitch::Pink::getType() const {
     return Type::PINK;
 }
 
+const char *Glitch::Pink::getName() const {
+    return "memory";
+}
+
 const uint32_t *Glitch::Pink::getPalette() const {
     static const uint32_t palette[4] = {
         0x000000,
