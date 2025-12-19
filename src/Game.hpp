@@ -4,15 +4,15 @@
 #include "Graphics/Viewport.hpp"
 #include "Graphics/Spellbar.hpp"
 #include "GameObjects/Player.hpp"
-#include <functional>
+#include "Function.hpp"
 
 namespace Game {
     void start();
     void update();
     void draw();
     void setPalette(const uint32_t *palette);
-    const RoomData &loadRoom(uint8_t x, uint8_t y, std::function<void()> callback = nullptr);
-    const RoomData &moveRoom(int8_t x, int8_t y, std::function<void()> callback = nullptr);
+    const RoomData &loadRoom(uint8_t x, uint8_t y, Function<void()> callback = nullptr);
+    const RoomData &moveRoom(int8_t x, int8_t y, Function<void()> callback = nullptr);
     
     extern Viewport gameView;
     extern Viewport hudView;

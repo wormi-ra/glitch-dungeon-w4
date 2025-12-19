@@ -492,7 +492,7 @@ namespace lni {
             rsrv_sz <<= 2;
             reallocate();
         }
-        my_memmove(iit + 1, iit, (vec_sz - (it - arr)) * sizeof(T));
+        memmove(iit + 1, iit, (vec_sz - (it - arr)) * sizeof(T));
         (*iit) = std::move( T( std::forward<Args>(args) ... ) );
         ++vec_sz;
         return iit;
@@ -505,7 +505,7 @@ namespace lni {
             rsrv_sz <<= 2;
             reallocate();
         }
-        my_memmove(iit + 1, iit, (vec_sz - (it - arr)) * sizeof(T));
+        memmove(iit + 1, iit, (vec_sz - (it - arr)) * sizeof(T));
         (*iit) = val;
         ++vec_sz;
         return iit;
@@ -518,7 +518,7 @@ namespace lni {
             rsrv_sz <<= 2;
             reallocate();
         }
-        my_memmove(iit + 1, iit, (vec_sz - (it - arr)) * sizeof(T));
+        memmove(iit + 1, iit, (vec_sz - (it - arr)) * sizeof(T));
         (*iit) = std::move(val);
         ++vec_sz;
         return iit;
@@ -532,7 +532,7 @@ namespace lni {
             rsrv_sz = (vec_sz + cnt) << 2;
             reallocate();
         }
-        my_memmove(f + cnt, f, (vec_sz - (it - arr)) * sizeof(T));
+        memmove(f + cnt, f, (vec_sz - (it - arr)) * sizeof(T));
         vec_sz += cnt;
         for (iterator it = f; cnt--; ++it)
             (*it) = val;
@@ -549,7 +549,7 @@ namespace lni {
             rsrv_sz = (vec_sz + cnt) << 2;
             reallocate();
         }
-        my_memmove(f + cnt, f, (vec_sz - (it - arr)) * sizeof(T));
+        memmove(f + cnt, f, (vec_sz - (it - arr)) * sizeof(T));
         for (iterator it = f; first != last; ++it, ++first)
             (*it) = *first;
         vec_sz += cnt;
@@ -565,7 +565,7 @@ namespace lni {
             rsrv_sz = (vec_sz + cnt) << 2;
             reallocate();
         }
-        my_memmove(f + cnt, f, (vec_sz - (it - arr)) * sizeof(T));
+        memmove(f + cnt, f, (vec_sz - (it - arr)) * sizeof(T));
         iterator iit = f;
         for (auto &item: lst) {
             (*iit) = item;
@@ -579,7 +579,7 @@ namespace lni {
     constexpr typename vector<T>::iterator vector<T>::erase(typename vector<T>::const_iterator it) {
         iterator iit = &arr[it - arr];
         (*iit).~T();
-        my_memmove(iit, iit + 1, (vec_sz - (it - arr) - 1) * sizeof(T));
+        memmove(iit, iit + 1, (vec_sz - (it - arr) - 1) * sizeof(T));
         --vec_sz;
         return iit;
     }
@@ -590,7 +590,7 @@ namespace lni {
         if (first == last) return f;
         for ( ; first != last; ++first)
             (*first).~T();
-        my_memmove(f, last, (vec_sz - (last - arr)) * sizeof(T));
+        memmove(f, last, (vec_sz - (last - arr)) * sizeof(T));
         vec_sz -= last - first;
         return f;
     }

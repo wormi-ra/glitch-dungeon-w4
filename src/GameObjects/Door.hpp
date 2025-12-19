@@ -12,7 +12,4 @@ class Door : public Entity<Data::Door> {
         virtual IEntity::Type getType() const override;
         virtual uint16_t getDrawColor() const override;
         virtual void update() override;
-
-    private:
-        void onEnter();
 };

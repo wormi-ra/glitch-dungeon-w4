@@ -34,7 +34,7 @@ Vector2<uint8_t> Game::roomPosition {0, 0};
 
 Player Game::player {};
 
-static std::function<void()> loadCallback = nullptr;
+static Function<void()> loadCallback = nullptr;
 
 void Game::start() {
     w4::trace("start");
@@ -79,7 +79,7 @@ void Game::draw() {
     Game::player.draw(Game::gameView);
 }
 
-const RoomData &Game::loadRoom(uint8_t x, uint8_t y, std::function<void()> callback) {
+const RoomData &Game::loadRoom(uint8_t x, uint8_t y, Function<void()> callback) {
     Vector2<uint8_t> newPosition = {x, y};
     if (Game::currentRoom != nullptr && newPosition == Game::roomPosition) {
         callback();
@@ -93,7 +93,7 @@ const RoomData &Game::loadRoom(uint8_t x, uint8_t y, std::function<void()> callb
     return Data::DUNGEON[Game::roomPosition.y][Game::roomPosition.x];
 }
 
-const RoomData &Game::moveRoom(int8_t x, int8_t y, std::function<void()> callback) {
+const RoomData &Game::moveRoom(int8_t x, int8_t y, Function<void()> callback) {
     Vector2<int8_t> pos = Vector2<int8_t>(static_cast<int8_t>(Game::roomPosition.x) + x, static_cast<int8_t>(Game::roomPosition.y) + y);
 
     pos.x = mod(pos.x, 6);

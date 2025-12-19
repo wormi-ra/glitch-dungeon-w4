@@ -37,12 +37,12 @@ uint16_t Door::getDrawColor() const {
     return 0x1204;
 }
 
-void Door::onEnter() {
+static void onEnter(uint8_t door_id) {
     // Game::player.velocity.x = 0;
     for (auto &entity : Game::currentRoom->entities) {
         if (entity->getType() == IEntity::Type::DOOR) {
             auto door = static_cast<const Entity<Data::Door> *>(entity);
-            if (door->data->door_id == this->data->door_id) {
+            if (door->data->door_id == door_id) {
                 Game::player.position = Vector2<float>(door->position);
             }
         }
@@ -53,8 +53,9 @@ void Door::update() {
     GameObject::update();
     if (this->collidesWith(Game::player)) {
         if (Input::isPressedDown(BUTTON_DOWN)) { // && isGrounded
-            Game::loadRoom(this->data->room.x, this->data->room.y, [this]() {
-                this->onEnter();
+            auto door_id = this->data->door_id;
+            Game::loadRoom(this->data->room.x, this->data->room.y, [door_id]() {
+                onEnter(door_id);
             });
         }
     }
