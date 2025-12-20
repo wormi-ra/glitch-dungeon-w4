@@ -48,4 +48,5 @@ void GameObject::update() {
         this->currentFrame = mod(this->currentFrame + 1, this->animLength);
     }
     this->m_animTimer++;
+    this->position += this->velocity;
 }

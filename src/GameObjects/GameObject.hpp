@@ -9,6 +9,7 @@ typedef const int8_t anim_t;
 class GameObject : public IDrawable {
     public:
         Vector2<float> position {};
+        Vector2<float> velocity {};
         IntRect bbox {};
         anim_t *animation {};
         const Sheet *sheet {};

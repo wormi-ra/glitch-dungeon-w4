@@ -1,4 +1,5 @@
 #include "Game.hpp"
+#include "Data/Entities.hpp"
 #include "Data/Rooms.hpp"
 #include "Glitch/Glitch.hpp"
 #include "Graphics/Spellbar.hpp"
@@ -34,6 +35,8 @@ Vector2<uint8_t> Game::roomPosition {0, 0};
 
 Player Game::player {};
 
+Game::Stats Game::stats {};
+
 static Function<void()> loadCallback = nullptr;
 
 void Game::start() {
@@ -64,6 +67,7 @@ void Game::update() {
     Game::currentRoom->update();
     Game::textBox.update();
     applyLoadRoom();
+    Game::stats.frames++;
 }
 
 void Game::draw() {
@@ -78,6 +82,26 @@ void Game::draw() {
     Game::player.draw(Game::gameView);
 }
 
+void Game::save() {
+
+}
+
+void Game::load() {
+    
+}
+
+void Game::reset() {
+    Game::player = Player();
+    if (Game::currentRoom != nullptr) {
+        delete Game::currentRoom;
+        Game::currentRoom = nullptr;
+    }
+    Data::interactedEntities = {};
+    Game::roomPosition = {0, 0};
+    Game::stats = {};
+    loadCallback = nullptr;
+}
+
 const RoomData &Game::loadRoom(uint8_t x, uint8_t y, Function<void()> callback) {
     Vector2<uint8_t> newPosition = {x, y};
     if (Game::currentRoom != nullptr && newPosition == Game::roomPosition) {
@@ -89,6 +113,7 @@ const RoomData &Game::loadRoom(uint8_t x, uint8_t y, Function<void()> callback) 
         Game::currentRoom = new Room(&Data::DUNGEON[Game::roomPosition.y][Game::roomPosition.x]);
     }
     loadCallback = callback;
+    Game::textBox.setText(nullptr, 0);
     return Data::DUNGEON[Game::roomPosition.y][Game::roomPosition.x];
 }
 

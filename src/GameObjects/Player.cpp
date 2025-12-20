@@ -11,25 +11,28 @@ Player::Player()
 {
     this->position = {20,72};
     this->bbox = {{2, 2}, {14, 16}};
-    this->spellbook = {
-        Glitch::SPELLS[1],
-        Glitch::SPELLS[2],
-        Glitch::SPELLS[3],
-        Glitch::SPELLS[4],
-        Glitch::SPELLS[5],
-        Glitch::SPELLS[6],
-        Glitch::SPELLS[7],
-     };
+    // this->spellbook = {
+    //     Glitch::SPELLS[1],
+    //     Glitch::SPELLS[2],
+    //     Glitch::SPELLS[3],
+    //     Glitch::SPELLS[4],
+    //     Glitch::SPELLS[5],
+    //     Glitch::SPELLS[6],
+    //     Glitch::SPELLS[7],
+    //  };
 }
 
 Glitch::Glitch &Player::setSpell(Glitch::Type spell) {
-    this->glitch = Glitch::SPELLS[static_cast<uint8_t>(spell)];
-    Game::setPalette(this->glitch->getPalette());
+    if (spell != this->glitch->getType()) {
+        this->glitch = Glitch::SPELLS[static_cast<uint8_t>(spell)];
+        Game::setPalette(this->glitch->getPalette());
+        Game::stats.spells++;
+    }
     return *this->glitch;
 }
 
 Glitch::Glitch &Player::nextSpell() {
-    if (this->spellbook.empty()) {
+    if (!(this->state & HAS_GRIMOIRE) || this->spellbook.empty()) {
         return *this->glitch;
     }
     int32_t index = -1;
@@ -41,7 +44,17 @@ Glitch::Glitch &Player::nextSpell() {
         }
         i++;
     }
-    return this->setSpell(this->spellbook[mod(static_cast<uint32_t>(index + 1), this->spellbook.size())]->getType());
+    auto idx = mod(static_cast<uint32_t>(index + 1), this->spellbook.size());
+    return this->setSpell(this->spellbook[idx]->getType());
+}
+
+void Player::giveSpell(Glitch::Type spell) {
+    for (const auto &glitch : this->spellbook) {
+        if (glitch->getType() == spell) {
+            return;
+        }
+    }
+    this->spellbook.emplace_back(Glitch::SPELLS[static_cast<uint8_t>(spell)]);
 }
 
 void Player::applyOffscreenLogic() {
@@ -83,6 +96,7 @@ void Player::update() {
     if (Input::isPressedDown(BUTTON_1))
         this->nextSpell();
     this->applyOffscreenLogic();
+    this->state |= (IS_GROUNDED);
 }
 
 uint16_t Player::getDrawColor() const {

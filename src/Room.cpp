@@ -70,7 +70,7 @@ void Room::draw() const {
             }
         }
     }
-    for (const auto &entity : this->entities) {
+    for (const auto &entity : this->entities) {        
         entity->draw(Game::gameView);
     }
 }

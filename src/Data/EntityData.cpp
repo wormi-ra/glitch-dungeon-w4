@@ -4,6 +4,7 @@
 #include "../GameObjects/Enemy.hpp"
 #include "../GameObjects/NPC.hpp"
 #include "../GameObjects/Collection.hpp"
+#include <cstdint>
 
 IEntity *Data::EntityData::instantiate() const {
     switch (this->type) {
@@ -18,4 +19,8 @@ IEntity *Data::EntityData::instantiate() const {
     case Type::COLLECTION:
         return new ::Collection(static_cast<const Data::Collection *>(this));
     }
+}
+
+uint8_t Data::EntityData::getId() const {
+    return this->id;
 }

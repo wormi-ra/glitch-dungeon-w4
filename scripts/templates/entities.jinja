@@ -6,8 +6,9 @@ const Data::EntityData *Data::ENTITIES[] {
     // {{ loop.index - 1 }}
     new Data::{{ entity.type }} {
         {
+            { {{- entity.obj.x }}, {{ entity.obj.y -}} },
             Data::EntityData::Type::{{ entity.type|upper }},
-            { {{- entity.obj.x }}, {{ entity.obj.y -}} }
+            {{ loop.index - 1 }},
         },
     {% if entity.obj.room_x is defined and entity.obj.room_y is defined %}
         { {{- entity.obj.room_x }}, {{ entity.obj.room_y -}} },

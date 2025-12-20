@@ -1,12 +1,12 @@
 #pragma once
 
 #include <cstdint>
-#include "../GameObjects/Entity.hpp"
+#include "../GameObjects/IEntity.hpp"
 #include "../Vector2.hpp"
 
 namespace Data {
     struct EntityData {
-        enum class Type : uint8_t {
+        enum Type : uint8_t {
             DOOR,
             CHECKPOINT,
             ENEMY,
@@ -14,10 +14,12 @@ namespace Data {
             COLLECTION,
         };
 
-        Type type;
         Vector2<int16_t> position;
+        Type type;
+        uint8_t id;
 
         IEntity *instantiate() const;
+        uint8_t getId() const;
     };
 
     struct Door : public EntityData {

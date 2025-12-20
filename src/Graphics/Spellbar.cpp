@@ -9,6 +9,9 @@ void Spellbar::draw(const Viewport &view) const {
     Vector2<int32_t> position = this->position;
 
     for (const auto &spell : Game::player.spellbook) {
+        if (!(Game::player.state & Player::HAS_GRIMOIRE)) {
+            continue;
+        }
         if (spell->getType() == Glitch::Type::GREY) {
             continue;
         }
