@@ -20,6 +20,7 @@ namespace Game {
     void load();
     void reset();
     void setPalette(const uint32_t *palette);
+    void dismissTextbox();
     const RoomData &loadRoom(uint8_t x, uint8_t y, Function<void()> callback = nullptr);
     const RoomData &moveRoom(int8_t x, int8_t y, Function<void()> callback = nullptr);
     

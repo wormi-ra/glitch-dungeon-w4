@@ -48,5 +48,26 @@ void GameObject::update() {
         this->currentFrame = mod(this->currentFrame + 1, this->animLength);
     }
     this->m_animTimer++;
-    this->position += this->velocity;
+}
+
+void GameObject::setFacing(Facing facing) {
+    if (facing == Facing::LEFT) {
+        this->flags |= BLIT_FLIP_X;
+    } else {
+        this->flags &= ~BLIT_FLIP_X;
+    }
+}
+
+void GameObject::setAnimation(const anim_t *anim, uint8_t len, uint8_t speed) {
+    if (anim != this->animation) {
+        this->animation = anim;
+        this->animLength = len;
+        this->m_animTimer = 0;
+        this->currentFrame = 0;
+    }
+    this->animSpeed = speed;
+}
+
+bool GameObject::isReverse() const {
+    return this->flags & BLIT_FLIP_Y;
 }

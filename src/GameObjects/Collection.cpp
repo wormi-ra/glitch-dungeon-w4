@@ -28,8 +28,7 @@ Collection::Collection(const Data::Collection *data)
     : GameObject(&Data::COLLECTION_SHEET), Entity(data) {
     this->position = Vector2<float>(data->position);
     this->bbox = {
-        {2, 2},
-        {14, 16},
+        {2, 2, 14, 16},
     };
     this->animation = COLLECTION_ANIMS[this->data->collection_id];
     this->animLength = 2;

@@ -14,8 +14,7 @@ Door::Door(const Data::Door *data)
     : GameObject(&Data::DOOR_SHEET), Entity(data) {
     this->position = Vector2<float>(data->position);
     this->bbox = {
-        {4, 0},
-        {12, 16},
+        {4, 0, 12, 16},
     };
     if (this->locked()) {
         this->animation = DOOR_LOCKED_ANIM;
@@ -66,7 +65,7 @@ void Door::update() {
     GameObject::update();
     if (this->collidesWith(Game::player)
         && Input::isPressedDown(BUTTON_DOWN)
-        && (Game::player.state & Player::IS_GROUNDED)) {
+        && (Game::player.state & Player::ON_GROUND)) {
         if (this->locked()) {
             if (Game::player.artifacts >= this->data->num_artifacts) {
                 this->unlock();
@@ -79,7 +78,7 @@ void Door::update() {
                 Game::textBox.setText(lockText);
             }
         } else {
-            Game::player.state &= ~(Player::IS_GROUNDED);
+            Game::player.state &= ~(Player::ON_GROUND);
             auto target = this->data;
             // w4::tracef("this.id = %d,door_id = %d", this->getId(), door_id);
             Game::loadRoom(this->data->room.x, this->data->room.y, [target]() {

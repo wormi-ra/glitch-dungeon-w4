@@ -31,6 +31,7 @@ class Input {
         static bool isClicked(IntRect rect, uint8_t buttons);
         static bool isClickedDown(IntRect rect, uint8_t buttons);
         static bool isClickedUp(IntRect rect, uint8_t buttons);
+        static Vector2<int16_t> mouseDelta();
 
         static constexpr uint8_t GAMEPAD_COUNT = 4;
 

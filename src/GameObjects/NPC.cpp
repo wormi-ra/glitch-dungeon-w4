@@ -8,8 +8,7 @@ NPC::NPC(const Data::NPC *data)
     : GameObject(&Data::NPC_SHEET), Entity(data) {
     this->position = Vector2<float>(data->position);
     this->bbox = {
-        {2, 2},
-        {14, 16},
+        {2 - 8, 2,14 + 8, 16},
     };
     this->animation = NPC_ANIM;
     this->animLength = sizeof(NPC_ANIM) / sizeof(anim_t);
@@ -26,8 +25,27 @@ uint16_t NPC::getDrawColor() const {
 
 void NPC::update() {
     GameObject::update();
+    auto d = 16.0f;
+	auto dy = 8.0f;
+    auto pbbox = FloatRect(Game::player.bbox).bbox();
+    auto npcbbox = FloatRect(this->bbox).bbox();
+	auto px = Game::player.position.x + (pbbox.rb / 2.0f);
+	if (Game::player.position.y + pbbox.bb > this->position.y - dy && Game::player.position.y < this->position.y + npcbbox.bb + dy){
+		if (px < this->position.x + npcbbox.lb + 8 && px > this->position.x + npcbbox.lb - d) {
+            this->setFacing(Facing::LEFT);
+		}
+		if (px > this->position.x + npcbbox.rb - 8 && px < this->position.x + npcbbox.rb + d) {
+            this->setFacing(Facing::RIGHT);
+		}
+	}
     if (this->collidesWith(Game::player)) {
-        Game::textBox.setText(this->getText(), 1);
+        if (!this->speaking) {
+            this->speaking = true;
+            Game::textBox.setText(this->getText());
+        }
+    } else if (this->speaking) {
+        this->speaking = false;
+        Game::textBox.setText(nullptr, 0);
     }
 }
 

@@ -2,6 +2,7 @@
 #include "Entity.hpp"
 #include "GameObject.hpp"
 #include "../Data/Sheets.hpp"
+#include "../Game.hpp"
 
 static const anim_t CHECKPOINT_ANIM[] {1};
 
@@ -11,17 +12,19 @@ Checkpoint::Checkpoint(const Data::Checkpoint *data)
     : GameObject(&Data::CHECKPOINT_SHEET), Entity(data) {
     this->position = Vector2<float>(data->position);
     this->bbox = {
-        {2, 2},
-        {14, 16},
+        {2, 2, 14, 16},
     };
+    this->active = Game::player.checkpointId == data->id;
     if (this->active) {
-        this->animation = CHECKPOINT_ACTIVE_ANIM;
-        this->animLength = sizeof(CHECKPOINT_ACTIVE_ANIM) / sizeof(anim_t);
+        this->setAnimation(CHECKPOINT_ACTIVE_ANIM, sizeof(CHECKPOINT_ACTIVE_ANIM) / sizeof(anim_t));
     } else {
-        this->animation = CHECKPOINT_ANIM;
-        this->animLength = sizeof(CHECKPOINT_ANIM) / sizeof(anim_t);
+        this->setAnimation(CHECKPOINT_ANIM, sizeof(CHECKPOINT_ANIM) / sizeof(anim_t));
     }
-    this->animSpeed = 8;
+}
+
+void Checkpoint::deactivate() {
+    this->active = false;
+    this->setAnimation(CHECKPOINT_ANIM, sizeof(CHECKPOINT_ANIM) / sizeof(anim_t));
 }
 
 IEntity::Type Checkpoint::getType() const {
@@ -34,4 +37,11 @@ uint16_t Checkpoint::getDrawColor() const {
 
 void Checkpoint::update() {
     GameObject::update();
+    if (this->collidesWith(Game::player)) {
+        if (!this->active) {
+            this->active = true;
+            this->setAnimation(CHECKPOINT_ACTIVE_ANIM, sizeof(CHECKPOINT_ACTIVE_ANIM) / sizeof(anim_t));
+            Game::player.setCheckpoint(*this);
+        }
+    }
 }

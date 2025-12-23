@@ -1,4 +1,5 @@
 #include "Input.hpp"
+#include "Vector2.hpp"
 #include "wasm4.hpp"
 #include <cstdint>
 
@@ -24,6 +25,16 @@ void Input::update() {
 
 Vector2<int16_t> Input::getMouse() {
     return {Input::m_mouse.mouseX, Input::m_mouse.mouseY};
+}
+
+Vector2<int16_t> Input::mouseDelta() {
+    return Vector2<int16_t > {
+        Input::m_mouse.mouseX,
+        Input::m_mouse.mouseY,
+    } - Vector2<int16_t > {
+        Input::m_previousMouse.mouseX,
+        Input::m_previousMouse.mouseY,
+    };
 }
 
 bool Input::isPressed(uint8_t key, Gamepad gamepad) {

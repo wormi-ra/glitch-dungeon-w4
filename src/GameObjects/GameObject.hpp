@@ -3,11 +3,17 @@
 #include "../Vector2.hpp"
 #include "../Graphics/IDrawable.hpp"
 #include "../Graphics/Sheet.hpp"
+#include <cstdint>
 
 typedef const int8_t anim_t;
 
 class GameObject : public IDrawable {
     public:
+        enum Facing : uint8_t {
+            LEFT,
+            RIGHT,
+        };
+
         Vector2<float> position {};
         Vector2<float> velocity {};
         IntRect bbox {};
@@ -23,6 +29,9 @@ class GameObject : public IDrawable {
         {}
 
         bool collidesWith(const GameObject &other) const;
+        void setAnimation(const anim_t *anim, uint8_t len, uint8_t speed = 8);
+        void setFacing(Facing facing);
+        bool isReverse() const;
         virtual uint16_t getDrawColor() const = 0;
         virtual void update();
         virtual void draw(const Viewport &view) const;

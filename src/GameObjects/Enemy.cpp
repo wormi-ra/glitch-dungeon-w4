@@ -1,5 +1,6 @@
 #include "Enemy.hpp"
 #include "../Data/Sheets.hpp"
+#include "../Game.hpp"
 
 static const anim_t FLOOR_ENEMY_ANIM[] {4, 5, 0, 6, 7, -4};
 
@@ -9,8 +10,7 @@ Enemy::Enemy(const Data::Enemy *data)
     : GameObject(&Data::ENEMY_SHEET), Entity(data) {
     this->position = Vector2<float>(data->position);
     this->bbox = {
-        {2, 2},
-        {14, 16},
+        {2, 2, 14, 16},
     };
     if (this->data->enemy_id == 1) {
         this->animation = FLOOR_ENEMY_ANIM;
@@ -35,4 +35,7 @@ uint16_t Enemy::getDrawColor() const {
 
 void Enemy::update() {
     GameObject::update();
+    if (this->collidesWith(Game::player)) {
+        Game::player.die();
+    }
 }

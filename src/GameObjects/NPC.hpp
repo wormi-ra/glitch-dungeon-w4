@@ -5,6 +5,8 @@
 
 class NPC : public Entity<Data::NPC> {
     public:
+        bool speaking = false;
+
         NPC(const Data::NPC *data);
 
         virtual IEntity::Type getType() const override;

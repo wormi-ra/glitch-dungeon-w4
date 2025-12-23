@@ -7,6 +7,7 @@
 #include "Vector2.hpp"
 #include "utils.hpp"
 #include "wasm4.hpp"
+#include "Input.hpp"
 
 Viewport Game::gameView{
     {0, 0},
@@ -62,12 +63,21 @@ static void applyLoadRoom() {
     }
 }
 
+void Game::dismissTextbox() {
+    IntRect rect = hudView.transform({textBox.position, textBox.size});
+    if (rect.contains(Vector2<int32_t>(Input::getMouse()))
+        && Input::mouseDelta() != Vector2<int16_t>(0, 0)) {
+            textBox.setText(nullptr, 0);
+    }
+}
+
 void Game::update() {
+    Game::stats.frames++;
     Game::player.update();
     Game::currentRoom->update();
     Game::textBox.update();
+    Game::dismissTextbox();
     applyLoadRoom();
-    Game::stats.frames++;
 }
 
 void Game::draw() {
@@ -99,11 +109,13 @@ void Game::reset() {
     Data::interactedEntities = {};
     Game::roomPosition = {0, 0};
     Game::stats = {};
+    Game::textBox.setText(nullptr, 0);
     loadCallback = nullptr;
 }
 
 const RoomData &Game::loadRoom(uint8_t x, uint8_t y, Function<void()> callback) {
     Vector2<uint8_t> newPosition = {x, y};
+    w4::tracef("%d %d", newPosition.x, newPosition.y);
     if (Game::currentRoom != nullptr && newPosition == Game::roomPosition) {
         callback();
         return *Game::currentRoom->data;

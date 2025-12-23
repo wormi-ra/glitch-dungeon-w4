@@ -9,6 +9,7 @@ class Checkpoint : public Entity<Data::Checkpoint> {
 
         Checkpoint(const Data::Checkpoint *data);
 
+        void deactivate();
         virtual IEntity::Type getType() const override;
         virtual uint16_t getDrawColor() const override;
         virtual void update() override;

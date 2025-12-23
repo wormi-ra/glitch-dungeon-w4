@@ -70,11 +70,11 @@ WASM_IMPORT("blitSub")
 void blitSub (const uint8_t* data, int32_t x, int32_t y, uint32_t width, uint32_t height,
     uint32_t srcX, uint32_t srcY, uint32_t stride, uint32_t flags);
 
-#define BLIT_2BPP 1
-#define BLIT_1BPP 0
-#define BLIT_FLIP_X 2
-#define BLIT_FLIP_Y 4
-#define BLIT_ROTATE 8
+#define BLIT_2BPP 1u
+#define BLIT_1BPP 0u
+#define BLIT_FLIP_X 2u
+#define BLIT_FLIP_Y 4u
+#define BLIT_ROTATE 8u
 
 /** Draws a line between two points. */
 WASM_IMPORT("line")

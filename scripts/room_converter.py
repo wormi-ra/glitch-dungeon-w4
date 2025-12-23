@@ -164,6 +164,6 @@ if __name__=="__main__":
             convert = convert_room(room)
             convert["name"] = name.upper()
             rooms.append(convert)
-    # output_rooms(rooms)
-    output_entities(ENTITIES)
+    output_rooms(rooms)
+    # output_entities(ENTITIES)
     # generate_dungeon(sys.stdout)
