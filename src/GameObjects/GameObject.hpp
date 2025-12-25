@@ -28,7 +28,7 @@ class GameObject : public IDrawable {
             : sheet(sheet)
         {}
 
-        bool collidesWith(const GameObject &other) const;
+        bool collidesWith(const GameObject &other, int32_t q = 0) const;
         void setAnimation(const anim_t *anim, uint8_t len, uint8_t speed = 8);
         void setFacing(Facing facing);
         bool isReverse() const;

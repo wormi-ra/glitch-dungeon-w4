@@ -29,12 +29,12 @@ For more information, please refer to <http://unlicense.org/>
 
 
 #pragma once
-#include <utility>
-#include <type_traits>
+// #include <utility>
+// #include <type_traits>
 #include <functional>
 // #include <exception>
 // #include <typeinfo>
-#include <memory>
+// #include <memory>
 
 #define FUNC_NO_RTTI
 #define FUNC_NO_EXCEPTIONS

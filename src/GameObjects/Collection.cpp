@@ -3,6 +3,7 @@
 #include "../Game.hpp"
 #include "GameObject.hpp"
 #include "Player.hpp"
+#include <cstring>
 
 static const anim_t COLLECTION_ANIMS[17][2] {
     {0, 1},
@@ -57,7 +58,7 @@ uint16_t Collection::getDrawColor() const {
     case Collection::Item::PINK_SPELL:
         return this->currentFrame ? 0x1140 : 0x1130;
     case Collection::Item::CAT:
-        return 0x4320;
+        return this->currentFrame ? 0x4320 : 0x1230;
     default:
         return 0x1340;
     }
@@ -68,7 +69,8 @@ void Collection::update() {
         return;
     GameObject::update();
     if (this->collidesWith(Game::player)) {
-        onCollect();
+        if (!(Game::state & Game::State::GLITCHED))
+           onCollect();
     }
 }
 
@@ -108,10 +110,15 @@ void Collection::onCollect() {
         break;
     case Collection::Item::NEGATIVE_SPELL:
         Game::player.giveSpell(Glitch::Type::NEGATIVE);
+        Game::state |= Game::State::GLITCHED;
+        Game::player.position.y = 3 * 8;
+        Game::currentRoom->tiles[5 * 20 + 11] = (1 << 7) | (uint8_t(Tile::Type::SOLID) << 4);
+        Game::currentRoom->tiles[5 * 20 + 12] = (1 << 7) | (uint8_t(Tile::Type::SOLID) << 4);
         break;
     default:
         break;
     }
+    Game::save();
 }
 
 const char *Collection::getName() const {
@@ -127,7 +134,7 @@ const char *Collection::getName() const {
     case Collection::Item::GOLD_SPELL:
         return "wall spell";
     case Collection::Item::ZERO_SPELL:
-        return "invis spell";
+        return "invisible spell";
     case Collection::Item::PINK_SPELL:
         return "memory spell";
     case Collection::Item::NEGATIVE_SPELL:

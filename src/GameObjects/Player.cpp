@@ -7,7 +7,6 @@
 #include "GameObject.hpp"
 #include <cstdint>
 
-
 static const anim_t PLAYER_IDLE[] {
     0
 };
@@ -26,19 +25,11 @@ Player::Player()
     this->position = {20,72};
     this->bbox = {IntRect::BBox {2, 2, 14, 16}};
     this->setAnimation(PLAYER_IDLE, 1);
-    this->state |= HAS_GRIMOIRE; 
-    // this->spellbook = {
-    //     Glitch::SPELLS[1],
-    //     Glitch::SPELLS[2],
-    //     Glitch::SPELLS[3],
-    //     Glitch::SPELLS[4],
-    //     Glitch::SPELLS[5],
-    //     Glitch::SPELLS[6],
-    //     Glitch::SPELLS[7],
-    //  };
 }
 
 uint16_t Player::getDrawColor() const {
+    if (Game::roomPosition == Vector2<uint8_t>(5, 5))
+        return 0x1023;
     switch (this->glitch->getType()) {
         case Glitch::Type::ZERO:
             return 0x3014;
@@ -53,18 +44,44 @@ uint16_t Player::getDrawColor() const {
     }
 }
 
-Glitch::Glitch &Player::setSpell(Glitch::Type spell) {
+void Player::normalize() {
+    auto &physics = this->glitch->getPhysics();
+    this->gravAcc = physics.originalGravAcc;
+    if (this->state & IS_JUMPING) {
+        this->gravAcc = physics.floatGravAcc;
+    }
+    this->state &= ~ON_GROUND;
+}
+
+Glitch::Glitch &Player::setSpell(Glitch::Type spell, bool forced) {
+    if (!this->canUseSpellbook() && !forced) {
+        if (!Game::currentRoom->data->can_use_spellbook && Game::roomPosition != Vector2<uint8_t>(5, 5)) {
+            Game::textBox.setText("a dark force\nprevents you from\ncasting spells here");
+            // TODO Play denied spell sound
+        }
+        return *this->glitch;
+    }
     if (spell != this->glitch->getType()) {
         this->glitch = Glitch::SPELLS[static_cast<uint8_t>(spell)];
+        this->normalize();
         Game::setPalette(this->glitch->getPalette());
-        Game::stats.spells++;
+        if (!forced) {
+            // TODO Play change spell sound
+            Game::stats.spells++;
+        }
     }
     return *this->glitch;
 }
 
+bool Player::canUseSpellbook() const {
+    return (this->state & HAS_GRIMOIRE) 
+        && !this->spellbook.empty()
+        && Game::currentRoom->data->can_use_spellbook;
+}
+
 Glitch::Glitch &Player::nextSpell() {
-    if (!(this->state & HAS_GRIMOIRE) || this->spellbook.empty()) {
-        return *this->glitch;
+    if (!this->canUseSpellbook()) {
+        return this->setSpell(this->glitch->getType());
     }
     int32_t index = -1;
     int32_t i = 0;
@@ -145,17 +162,38 @@ void Player::processInputs() {
         this->jump();
     if (Input::isPressedUp(BUTTON_UP))
         this->stopJump();
-    // if (Input::isPressed(BUTTON_DOWN))
-    //     this->position.y += 2.0f;
+    this->state &= ~PRESSED_DOWN;
+    if (Input::isPressedDown(BUTTON_DOWN))
+        this->state |= PRESSED_DOWN;
     if (Input::isPressedDown(BUTTON_1))
         this->nextSpell();
     if (Input::isPressedDown(BUTTON_2))
         this->die();
+    uint8_t spellIndex = 0xff;
+    if (Input::isPressedDown(BUTTON_UP, Gamepad::gamepad2))
+        spellIndex = 0;
+    else if (Input::isPressedDown(BUTTON_LEFT, Gamepad::gamepad2))
+        spellIndex = 1;
+    else if (Input::isPressedDown(BUTTON_DOWN, Gamepad::gamepad2))
+        spellIndex = 2;
+    else if (Input::isPressedDown(BUTTON_RIGHT, Gamepad::gamepad2))
+        spellIndex = 3;
+    else if (Input::isPressedDown(BUTTON_1, Gamepad::gamepad2))
+        spellIndex = 4;
+    else if (Input::isPressedDown(BUTTON_2, Gamepad::gamepad2))
+        spellIndex = 5;
+    if (spellIndex < this->spellbook.size())
+        this->setSpell(this->spellbook.at(spellIndex)->getType());
 }
 
 void Player::moveHorizontal(float direction) {
+    auto &physics = this->glitch->getPhysics();
+    auto acc = (this->state & ON_GROUND) ? physics.gndRunAcc : physics.airRunAcc;
+
     this->state |= HORIZONTAL_INPUT;
-    this->velocity.x = direction * this->glitch->getPhysics().maxRunVelocity;
+    if (std::abs(this->velocity.x) > physics.maxRunVelocity)
+        acc = -acc;
+    this->velocity.x = std::clamp(this->velocity.x + acc * direction, -physics.maxRunVelocity, physics.maxRunVelocity);
 }
 
 void Player::stopMove() {
@@ -222,38 +260,45 @@ void Player::applyCollisions() {
     auto bottom_tile = static_cast<uint32_t>(std::ceil(
         std::min((this->position.y + bbox.bb + this->velocity.y + 1)  / tileSize, static_cast<float>(Game::currentRoom->data->height))  
     ));
+    bool wasOnGround = this->state & ON_GROUND;
 
-    this->state &= ~ON_GROUND;
+    if (!(this->glitch->getPhysics().flags & Glitch::Physics::CAN_FLOAT) || Input::isPressed(BUTTON_DOWN)) {
+        this->state &= ~ON_GROUND;
+    }
+    this->state &= ~CLIMBING;
+    this->state &= ~HORIZONTAL_COLLISION;
     for (auto y = top_tile; y < bottom_tile; y++) {
         for (auto x = left_tile; x < right_tile; x++) {
             auto collision = Tile::getCollision(Game::currentRoom->getTile(x, y));
+            if (collision == Tile::Type::KILL_PLAYER
+                && !(Game::player.glitch->getPhysics().flags & Glitch::Physics::IS_INVISIBLE)
+                && this->tileCollide({x, y}, FloatRect({bbox.lb + q, bbox.tb + q, bbox.rb - q, bbox.bb - q}))) {
+                this->die();
+                return;
+            }
             if (!this->glitch->collidesWith(collision) || this->glitch->isFallthrough(collision))
                 continue;
             //left collisions
             if (this->velocity.x < 0 && this->tileCollide({x, y},
                 FloatRect::BBox {bbox.lb + this->velocity.x - 1, bbox.tb + q, bbox.lb, bbox.bb - q})) {
-                if (collision == Tile::Type::KILL_PLAYER) {
-                    this->die();
-                    return;
-                }
                 this->position.x = static_cast<float>(x * tileSize + tileSize) - bbox.lb;
                 this->velocity.x = 0;
-                break;
+                this->state |= HORIZONTAL_COLLISION;
             }
             // right collisions
             if (this->velocity.x > 0 && this->tileCollide({x, y},
                 FloatRect::BBox {bbox.rb, bbox.tb + q, bbox.rb + this->velocity.x + 1, bbox.bb - q})) {
-                if (collision == Tile::Type::KILL_PLAYER) {
-                    this->die();
-                    return;
-                }
                 this->position.x = static_cast<float>(x * tileSize) - bbox.rb;
                 this->velocity.x = 0;
-                break;
+                this->state |= HORIZONTAL_COLLISION;
             }
         }
     }
     this->position.x += this->velocity.x;
+    if ((this->state & HORIZONTAL_COLLISION) && (this->state & HORIZONTAL_INPUT) && (this->glitch->getPhysics().flags & Glitch::Physics::CAN_CLIMB)) {
+        this->velocity.y = -1.0f;
+        this->state |= CLIMBING;
+    }
     for (auto y = top_tile; y < bottom_tile; y++) {
         for (auto x = left_tile; x < right_tile; x++) {
             auto collision = Tile::getCollision(Game::currentRoom->getTile(x, y));
@@ -267,10 +312,6 @@ void Player::applyCollisions() {
                     && this->glitch->isFallthrough(collision)
                     && (static_cast<float>(y * tileSize + tileSize) > this->position.y || Input::isPressed(BUTTON_DOWN))) {
                     continue;
-                }
-                if (collision == Tile::Type::KILL_PLAYER) {
-                    this->die();
-                    return;
                 }
                 this->position.y = static_cast<float>(y * tileSize) + tileSize - bbox.tb;
                 this->velocity.y = 0;
@@ -287,16 +328,19 @@ void Player::applyCollisions() {
                     && (static_cast<float>(y * tileSize) < this->position.y + bbox.bb || Input::isPressed(BUTTON_DOWN))) {
                     continue;
                 }
-                if (collision == Tile::Type::KILL_PLAYER) {
-                    this->die();
-                    return;
-                }                    
                 this->position.y = static_cast<float>(y * tileSize) - bbox.bb;
                 this->velocity.y = 0;
                 if (!this->isReverse())
                     this->state |= ON_GROUND;
                 break;
             }
+        }
+    }
+    if (!wasOnGround) {
+        if (this->state & ON_GROUND) {
+            // Play fall sound
+        } else {
+            this->state &= ~PRESSED_DOWN;
         }
     }
     this->position.y += this->velocity.y;
@@ -366,12 +410,14 @@ void Player::applyPhysics() {
 }
 
 void Player::applyAnimationFromState() {
-    if (!(this->state & State::ON_GROUND)) {
-        this->setAnimation(PLAYER_JUMPING, sizeof(PLAYER_JUMPING) / sizeof(*PLAYER_JUMPING));
+    if (this->state & State::CLIMBING) {
+        this->setAnimation(PLAYER_RUNNING, sizeof(PLAYER_RUNNING) / sizeof(anim_t));
+    } else if (!(this->state & State::ON_GROUND)) {
+        this->setAnimation(PLAYER_JUMPING, sizeof(PLAYER_JUMPING) / sizeof(anim_t));
     } else if (this->velocity.x != 0.0f) {
-        this->setAnimation(PLAYER_RUNNING, sizeof(PLAYER_RUNNING) / sizeof(*PLAYER_RUNNING));
+        this->setAnimation(PLAYER_RUNNING, sizeof(PLAYER_RUNNING) / sizeof(anim_t));
     } else {
-        this->setAnimation(PLAYER_IDLE, sizeof(PLAYER_IDLE) / sizeof(*PLAYER_IDLE));
+        this->setAnimation(PLAYER_IDLE, sizeof(PLAYER_IDLE) / sizeof(anim_t));
     }
 }
 

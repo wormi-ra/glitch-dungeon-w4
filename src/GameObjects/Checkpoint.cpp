@@ -42,6 +42,7 @@ void Checkpoint::update() {
             this->active = true;
             this->setAnimation(CHECKPOINT_ACTIVE_ANIM, sizeof(CHECKPOINT_ACTIVE_ANIM) / sizeof(anim_t));
             Game::player.setCheckpoint(*this);
+            Game::save();
         }
     }
 }

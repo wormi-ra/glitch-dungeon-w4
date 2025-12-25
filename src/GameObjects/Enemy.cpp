@@ -35,7 +35,7 @@ uint16_t Enemy::getDrawColor() const {
 
 void Enemy::update() {
     GameObject::update();
-    if (this->collidesWith(Game::player)) {
+    if (!(Game::player.glitch->getPhysics().flags & Glitch::Physics::IS_INVISIBLE) && this->collidesWith(Game::player, 3)) {
         Game::player.die();
     }
 }

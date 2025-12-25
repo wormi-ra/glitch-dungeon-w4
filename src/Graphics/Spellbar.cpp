@@ -18,6 +18,8 @@ void Spellbar::draw(const Viewport &view) const {
         IntRect rect = view.transform({this->position + position + Vector2{1, 1}, {13, 13}});
         if (spell == currentSpell) {
             *DRAW_COLORS = 0x34;
+        } else if (!Game::player.canUseSpellbook()) {
+            *DRAW_COLORS = 0x21;
         } else {
             if (rect.contains(static_cast<Vector2<int32_t>>(Input::getMouse()))) {
                 *DRAW_COLORS = 0x31;

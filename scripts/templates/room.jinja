@@ -8,7 +8,7 @@ static const uint8_t {{ room.name }}_DATA[] {
 const RoomData Data::{{ room.name }} {
     .width = {{ room.width }},
     .height = {{ room.height }},
-    .glitch_type = {{ room.glitch_type }},
+    {# .glitch_type = {{ room.glitch_type }}, #}
     .glitch_sequence = { {{- room.glitch_sequence|join(', ') -}} },
     .glitch_time_limit = {{ room.glitch_time_limit }},
     .can_use_spellbook = {{ room.can_use_spellbook|lower }},
@@ -21,11 +21,20 @@ const RoomData Data::{{ room.name }} {
 };
 
 {% endfor %}
-const RoomData Data::DUNGEON[6][6] {
-    {Data::ROOM_0_0, Data::ROOM_1_0, Data::ROOM_2_0, Data::ROOM_3_0, Data::ROOM_4_0, Data::ROOM_5_0},
-    {Data::ROOM_0_1, Data::ROOM_1_1, Data::ROOM_2_1, Data::ROOM_3_1, Data::ROOM_4_1, Data::ROOM_5_1},
-    {Data::ROOM_0_2, Data::ROOM_1_2, Data::ROOM_2_2, Data::ROOM_3_2, Data::ROOM_4_2, Data::ROOM_5_2},
-    {Data::ROOM_0_3, Data::ROOM_1_3, Data::ROOM_2_3, Data::ROOM_3_3, Data::ROOM_4_3, Data::ROOM_5_3},
-    {Data::ROOM_0_4, Data::ROOM_1_4, Data::ROOM_2_4, Data::ROOM_3_4, Data::ROOM_4_4, Data::ROOM_5_4},
-    {Data::ROOM_0_5, Data::ROOM_1_5, Data::ROOM_2_5, Data::ROOM_3_5, Data::ROOM_4_5, Data::ROOM_5_5},
+const RoomData *Data::DUNGEON[6][6] {
+    {&Data::ROOM_0_0, &Data::ROOM_1_0, &Data::ROOM_2_0, &Data::ROOM_3_0, &Data::ROOM_4_0, &Data::ROOM_5_0},
+    {&Data::ROOM_0_1, &Data::ROOM_1_1, &Data::ROOM_2_1, &Data::ROOM_3_1, &Data::ROOM_4_1, &Data::ROOM_5_1},
+    {&Data::ROOM_0_2, &Data::ROOM_1_2, &Data::ROOM_2_2, &Data::ROOM_3_2, &Data::ROOM_4_2, &Data::ROOM_5_2},
+    {&Data::ROOM_0_3, &Data::ROOM_1_3, &Data::ROOM_2_3, &Data::ROOM_3_3, &Data::ROOM_4_3, &Data::ROOM_5_3},
+    {&Data::ROOM_0_4, &Data::ROOM_1_4, &Data::ROOM_2_4, &Data::ROOM_3_4, &Data::ROOM_4_4, &Data::ROOM_5_4},
+    {&Data::ROOM_0_5, &Data::ROOM_1_5, &Data::ROOM_2_5, &Data::ROOM_3_5, &Data::ROOM_4_5, &Data::ROOM_5_5},
+};
+
+const RoomData *Data::DUNGEON_GLITCHED[6][6] {
+    {&Data::ROOM_0_0_GLITCHED, &Data::ROOM_1_0_GLITCHED, &Data::ROOM_2_0, &Data::ROOM_3_0, &Data::ROOM_4_0, &Data::ROOM_5_0},
+    {&Data::ROOM_0_1, &Data::ROOM_1_1, &Data::ROOM_2_1, &Data::ROOM_3_1, &Data::ROOM_4_1, &Data::ROOM_5_1},
+    {&Data::ROOM_0_2, &Data::ROOM_1_2, &Data::ROOM_2_2_GLITCHED, &Data::ROOM_3_2, &Data::ROOM_4_2, &Data::ROOM_5_2},
+    {&Data::ROOM_0_3, &Data::ROOM_1_3, &Data::ROOM_2_3, &Data::ROOM_3_3_GLITCHED, &Data::ROOM_4_3, &Data::ROOM_5_3},
+    {&Data::ROOM_0_4_GLITCHED, &Data::ROOM_1_4, &Data::ROOM_2_4, &Data::ROOM_3_4_GLITCHED, &Data::ROOM_4_4, &Data::ROOM_5_4},
+    {&Data::ROOM_0_5_GLITCHED, &Data::ROOM_1_5, &Data::ROOM_2_5, &Data::ROOM_3_5, &Data::ROOM_4_5, &Data::ROOM_5_5},
 };

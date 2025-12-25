@@ -1,5 +1,12 @@
 #include "Red.hpp"
 
+Glitch::Red::Red()
+{
+    this->m_physics = {
+        .flags = Physics::CAN_FLOAT
+    };
+}
+
 Glitch::Type Glitch::Red::getType() const {
     return Type::RED;
 }

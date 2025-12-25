@@ -64,7 +64,7 @@ static void onEnter(const Data::Door *target) {
 void Door::update() {
     GameObject::update();
     if (this->collidesWith(Game::player)
-        && Input::isPressedDown(BUTTON_DOWN)
+        && (Game::player.state & Player::PRESSED_DOWN)
         && (Game::player.state & Player::ON_GROUND)) {
         if (this->locked()) {
             if (Game::player.artifacts >= this->data->num_artifacts) {
@@ -80,8 +80,21 @@ void Door::update() {
         } else {
             Game::player.state &= ~(Player::ON_GROUND);
             auto target = this->data;
-            // w4::tracef("this.id = %d,door_id = %d", this->getId(), door_id);
-            Game::loadRoom(this->data->room.x, this->data->room.y, [target]() {
+            auto roomX = this->data->room.x;
+            auto roomY = this->data->room.y;
+            if (Game::state & Game::GLITCHED) {
+                if (Game::roomPosition == Vector2<uint8_t>(1, 0)) {
+                    if (this->data->door_id == 0) {
+                        roomX = 1;
+                        roomY = 0;
+                    }
+                    if (this->data->door_id == 2) {
+                        roomX = 2;
+                        roomY = 0;
+                    }
+                }
+            }
+            Game::loadRoom(roomX, roomY, [target]() {
                 onEnter(target);
             });
         }

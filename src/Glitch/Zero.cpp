@@ -1,11 +1,18 @@
 #include "Zero.hpp"
 
+Glitch::Zero::Zero()
+{
+    this->m_physics = {
+        .flags = Physics::IS_INVISIBLE
+    };
+}
+
 Glitch::Type Glitch::Zero::getType() const {
     return Type::ZERO;
 }
 
 const char *Glitch::Zero::getName() const {
-    return "invis";
+    return "invisible";
 }
 
 const uint32_t *Glitch::Zero::getPalette() const {

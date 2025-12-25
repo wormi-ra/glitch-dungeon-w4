@@ -1,5 +1,12 @@
 #include "Negative.hpp"
 
+bool Glitch::Negative::isFallthrough(Tile::Type collision) const {
+    return (collision == Tile::Type::FALLTHROUGH)
+        || (collision == Tile::Type::KILL_PLAYER)
+        || (collision == Tile::Type::SOLID);
+}
+
+
 Glitch::Type Glitch::Negative::getType() const {
     return Type::NEGATIVE;
 }

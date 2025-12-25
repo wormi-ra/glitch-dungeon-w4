@@ -20,6 +20,8 @@ IEntity::Type NPC::getType() const {
 }
 
 uint16_t NPC::getDrawColor() const {
+    if (Game::roomPosition == Vector2<uint8_t> {5, 5})
+        return 0x1230;
     return 0x1340;
 }
 
@@ -45,7 +47,8 @@ void NPC::update() {
         }
     } else if (this->speaking) {
         this->speaking = false;
-        Game::textBox.setText(nullptr, 0);
+        if (Game::textBox.text == this->getText())
+            Game::textBox.setText(nullptr, 0);
     }
 }
 
@@ -92,7 +95,7 @@ const char *NPC::getText() const {
         case 18:
             return "hip hip hooray!\nyay!!\nyou're the best!";
         case 19:
-            return "TODO: stats";
+            return Game::statsText;
         case 20:
             return "thanks for playing\n:)!\npress R to restart";
         case 21:

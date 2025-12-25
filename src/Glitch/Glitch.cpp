@@ -14,8 +14,7 @@ const Glitch::Physics &Glitch::Glitch::getPhysics() const {
 bool Glitch::Glitch::collidesWith(Tile::Type collision) const {
     return (collision == Tile::Type::SOLID 
         || collision == Tile::Type::SUPER_SOLID
-        || collision == Tile::Type::FALLTHROUGH
-        || collision == Tile::Type::KILL_PLAYER);
+        || collision == Tile::Type::FALLTHROUGH);
 }
 
 bool Glitch::Glitch::isFallthrough(Tile::Type collision) const {

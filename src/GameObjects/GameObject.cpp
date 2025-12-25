@@ -1,22 +1,23 @@
 #include "GameObject.hpp"
 #include "../utils.hpp"
 #include <cmath>
+#include <cstdint>
 #include <cstdlib>
 
-bool GameObject::collidesWith(const GameObject &other) const {
+bool GameObject::collidesWith(const GameObject &other, int32_t q) const {
     IntRect myRect = {
         Vector2<int32_t>{
-            static_cast<int32_t>(std::roundf(this->position.x)), 
-            static_cast<int32_t>(std::roundf(this->position.y))
+            static_cast<int32_t>(std::round(this->position.x)), 
+            static_cast<int32_t>(std::round(this->position.y))
         } + this->bbox.position,
         this->bbox.size,
     };
     IntRect otherRect = {
         Vector2<int32_t>{
-            static_cast<int32_t>(std::roundf(other.position.x)), 
-            static_cast<int32_t>(std::roundf(other.position.y))
-        } + other.bbox.position,
-        other.bbox.size,
+            static_cast<int32_t>(std::round(other.position.x)), 
+            static_cast<int32_t>(std::round(other.position.y))
+        } + other.bbox.position + Vector2 {q, q},
+        other.bbox.size - Vector2 {static_cast<uint32_t>(q) * 2u, static_cast<uint32_t>(q) * 2u}
     };
     return myRect.intersects(otherRect);
 }

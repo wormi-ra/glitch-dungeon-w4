@@ -12,8 +12,12 @@ void Sheet::blitSub(const Viewport &view, uint32_t tileId, Vector2<int32_t> posi
     });
     if (rect.size.x == 0 || rect.size.y == 0)
         return;
-    auto srcX = position.x + static_cast<int32_t>(this->tileWidth) > static_cast<int32_t>(view.size.x) ? tx : tx + this->tileWidth - rect.size.x;
-    auto srcY = position.y + static_cast<int32_t>(this->tileHeight) > static_cast<int32_t>(view.size.y) ? ty : ty + this->tileHeight - rect.size.y;
+    auto srcX = position.x + view.offset.x + static_cast<int32_t>(this->tileWidth) > static_cast<int32_t>(view.size.x) ? tx : tx + this->tileWidth - rect.size.x;
+    auto srcY = position.y + view.offset.y + static_cast<int32_t>(this->tileHeight) > static_cast<int32_t>(view.size.y) ? ty : ty + this->tileHeight - rect.size.y;
+    if (flags & BLIT_FLIP_X)
+        srcX += this->tileWidth - rect.size.x;
+    if (flags & BLIT_FLIP_Y)
+        srcY += this->tileHeight - rect.size.y;
     w4::blitSub(
         this->data,
         rect.position.x,

@@ -1,5 +1,12 @@
 #include "Gold.hpp"
 
+Glitch::Gold::Gold()
+{
+    this->m_physics = {
+        .flags = Physics::CAN_CLIMB
+    };
+}
+
 Glitch::Type Glitch::Gold::getType() const {
     return Type::GOLD;
 }

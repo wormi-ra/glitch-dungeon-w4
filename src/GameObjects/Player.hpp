@@ -3,14 +3,18 @@
 #include "Checkpoint.hpp"
 #include "GameObject.hpp"
 #include "../Glitch/Glitch.hpp"
+#include "../DynamicArray.hpp"
 
 class Player : public GameObject {
     public:
         enum State : uint8_t {
-            HAS_GRIMOIRE =      0b00000001,
-            ON_GROUND =         0b00000010,
-            IS_JUMPING =        0b00000100,
-            HORIZONTAL_INPUT =  0b00001000,
+            HAS_GRIMOIRE =          0b00000001,
+            ON_GROUND =             0b00000010,
+            IS_JUMPING =            0b00000100,
+            HORIZONTAL_INPUT =      0b00001000,
+            HORIZONTAL_COLLISION =  0b00010000,
+            CLIMBING =              0b00100000,
+            PRESSED_DOWN =          0b01000000,
         };
 
         DynamicArray<Glitch::Glitch *> spellbook {};
@@ -25,8 +29,9 @@ class Player : public GameObject {
 
         Player();
 
-        Glitch::Glitch &setSpell(Glitch::Type spell);
+        Glitch::Glitch &setSpell(Glitch::Type spell, bool forced = false);
         Glitch::Glitch &nextSpell();
+        bool canUseSpellbook() const;
         void giveSpell(Glitch::Type spell);
         void normalize();
         void die();

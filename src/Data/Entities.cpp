@@ -1,202 +1,191 @@
-
 #include "Entities.hpp"
 
-const Data::EntityData *Data::ENTITIES[] {
+const Data::EntityData *Data::ENTITIES[208] {
     // 0
-    new Data::Door {
+    new Data::NPC {
         {
-            {136, 8},
-            Data::EntityData::Type::DOOR,
+            {48, 72},
+            Data::EntityData::Type::NPC,
             0,
         },
-        {4, 3},
-        10,
         0,
     },
     // 1
-    new Data::Door {
+    new Data::NPC {
         {
-            {88, 56},
-            Data::EntityData::Type::DOOR,
+            {48, 72},
+            Data::EntityData::Type::NPC,
             1,
         },
-        {0, 4},
-        0,
         0,
     },
     // 2
-    new Data::Door {
+    new Data::Enemy {
         {
-            {72, 96},
-            Data::EntityData::Type::DOOR,
+            {70, 72},
+            Data::EntityData::Type::ENEMY,
             2,
         },
-        {3, 4},
-        0,
         0,
     },
     // 3
     new Data::Enemy {
         {
-            {69, 48},
+            {64, 72},
             Data::EntityData::Type::ENEMY,
             3,
         },
-        1,
+        0,
     },
     // 4
-    new Data::Door {
+    new Data::Enemy {
         {
-            {72, 64},
-            Data::EntityData::Type::DOOR,
+            {29, 72},
+            Data::EntityData::Type::ENEMY,
             4,
         },
-        {4, 4},
-        1,
         0,
     },
     // 5
-    new Data::Checkpoint {
+    new Data::Collection {
         {
-            {136, 96},
-            Data::EntityData::Type::CHECKPOINT,
+            {120, 16},
+            Data::EntityData::Type::COLLECTION,
             5,
         },
+        0,
     },
     // 6
     new Data::Collection {
         {
-            {8, 96},
+            {144, 24},
             Data::EntityData::Type::COLLECTION,
             6,
         },
-        4,
+        2,
     },
     // 7
-    new Data::Door {
-        {
-            {8, 96},
-            Data::EntityData::Type::DOOR,
-            7,
-        },
-        {0, 4},
-        1,
-        0,
-    },
-    // 8
-    new Data::Checkpoint {
-        {
-            {32, 96},
-            Data::EntityData::Type::CHECKPOINT,
-            8,
-        },
-    },
-    // 9
-    new Data::Door {
-        {
-            {104, 16},
-            Data::EntityData::Type::DOOR,
-            9,
-        },
-        {2, 4},
-        10,
-        0,
-    },
-    // 10
-    new Data::Enemy {
-        {
-            {73, 0},
-            Data::EntityData::Type::ENEMY,
-            10,
-        },
-        0,
-    },
-    // 11
-    new Data::Enemy {
-        {
-            {101, 48},
-            Data::EntityData::Type::ENEMY,
-            11,
-        },
-        1,
-    },
-    // 12
-    new Data::Checkpoint {
-        {
-            {136, 72},
-            Data::EntityData::Type::CHECKPOINT,
-            12,
-        },
-    },
-    // 13
     new Data::Collection {
         {
-            {40, 80},
+            {104, 8},
             Data::EntityData::Type::COLLECTION,
-            13,
+            7,
         },
-        9,
+        1,
     },
-    // 14
+    // 8
+    new Data::Collection {
+        {
+            {48, 40},
+            Data::EntityData::Type::COLLECTION,
+            8,
+        },
+        4,
+    },
+    // 9
+    new Data::Collection {
+        {
+            {40, 96},
+            Data::EntityData::Type::COLLECTION,
+            9,
+        },
+        5,
+    },
+    // 10
+    new Data::Collection {
+        {
+            {16, 88},
+            Data::EntityData::Type::COLLECTION,
+            10,
+        },
+        6,
+    },
+    // 11
+    new Data::Collection {
+        {
+            {8, 24},
+            Data::EntityData::Type::COLLECTION,
+            11,
+        },
+        13,
+    },
+    // 12
     new Data::Door {
         {
-            {136, 16},
+            {16, 96},
             Data::EntityData::Type::DOOR,
-            14,
+            12,
         },
         {1, 0},
-        2,
+        0,
         0,
     },
-    // 15
+    // 13
     new Data::Door {
         {
-            {136, 96},
+            {40, 48},
             Data::EntityData::Type::DOOR,
+            13,
+        },
+        {4, 1},
+        10,
+        0,
+    },
+    // 14
+    new Data::Checkpoint {
+        {
+            {56, 48},
+            Data::EntityData::Type::CHECKPOINT,
+            14,
+        },
+    },
+    // 15
+    new Data::NPC {
+        {
+            {80, 96},
+            Data::EntityData::Type::NPC,
             15,
         },
-        {3, 0},
+        7,
+    },
+    // 16
+    new Data::Door {
+        {
+            {16, 16},
+            Data::EntityData::Type::DOOR,
+            16,
+        },
+        {1, 2},
         1,
         0,
     },
-    // 16
-    new Data::NPC {
-        {
-            {104, 16},
-            Data::EntityData::Type::NPC,
-            16,
-        },
-        2,
-    },
     // 17
-    new Data::Checkpoint {
+    new Data::Enemy {
         {
-            {40, 16},
-            Data::EntityData::Type::CHECKPOINT,
+            {82, 96},
+            Data::EntityData::Type::ENEMY,
             17,
         },
+        0,
     },
     // 18
-    new Data::Door {
+    new Data::Checkpoint {
         {
-            {136, 8},
-            Data::EntityData::Type::DOOR,
+            {32, 16},
+            Data::EntityData::Type::CHECKPOINT,
             18,
         },
-        {4, 3},
-        10,
-        0,
     },
     // 19
     new Data::Door {
         {
-            {88, 56},
+            {16, 96},
             Data::EntityData::Type::DOOR,
             19,
         },
-        {0, 0},
-        12,
-        9999,
+        {5, 1},
+        10,
+        0,
     },
     // 20
     new Data::Door {
@@ -240,796 +229,789 @@ const Data::EntityData *Data::ENTITIES[] {
     // 24
     new Data::Door {
         {
-            {128, 56},
+            {72, 96},
             Data::EntityData::Type::DOOR,
             24,
+        },
+        {3, 4},
+        0,
+        0,
+    },
+    // 25
+    new Data::Enemy {
+        {
+            {69, 48},
+            Data::EntityData::Type::ENEMY,
+            25,
+        },
+        1,
+    },
+    // 26
+    new Data::Door {
+        {
+            {72, 64},
+            Data::EntityData::Type::DOOR,
+            26,
+        },
+        {4, 4},
+        1,
+        0,
+    },
+    // 27
+    new Data::Checkpoint {
+        {
+            {136, 96},
+            Data::EntityData::Type::CHECKPOINT,
+            27,
+        },
+    },
+    // 28
+    new Data::Collection {
+        {
+            {8, 96},
+            Data::EntityData::Type::COLLECTION,
+            28,
+        },
+        4,
+    },
+    // 29
+    new Data::Door {
+        {
+            {72, 96},
+            Data::EntityData::Type::DOOR,
+            29,
+        },
+        {3, 4},
+        0,
+        0,
+    },
+    // 30
+    new Data::Enemy {
+        {
+            {69, 48},
+            Data::EntityData::Type::ENEMY,
+            30,
+        },
+        1,
+    },
+    // 31
+    new Data::Door {
+        {
+            {72, 64},
+            Data::EntityData::Type::DOOR,
+            31,
+        },
+        {4, 4},
+        1,
+        0,
+    },
+    // 32
+    new Data::Checkpoint {
+        {
+            {136, 96},
+            Data::EntityData::Type::CHECKPOINT,
+            32,
+        },
+    },
+    // 33
+    new Data::Collection {
+        {
+            {8, 96},
+            Data::EntityData::Type::COLLECTION,
+            33,
+        },
+        4,
+    },
+    // 34
+    new Data::Collection {
+        {
+            {88, 80},
+            Data::EntityData::Type::COLLECTION,
+            34,
+        },
+        3,
+    },
+    // 35
+    new Data::Collection {
+        {
+            {64, 24},
+            Data::EntityData::Type::COLLECTION,
+            35,
+        },
+        7,
+    },
+    // 36
+    new Data::Checkpoint {
+        {
+            {24, 80},
+            Data::EntityData::Type::CHECKPOINT,
+            36,
+        },
+    },
+    // 37
+    new Data::Enemy {
+        {
+            {103, 32},
+            Data::EntityData::Type::ENEMY,
+            37,
+        },
+        1,
+    },
+    // 38
+    new Data::Checkpoint {
+        {
+            {80, 72},
+            Data::EntityData::Type::CHECKPOINT,
+            38,
+        },
+    },
+    // 39
+    new Data::Checkpoint {
+        {
+            {16, 96},
+            Data::EntityData::Type::CHECKPOINT,
+            39,
+        },
+    },
+    // 40
+    new Data::Collection {
+        {
+            {120, 96},
+            Data::EntityData::Type::COLLECTION,
+            40,
+        },
+        10,
+    },
+    // 41
+    new Data::Enemy {
+        {
+            {105, 96},
+            Data::EntityData::Type::ENEMY,
+            41,
+        },
+        0,
+    },
+    // 42
+    new Data::Door {
+        {
+            {128, 48},
+            Data::EntityData::Type::DOOR,
+            42,
+        },
+        {5, 5},
+        0,
+        0,
+    },
+    // 43
+    new Data::Collection {
+        {
+            {144, 72},
+            Data::EntityData::Type::COLLECTION,
+            43,
+        },
+        8,
+    },
+    // 44
+    new Data::Door {
+        {
+            {128, 56},
+            Data::EntityData::Type::DOOR,
+            44,
         },
         {2, 0},
         2,
         0,
     },
-    // 25
+    // 45
     new Data::Door {
         {
             {16, 56},
             Data::EntityData::Type::DOOR,
-            25,
+            45,
         },
         {1, 1},
         1,
         0,
     },
-    // 26
+    // 46
     new Data::NPC {
         {
             {112, 56},
             Data::EntityData::Type::NPC,
-            26,
+            46,
         },
         1,
     },
-    // 27
+    // 47
     new Data::Door {
         {
             {72, 88},
             Data::EntityData::Type::DOOR,
-            27,
+            47,
         },
         {0, 1},
         0,
         2,
     },
-    // 28
-    new Data::NPC {
-        {
-            {48, 88},
-            Data::EntityData::Type::NPC,
-            28,
-        },
-        16,
-    },
-    // 29
-    new Data::NPC {
-        {
-            {88, 88},
-            Data::EntityData::Type::NPC,
-            29,
-        },
-        17,
-    },
-    // 30
-    new Data::NPC {
-        {
-            {128, 88},
-            Data::EntityData::Type::NPC,
-            30,
-        },
-        18,
-    },
-    // 31
-    new Data::NPC {
-        {
-            {240, 88},
-            Data::EntityData::Type::NPC,
-            31,
-        },
-        19,
-    },
-    // 32
-    new Data::NPC {
-        {
-            {288, 88},
-            Data::EntityData::Type::NPC,
-            32,
-        },
-        20,
-    },
-    // 33
-    new Data::Enemy {
-        {
-            {72, 56},
-            Data::EntityData::Type::ENEMY,
-            33,
-        },
-        0,
-    },
-    // 34
-    new Data::Enemy {
-        {
-            {72, 88},
-            Data::EntityData::Type::ENEMY,
-            34,
-        },
-        0,
-    },
-    // 35
-    new Data::Door {
-        {
-            {24, 96},
-            Data::EntityData::Type::DOOR,
-            35,
-        },
-        {0, 2},
-        1,
-        0,
-    },
-    // 36
-    new Data::Door {
-        {
-            {8, 96},
-            Data::EntityData::Type::DOOR,
-            36,
-        },
-        {4, 0},
-        0,
-        0,
-    },
-    // 37
-    new Data::Door {
-        {
-            {136, 96},
-            Data::EntityData::Type::DOOR,
-            37,
-        },
-        {3, 3},
-        1,
-        0,
-    },
-    // 38
-    new Data::Enemy {
-        {
-            {106, 96},
-            Data::EntityData::Type::ENEMY,
-            38,
-        },
-        0,
-    },
-    // 39
-    new Data::Enemy {
-        {
-            {74, 96},
-            Data::EntityData::Type::ENEMY,
-            39,
-        },
-        0,
-    },
-    // 40
-    new Data::Enemy {
-        {
-            {42, 96},
-            Data::EntityData::Type::ENEMY,
-            40,
-        },
-        0,
-    },
-    // 41
-    new Data::Enemy {
-        {
-            {66, 48},
-            Data::EntityData::Type::ENEMY,
-            41,
-        },
-        1,
-    },
-    // 42
-    new Data::Checkpoint {
-        {
-            {120, 32},
-            Data::EntityData::Type::CHECKPOINT,
-            42,
-        },
-    },
-    // 43
-    new Data::NPC {
-        {
-            {56, 32},
-            Data::EntityData::Type::NPC,
-            43,
-        },
-        10,
-    },
-    // 44
-    new Data::Door {
-        {
-            {16, 96},
-            Data::EntityData::Type::DOOR,
-            44,
-        },
-        {1, 3},
-        0,
-        0,
-    },
-    // 45
-    new Data::Checkpoint {
-        {
-            {128, 96},
-            Data::EntityData::Type::CHECKPOINT,
-            45,
-        },
-    },
-    // 46
-    new Data::Collection {
-        {
-            {64, 56},
-            Data::EntityData::Type::COLLECTION,
-            46,
-        },
-        5,
-    },
-    // 47
-    new Data::Enemy {
-        {
-            {28, 96},
-            Data::EntityData::Type::ENEMY,
-            47,
-        },
-        0,
-    },
     // 48
-    new Data::Enemy {
+    new Data::Door {
         {
-            {68, 96},
-            Data::EntityData::Type::ENEMY,
+            {128, 56},
+            Data::EntityData::Type::DOOR,
             48,
         },
+        {2, 4},
+        2,
         0,
     },
     // 49
-    new Data::Enemy {
+    new Data::Door {
         {
-            {77, 96},
-            Data::EntityData::Type::ENEMY,
+            {72, 88},
+            Data::EntityData::Type::DOOR,
             49,
         },
+        {0, 1},
+        0,
         0,
     },
     // 50
-    new Data::Enemy {
+    new Data::Checkpoint {
         {
-            {56, 96},
-            Data::EntityData::Type::ENEMY,
+            {16, 56},
+            Data::EntityData::Type::CHECKPOINT,
             50,
         },
-        0,
     },
     // 51
-    new Data::Door {
+    new Data::Collection {
         {
-            {16, 96},
-            Data::EntityData::Type::DOOR,
+            {32, 32},
+            Data::EntityData::Type::COLLECTION,
             51,
         },
-        {4, 3},
-        0,
-        0,
+        13,
     },
     // 52
-    new Data::Enemy {
+    new Data::Collection {
         {
-            {64, 48},
-            Data::EntityData::Type::ENEMY,
+            {120, 24},
+            Data::EntityData::Type::COLLECTION,
             52,
         },
-        0,
+        13,
     },
     // 53
-    new Data::Enemy {
+    new Data::Collection {
         {
-            {39, 72},
-            Data::EntityData::Type::ENEMY,
+            {0, 48},
+            Data::EntityData::Type::COLLECTION,
             53,
         },
-        0,
+        13,
     },
     // 54
-    new Data::Enemy {
+    new Data::Collection {
         {
-            {64, 96},
-            Data::EntityData::Type::ENEMY,
+            {56, 16},
+            Data::EntityData::Type::COLLECTION,
             54,
         },
-        0,
+        13,
     },
     // 55
-    new Data::Door {
+    new Data::Collection {
         {
-            {8, 8},
-            Data::EntityData::Type::DOOR,
+            {16, 16},
+            Data::EntityData::Type::COLLECTION,
             55,
         },
-        {1, 1},
-        0,
-        0,
+        13,
     },
     // 56
-    new Data::NPC {
+    new Data::Collection {
         {
-            {16, 96},
-            Data::EntityData::Type::NPC,
+            {128, 32},
+            Data::EntityData::Type::COLLECTION,
             56,
         },
-        6,
+        13,
     },
     // 57
     new Data::Collection {
         {
-            {56, 96},
+            {56, 80},
             Data::EntityData::Type::COLLECTION,
             57,
         },
-        1,
+        13,
     },
     // 58
-    new Data::Enemy {
+    new Data::Collection {
         {
-            {8, 96},
-            Data::EntityData::Type::ENEMY,
+            {112, 104},
+            Data::EntityData::Type::COLLECTION,
             58,
         },
-        0,
+        13,
     },
     // 59
-    new Data::Enemy {
+    new Data::Collection {
         {
-            {129, 96},
-            Data::EntityData::Type::ENEMY,
+            {104, 56},
+            Data::EntityData::Type::COLLECTION,
             59,
         },
-        0,
+        13,
     },
     // 60
-    new Data::Door {
+    new Data::Enemy {
         {
-            {72, 96},
-            Data::EntityData::Type::DOOR,
+            {72, 48},
+            Data::EntityData::Type::ENEMY,
             60,
         },
-        {3, 3},
-        0,
         0,
     },
     // 61
-    new Data::Door {
+    new Data::Collection {
         {
-            {72, 16},
-            Data::EntityData::Type::DOOR,
+            {24, 96},
+            Data::EntityData::Type::COLLECTION,
             61,
         },
-        {5, 0},
-        9,
-        5,
+        13,
     },
     // 62
     new Data::Door {
         {
-            {120, 8},
-            Data::EntityData::Type::DOOR,
-            62,
-        },
-        {3, 5},
-        10,
-        0,
-    },
-    // 63
-    new Data::Collection {
-        {
-            {72, 56},
-            Data::EntityData::Type::COLLECTION,
-            63,
-        },
-        0,
-    },
-    // 64
-    new Data::Door {
-        {
             {24, 96},
             Data::EntityData::Type::DOOR,
-            64,
+            62,
         },
         {1, 0},
         1,
         0,
     },
-    // 65
+    // 63
     new Data::Door {
         {
             {128, 24},
             Data::EntityData::Type::DOOR,
-            65,
+            63,
         },
         {2, 1},
         0,
         0,
     },
-    // 66
+    // 64
     new Data::NPC {
         {
             {112, 96},
             Data::EntityData::Type::NPC,
-            66,
+            64,
         },
         -1,
     },
-    // 67
+    // 65
     new Data::Checkpoint {
         {
             {104, 24},
             Data::EntityData::Type::CHECKPOINT,
+            65,
+        },
+    },
+    // 66
+    new Data::Enemy {
+        {
+            {72, 56},
+            Data::EntityData::Type::ENEMY,
+            66,
+        },
+        0,
+    },
+    // 67
+    new Data::Enemy {
+        {
+            {72, 88},
+            Data::EntityData::Type::ENEMY,
             67,
         },
+        0,
     },
     // 68
     new Data::Door {
         {
-            {128, 16},
+            {24, 96},
             Data::EntityData::Type::DOOR,
             68,
         },
-        {0, 3},
-        0,
+        {0, 2},
+        1,
         0,
     },
     // 69
-    new Data::Enemy {
-        {
-            {103, 32},
-            Data::EntityData::Type::ENEMY,
-            69,
-        },
-        1,
-    },
-    // 70
-    new Data::Checkpoint {
-        {
-            {80, 72},
-            Data::EntityData::Type::CHECKPOINT,
-            70,
-        },
-    },
-    // 71
-    new Data::Checkpoint {
+    new Data::Door {
         {
             {16, 96},
-            Data::EntityData::Type::CHECKPOINT,
+            Data::EntityData::Type::DOOR,
+            69,
+        },
+        {4, 3},
+        0,
+        0,
+    },
+    // 70
+    new Data::Enemy {
+        {
+            {64, 48},
+            Data::EntityData::Type::ENEMY,
+            70,
+        },
+        0,
+    },
+    // 71
+    new Data::Enemy {
+        {
+            {39, 72},
+            Data::EntityData::Type::ENEMY,
             71,
         },
+        0,
     },
     // 72
-    new Data::Collection {
+    new Data::Enemy {
         {
-            {120, 96},
-            Data::EntityData::Type::COLLECTION,
+            {64, 96},
+            Data::EntityData::Type::ENEMY,
             72,
         },
-        10,
+        0,
     },
     // 73
     new Data::Enemy {
         {
-            {105, 96},
+            {28, 96},
             Data::EntityData::Type::ENEMY,
             73,
         },
         0,
     },
     // 74
-    new Data::Door {
+    new Data::Enemy {
         {
-            {128, 48},
-            Data::EntityData::Type::DOOR,
+            {68, 96},
+            Data::EntityData::Type::ENEMY,
             74,
         },
-        {5, 5},
-        0,
         0,
     },
     // 75
-    new Data::Collection {
+    new Data::Enemy {
         {
-            {144, 72},
-            Data::EntityData::Type::COLLECTION,
+            {77, 96},
+            Data::EntityData::Type::ENEMY,
             75,
         },
-        8,
+        0,
     },
     // 76
-    new Data::Door {
+    new Data::Enemy {
         {
-            {16, 96},
-            Data::EntityData::Type::DOOR,
+            {56, 96},
+            Data::EntityData::Type::ENEMY,
             76,
         },
-        {1, 0},
-        0,
         0,
     },
     // 77
-    new Data::Door {
+    new Data::Enemy {
         {
-            {40, 48},
-            Data::EntityData::Type::DOOR,
+            {31, 96},
+            Data::EntityData::Type::ENEMY,
             77,
         },
-        {4, 1},
-        10,
         0,
     },
     // 78
-    new Data::Checkpoint {
+    new Data::Door {
         {
-            {56, 48},
-            Data::EntityData::Type::CHECKPOINT,
+            {136, 16},
+            Data::EntityData::Type::DOOR,
             78,
         },
+        {1, 0},
+        2,
+        0,
     },
     // 79
-    new Data::NPC {
+    new Data::Door {
         {
-            {80, 96},
-            Data::EntityData::Type::NPC,
+            {136, 96},
+            Data::EntityData::Type::DOOR,
             79,
         },
-        7,
+        {3, 0},
+        1,
+        0,
     },
     // 80
-    new Data::Door {
-        {
-            {8, 96},
-            Data::EntityData::Type::DOOR,
-            80,
-        },
-        {5, 0},
-        1,
-        0,
-    },
-    // 81
-    new Data::Door {
-        {
-            {56, 48},
-            Data::EntityData::Type::DOOR,
-            81,
-        },
-        {5, 2},
-        0,
-        0,
-    },
-    // 82
     new Data::NPC {
         {
-            {88, 96},
+            {104, 16},
             Data::EntityData::Type::NPC,
-            82,
+            80,
         },
-        12,
+        2,
     },
-    // 83
+    // 81
     new Data::Checkpoint {
         {
-            {48, 96},
+            {40, 16},
             Data::EntityData::Type::CHECKPOINT,
-            83,
+            81,
         },
     },
-    // 84
+    // 82
     new Data::Door {
         {
-            {72, 96},
+            {8, 8},
             Data::EntityData::Type::DOOR,
-            84,
+            82,
         },
-        {2, 4},
-        9,
+        {1, 1},
+        0,
         0,
     },
-    // 85
-    new Data::Door {
+    // 83
+    new Data::NPC {
         {
-            {72, 8},
-            Data::EntityData::Type::DOOR,
+            {16, 96},
+            Data::EntityData::Type::NPC,
+            83,
+        },
+        6,
+    },
+    // 84
+    new Data::Collection {
+        {
+            {56, 96},
+            Data::EntityData::Type::COLLECTION,
+            84,
+        },
+        1,
+    },
+    // 85
+    new Data::Enemy {
+        {
+            {73, 0},
+            Data::EntityData::Type::ENEMY,
             85,
         },
-        {5, 4},
-        1,
         0,
     },
     // 86
-    new Data::NPC {
+    new Data::Enemy {
         {
-            {72, 56},
-            Data::EntityData::Type::NPC,
+            {101, 48},
+            Data::EntityData::Type::ENEMY,
             86,
         },
-        14,
+        1,
     },
     // 87
     new Data::Checkpoint {
         {
-            {40, 96},
+            {136, 72},
             Data::EntityData::Type::CHECKPOINT,
             87,
         },
     },
     // 88
-    new Data::Door {
+    new Data::Collection {
         {
-            {8, 24},
-            Data::EntityData::Type::DOOR,
+            {40, 80},
+            Data::EntityData::Type::COLLECTION,
             88,
         },
-        {3, 2},
-        0,
-        0,
+        9,
     },
     // 89
-    new Data::Checkpoint {
-        {
-            {8, 40},
-            Data::EntityData::Type::CHECKPOINT,
-            89,
-        },
-    },
-    // 90
-    new Data::NPC {
-        {
-            {104, 96},
-            Data::EntityData::Type::NPC,
-            90,
-        },
-        99,
-    },
-    // 91
     new Data::Enemy {
         {
-            {31, 96},
+            {73, 0},
             Data::EntityData::Type::ENEMY,
-            91,
+            89,
         },
         0,
+    },
+    // 90
+    new Data::Enemy {
+        {
+            {35, 48},
+            Data::EntityData::Type::ENEMY,
+            90,
+        },
+        1,
+    },
+    // 91
+    new Data::Checkpoint {
+        {
+            {136, 72},
+            Data::EntityData::Type::CHECKPOINT,
+            91,
+        },
     },
     // 92
     new Data::Collection {
         {
-            {88, 80},
+            {40, 80},
             Data::EntityData::Type::COLLECTION,
             92,
         },
-        3,
+        9,
     },
     // 93
-    new Data::Collection {
-        {
-            {64, 24},
-            Data::EntityData::Type::COLLECTION,
-            93,
-        },
-        7,
-    },
-    // 94
     new Data::Checkpoint {
         {
-            {24, 80},
+            {40, 96},
             Data::EntityData::Type::CHECKPOINT,
+            93,
+        },
+    },
+    // 94
+    new Data::Enemy {
+        {
+            {132, 48},
+            Data::EntityData::Type::ENEMY,
             94,
         },
+        0,
     },
     // 95
     new Data::NPC {
         {
-            {48, 72},
+            {112, 96},
             Data::EntityData::Type::NPC,
             95,
         },
-        0,
+        5,
     },
     // 96
-    new Data::Door {
+    new Data::Enemy {
         {
-            {120, 16},
-            Data::EntityData::Type::DOOR,
+            {8, 96},
+            Data::EntityData::Type::ENEMY,
             96,
         },
-        {4, 0},
-        4,
         0,
     },
     // 97
-    new Data::Door {
+    new Data::Enemy {
         {
-            {24, 96},
-            Data::EntityData::Type::DOOR,
+            {129, 96},
+            Data::EntityData::Type::ENEMY,
             97,
         },
-        {4, 0},
-        4,
         0,
     },
     // 98
-    new Data::Enemy {
+    new Data::Door {
         {
-            {18, 96},
-            Data::EntityData::Type::ENEMY,
+            {72, 96},
+            Data::EntityData::Type::DOOR,
             98,
         },
+        {3, 3},
+        0,
         0,
     },
     // 99
     new Data::Door {
         {
-            {128, 96},
+            {72, 16},
             Data::EntityData::Type::DOOR,
             99,
         },
-        {4, 1},
-        2,
-        0,
+        {5, 0},
+        9,
+        5,
     },
     // 100
     new Data::Door {
         {
-            {24, 16},
+            {120, 8},
             Data::EntityData::Type::DOOR,
             100,
         },
-        {3, 1},
-        0,
+        {3, 5},
+        10,
         0,
     },
     // 101
-    new Data::Checkpoint {
+    new Data::Collection {
         {
-            {80, 96},
-            Data::EntityData::Type::CHECKPOINT,
+            {72, 56},
+            Data::EntityData::Type::COLLECTION,
             101,
         },
+        0,
     },
     // 102
+    new Data::Door {
+        {
+            {8, 40},
+            Data::EntityData::Type::DOOR,
+            102,
+        },
+        {2, 0},
+        1,
+        0,
+    },
+    // 103
+    new Data::Collection {
+        {
+            {136, 32},
+            Data::EntityData::Type::COLLECTION,
+            103,
+        },
+        2,
+    },
+    // 104
     new Data::NPC {
         {
             {72, 16},
             Data::EntityData::Type::NPC,
-            102,
-        },
-        9,
-    },
-    // 103
-    new Data::Checkpoint {
-        {
-            {40, 96},
-            Data::EntityData::Type::CHECKPOINT,
-            103,
-        },
-    },
-    // 104
-    new Data::Enemy {
-        {
-            {132, 48},
-            Data::EntityData::Type::ENEMY,
             104,
         },
-        0,
+        6,
     },
     // 105
-    new Data::NPC {
+    new Data::Door {
         {
-            {112, 96},
-            Data::EntityData::Type::NPC,
+            {8, 96},
+            Data::EntityData::Type::DOOR,
             105,
         },
-        5,
+        {4, 0},
+        0,
+        0,
     },
     // 106
-    new Data::NPC {
+    new Data::Door {
         {
-            {48, 72},
-            Data::EntityData::Type::NPC,
+            {136, 96},
+            Data::EntityData::Type::DOOR,
             106,
         },
+        {3, 3},
+        1,
         0,
     },
     // 107
     new Data::Enemy {
         {
-            {70, 72},
+            {106, 96},
             Data::EntityData::Type::ENEMY,
             107,
         },
@@ -1038,7 +1020,7 @@ const Data::EntityData *Data::ENTITIES[] {
     // 108
     new Data::Enemy {
         {
-            {64, 72},
+            {74, 96},
             Data::EntityData::Type::ENEMY,
             108,
         },
@@ -1047,452 +1029,465 @@ const Data::EntityData *Data::ENTITIES[] {
     // 109
     new Data::Enemy {
         {
-            {29, 72},
+            {42, 96},
             Data::EntityData::Type::ENEMY,
             109,
         },
         0,
     },
     // 110
-    new Data::Collection {
+    new Data::Enemy {
         {
-            {120, 16},
-            Data::EntityData::Type::COLLECTION,
+            {66, 48},
+            Data::EntityData::Type::ENEMY,
             110,
-        },
-        0,
-    },
-    // 111
-    new Data::Collection {
-        {
-            {144, 24},
-            Data::EntityData::Type::COLLECTION,
-            111,
-        },
-        2,
-    },
-    // 112
-    new Data::Collection {
-        {
-            {104, 8},
-            Data::EntityData::Type::COLLECTION,
-            112,
         },
         1,
     },
-    // 113
-    new Data::Collection {
+    // 111
+    new Data::Checkpoint {
         {
-            {48, 40},
-            Data::EntityData::Type::COLLECTION,
+            {120, 32},
+            Data::EntityData::Type::CHECKPOINT,
+            111,
+        },
+    },
+    // 112
+    new Data::NPC {
+        {
+            {56, 32},
+            Data::EntityData::Type::NPC,
+            112,
+        },
+        10,
+    },
+    // 113
+    new Data::Door {
+        {
+            {128, 48},
+            Data::EntityData::Type::DOOR,
             113,
         },
-        4,
+        {4, 2},
+        0,
+        0,
     },
     // 114
     new Data::Collection {
         {
-            {40, 96},
+            {56, 8},
             Data::EntityData::Type::COLLECTION,
             114,
         },
-        5,
+        2,
     },
     // 115
     new Data::Collection {
         {
-            {16, 88},
+            {120, 24},
             Data::EntityData::Type::COLLECTION,
             115,
         },
-        6,
+        0,
     },
     // 116
     new Data::Collection {
         {
-            {8, 24},
+            {24, 16},
             Data::EntityData::Type::COLLECTION,
             116,
         },
         13,
     },
     // 117
-    new Data::Door {
-        {
-            {16, 16},
-            Data::EntityData::Type::DOOR,
-            117,
-        },
-        {1, 2},
-        1,
-        0,
-    },
-    // 118
-    new Data::Enemy {
-        {
-            {82, 96},
-            Data::EntityData::Type::ENEMY,
-            118,
-        },
-        0,
-    },
-    // 119
-    new Data::Checkpoint {
-        {
-            {32, 16},
-            Data::EntityData::Type::CHECKPOINT,
-            119,
-        },
-    },
-    // 120
-    new Data::Door {
-        {
-            {16, 96},
-            Data::EntityData::Type::DOOR,
-            120,
-        },
-        {5, 1},
-        10,
-        0,
-    },
-    // 121
-    new Data::Door {
-        {
-            {128, 48},
-            Data::EntityData::Type::DOOR,
-            121,
-        },
-        {4, 2},
-        0,
-        0,
-    },
-    // 122
-    new Data::Collection {
-        {
-            {56, 8},
-            Data::EntityData::Type::COLLECTION,
-            122,
-        },
-        2,
-    },
-    // 123
-    new Data::Collection {
-        {
-            {120, 24},
-            Data::EntityData::Type::COLLECTION,
-            123,
-        },
-        0,
-    },
-    // 124
-    new Data::Collection {
-        {
-            {24, 16},
-            Data::EntityData::Type::COLLECTION,
-            124,
-        },
-        13,
-    },
-    // 125
     new Data::Collection {
         {
             {80, 72},
             Data::EntityData::Type::COLLECTION,
-            125,
+            117,
         },
         7,
     },
-    // 126
+    // 118
     new Data::Collection {
         {
             {56, 96},
             Data::EntityData::Type::COLLECTION,
-            126,
+            118,
         },
         6,
     },
-    // 127
+    // 119
     new Data::Door {
         {
             {16, 72},
             Data::EntityData::Type::DOOR,
-            127,
+            119,
         },
-        {0, 0},
-        0,
+        {3, 5},
+        10,
         9999,
     },
-    // 128
+    // 120
     new Data::Checkpoint {
         {
             {40, 48},
             Data::EntityData::Type::CHECKPOINT,
-            128,
+            120,
         },
     },
-    // 129
+    // 121
     new Data::Checkpoint {
         {
             {64, 40},
             Data::EntityData::Type::CHECKPOINT,
-            129,
+            121,
         },
     },
-    // 130
+    // 122
     new Data::Checkpoint {
         {
             {88, 48},
             Data::EntityData::Type::CHECKPOINT,
-            130,
+            122,
         },
     },
-    // 131
+    // 123
     new Data::Checkpoint {
         {
             {112, 16},
             Data::EntityData::Type::CHECKPOINT,
+            123,
+        },
+    },
+    // 124
+    new Data::Enemy {
+        {
+            {39, 88},
+            Data::EntityData::Type::ENEMY,
+            124,
+        },
+        0,
+    },
+    // 125
+    new Data::Enemy {
+        {
+            {7, 8},
+            Data::EntityData::Type::ENEMY,
+            125,
+        },
+        0,
+    },
+    // 126
+    new Data::Checkpoint {
+        {
+            {16, 40},
+            Data::EntityData::Type::CHECKPOINT,
+            126,
+        },
+    },
+    // 127
+    new Data::Collection {
+        {
+            {128, 0},
+            Data::EntityData::Type::COLLECTION,
+            127,
+        },
+        14,
+    },
+    // 128
+    new Data::Collection {
+        {
+            {112, 88},
+            Data::EntityData::Type::COLLECTION,
+            128,
+        },
+        3,
+    },
+    // 129
+    new Data::Collection {
+        {
+            {8, 88},
+            Data::EntityData::Type::COLLECTION,
+            129,
+        },
+        4,
+    },
+    // 130
+    new Data::Collection {
+        {
+            {136, 96},
+            Data::EntityData::Type::COLLECTION,
+            130,
+        },
+        5,
+    },
+    // 131
+    new Data::Enemy {
+        {
+            {125, 24},
+            Data::EntityData::Type::ENEMY,
             131,
         },
+        1,
     },
     // 132
     new Data::Enemy {
         {
-            {39, 88},
+            {112, 72},
             Data::EntityData::Type::ENEMY,
             132,
         },
         0,
     },
     // 133
-    new Data::Enemy {
+    new Data::Door {
         {
-            {7, 8},
-            Data::EntityData::Type::ENEMY,
+            {8, 96},
+            Data::EntityData::Type::DOOR,
             133,
         },
+        {3, 1},
+        1,
         0,
     },
     // 134
-    new Data::Checkpoint {
+    new Data::Door {
         {
-            {16, 40},
-            Data::EntityData::Type::CHECKPOINT,
+            {24, 40},
+            Data::EntityData::Type::DOOR,
             134,
         },
+        {2, 4},
+        0,
+        0,
     },
     // 135
-    new Data::Collection {
-        {
-            {128, 0},
-            Data::EntityData::Type::COLLECTION,
-            135,
-        },
-        14,
-    },
-    // 136
-    new Data::Collection {
-        {
-            {112, 88},
-            Data::EntityData::Type::COLLECTION,
-            136,
-        },
-        3,
-    },
-    // 137
-    new Data::Collection {
-        {
-            {8, 88},
-            Data::EntityData::Type::COLLECTION,
-            137,
-        },
-        4,
-    },
-    // 138
-    new Data::Collection {
+    new Data::NPC {
         {
             {136, 96},
-            Data::EntityData::Type::COLLECTION,
+            Data::EntityData::Type::NPC,
+            135,
+        },
+        11,
+    },
+    // 136
+    new Data::Door {
+        {
+            {8, 96},
+            Data::EntityData::Type::DOOR,
+            136,
+        },
+        {3, 1},
+        1,
+        0,
+    },
+    // 137
+    new Data::Door {
+        {
+            {24, 40},
+            Data::EntityData::Type::DOOR,
+            137,
+        },
+        {2, 4},
+        0,
+        0,
+    },
+    // 138
+    new Data::NPC {
+        {
+            {136, 96},
+            Data::EntityData::Type::NPC,
             138,
         },
-        5,
+        11,
     },
     // 139
-    new Data::Enemy {
+    new Data::Collection {
         {
-            {125, 24},
-            Data::EntityData::Type::ENEMY,
+            {72, 24},
+            Data::EntityData::Type::COLLECTION,
             139,
         },
-        1,
+        12,
     },
     // 140
-    new Data::Enemy {
+    new Data::Collection {
         {
-            {112, 72},
-            Data::EntityData::Type::ENEMY,
+            {64, 40},
+            Data::EntityData::Type::COLLECTION,
             140,
         },
-        0,
+        6,
     },
     // 141
-    new Data::Enemy {
+    new Data::Collection {
         {
-            {73, 0},
-            Data::EntityData::Type::ENEMY,
+            {128, 40},
+            Data::EntityData::Type::COLLECTION,
             141,
         },
-        0,
+        15,
     },
     // 142
-    new Data::Enemy {
+    new Data::Door {
         {
-            {35, 48},
-            Data::EntityData::Type::ENEMY,
+            {136, 8},
+            Data::EntityData::Type::DOOR,
             142,
         },
-        1,
+        {4, 3},
+        10,
+        0,
     },
     // 143
-    new Data::Checkpoint {
+    new Data::Door {
         {
-            {136, 72},
-            Data::EntityData::Type::CHECKPOINT,
+            {88, 56},
+            Data::EntityData::Type::DOOR,
             143,
         },
+        {0, 4},
+        0,
+        0,
     },
     // 144
-    new Data::Collection {
+    new Data::Door {
         {
-            {40, 80},
-            Data::EntityData::Type::COLLECTION,
+            {136, 8},
+            Data::EntityData::Type::DOOR,
             144,
         },
-        9,
+        {4, 3},
+        10,
+        0,
     },
     // 145
-    new Data::Collection {
+    new Data::Door {
         {
-            {32, 96},
-            Data::EntityData::Type::COLLECTION,
+            {88, 56},
+            Data::EntityData::Type::DOOR,
             145,
         },
-        16,
+        {0, 4},
+        0,
+        7,
     },
     // 146
     new Data::Collection {
         {
-            {88, 96},
+            {24, 24},
             Data::EntityData::Type::COLLECTION,
             146,
         },
-        10,
+        0,
     },
     // 147
-    new Data::NPC {
+    new Data::Collection {
         {
-            {72, 96},
-            Data::EntityData::Type::NPC,
+            {16, 48},
+            Data::EntityData::Type::COLLECTION,
             147,
         },
-        22,
+        0,
     },
     // 148
-    new Data::Door {
+    new Data::Collection {
         {
-            {8, 40},
-            Data::EntityData::Type::DOOR,
+            {32, 64},
+            Data::EntityData::Type::COLLECTION,
             148,
         },
-        {2, 0},
-        1,
-        0,
+        9,
     },
     // 149
     new Data::Collection {
         {
-            {136, 32},
+            {88, 24},
             Data::EntityData::Type::COLLECTION,
             149,
         },
-        2,
+        10,
     },
     // 150
-    new Data::NPC {
-        {
-            {72, 16},
-            Data::EntityData::Type::NPC,
-            150,
-        },
-        6,
-    },
-    // 151
     new Data::Collection {
         {
-            {24, 24},
+            {88, 48},
             Data::EntityData::Type::COLLECTION,
+            150,
+        },
+        11,
+    },
+    // 151
+    new Data::Enemy {
+        {
+            {112, 24},
+            Data::EntityData::Type::ENEMY,
             151,
         },
         0,
     },
     // 152
-    new Data::Collection {
+    new Data::Enemy {
         {
-            {16, 48},
-            Data::EntityData::Type::COLLECTION,
+            {128, 56},
+            Data::EntityData::Type::ENEMY,
             152,
         },
         0,
     },
     // 153
-    new Data::Collection {
-        {
-            {32, 64},
-            Data::EntityData::Type::COLLECTION,
-            153,
-        },
-        9,
-    },
-    // 154
-    new Data::Collection {
-        {
-            {88, 24},
-            Data::EntityData::Type::COLLECTION,
-            154,
-        },
-        10,
-    },
-    // 155
-    new Data::Collection {
-        {
-            {88, 48},
-            Data::EntityData::Type::COLLECTION,
-            155,
-        },
-        11,
-    },
-    // 156
-    new Data::Enemy {
-        {
-            {112, 24},
-            Data::EntityData::Type::ENEMY,
-            156,
-        },
-        0,
-    },
-    // 157
-    new Data::Enemy {
-        {
-            {128, 56},
-            Data::EntityData::Type::ENEMY,
-            157,
-        },
-        0,
-    },
-    // 158
     new Data::Enemy {
         {
             {89, 88},
             Data::EntityData::Type::ENEMY,
+            153,
+        },
+        0,
+    },
+    // 154
+    new Data::Door {
+        {
+            {120, 80},
+            Data::EntityData::Type::DOOR,
+            154,
+        },
+        {2, 4},
+        10,
+        0,
+    },
+    // 155
+    new Data::Door {
+        {
+            {8, 32},
+            Data::EntityData::Type::DOOR,
+            155,
+        },
+        {0, 0},
+        0,
+        1,
+    },
+    // 156
+    new Data::Checkpoint {
+        {
+            {56, 64},
+            Data::EntityData::Type::CHECKPOINT,
+            156,
+        },
+    },
+    // 157
+    new Data::Checkpoint {
+        {
+            {24, 88},
+            Data::EntityData::Type::CHECKPOINT,
+            157,
+        },
+    },
+    // 158
+    new Data::NPC {
+        {
+            {88, 88},
+            Data::EntityData::Type::NPC,
             158,
         },
         0,
@@ -1500,554 +1495,473 @@ const Data::EntityData *Data::ENTITIES[] {
     // 159
     new Data::Door {
         {
-            {120, 80},
+            {120, 16},
             Data::EntityData::Type::DOOR,
             159,
         },
-        {2, 4},
-        10,
+        {4, 0},
+        4,
         0,
     },
     // 160
     new Data::Door {
         {
-            {8, 32},
+            {24, 96},
             Data::EntityData::Type::DOOR,
             160,
         },
-        {0, 0},
+        {4, 0},
+        4,
         0,
-        1,
     },
     // 161
-    new Data::Checkpoint {
-        {
-            {56, 64},
-            Data::EntityData::Type::CHECKPOINT,
-            161,
-        },
-    },
-    // 162
-    new Data::Checkpoint {
-        {
-            {24, 88},
-            Data::EntityData::Type::CHECKPOINT,
-            162,
-        },
-    },
-    // 163
-    new Data::NPC {
-        {
-            {88, 88},
-            Data::EntityData::Type::NPC,
-            163,
-        },
-        0,
-    },
-    // 164
-    new Data::Door {
-        {
-            {128, 56},
-            Data::EntityData::Type::DOOR,
-            164,
-        },
-        {2, 4},
-        2,
-        0,
-    },
-    // 165
-    new Data::Door {
-        {
-            {72, 88},
-            Data::EntityData::Type::DOOR,
-            165,
-        },
-        {0, 1},
-        0,
-        2,
-    },
-    // 166
-    new Data::Checkpoint {
-        {
-            {16, 56},
-            Data::EntityData::Type::CHECKPOINT,
-            166,
-        },
-    },
-    // 167
-    new Data::Collection {
-        {
-            {32, 32},
-            Data::EntityData::Type::COLLECTION,
-            167,
-        },
-        13,
-    },
-    // 168
-    new Data::Collection {
-        {
-            {120, 24},
-            Data::EntityData::Type::COLLECTION,
-            168,
-        },
-        13,
-    },
-    // 169
-    new Data::Collection {
-        {
-            {0, 48},
-            Data::EntityData::Type::COLLECTION,
-            169,
-        },
-        13,
-    },
-    // 170
-    new Data::Collection {
-        {
-            {56, 16},
-            Data::EntityData::Type::COLLECTION,
-            170,
-        },
-        13,
-    },
-    // 171
-    new Data::Collection {
-        {
-            {16, 16},
-            Data::EntityData::Type::COLLECTION,
-            171,
-        },
-        13,
-    },
-    // 172
-    new Data::Collection {
-        {
-            {128, 32},
-            Data::EntityData::Type::COLLECTION,
-            172,
-        },
-        13,
-    },
-    // 173
-    new Data::Collection {
-        {
-            {56, 80},
-            Data::EntityData::Type::COLLECTION,
-            173,
-        },
-        13,
-    },
-    // 174
-    new Data::Collection {
-        {
-            {112, 104},
-            Data::EntityData::Type::COLLECTION,
-            174,
-        },
-        13,
-    },
-    // 175
-    new Data::Collection {
-        {
-            {104, 56},
-            Data::EntityData::Type::COLLECTION,
-            175,
-        },
-        13,
-    },
-    // 176
     new Data::Enemy {
         {
-            {72, 48},
+            {18, 96},
             Data::EntityData::Type::ENEMY,
-            176,
+            161,
         },
         0,
     },
-    // 177
-    new Data::Collection {
-        {
-            {24, 96},
-            Data::EntityData::Type::COLLECTION,
-            177,
-        },
-        13,
-    },
-    // 178
-    new Data::Door {
-        {
-            {8, 96},
-            Data::EntityData::Type::DOOR,
-            178,
-        },
-        {3, 1},
-        1,
-        0,
-    },
-    // 179
-    new Data::Door {
-        {
-            {24, 40},
-            Data::EntityData::Type::DOOR,
-            179,
-        },
-        {2, 4},
-        0,
-        0,
-    },
-    // 180
-    new Data::NPC {
-        {
-            {136, 96},
-            Data::EntityData::Type::NPC,
-            180,
-        },
-        11,
-    },
-    // 181
-    new Data::Collection {
-        {
-            {72, 24},
-            Data::EntityData::Type::COLLECTION,
-            181,
-        },
-        12,
-    },
-    // 182
-    new Data::Collection {
-        {
-            {64, 40},
-            Data::EntityData::Type::COLLECTION,
-            182,
-        },
-        6,
-    },
-    // 183
-    new Data::Collection {
-        {
-            {128, 40},
-            Data::EntityData::Type::COLLECTION,
-            183,
-        },
-        16,
-    },
-    // 184
-    new Data::Door {
-        {
-            {24, 16},
-            Data::EntityData::Type::DOOR,
-            184,
-        },
-        {4, 1},
-        1,
-        0,
-    },
-    // 185
+    // 162
     new Data::Door {
         {
             {128, 96},
             Data::EntityData::Type::DOOR,
-            185,
+            162,
+        },
+        {4, 1},
+        2,
+        0,
+    },
+    // 163
+    new Data::Door {
+        {
+            {24, 16},
+            Data::EntityData::Type::DOOR,
+            163,
+        },
+        {3, 1},
+        0,
+        0,
+    },
+    // 164
+    new Data::Checkpoint {
+        {
+            {80, 96},
+            Data::EntityData::Type::CHECKPOINT,
+            164,
+        },
+    },
+    // 165
+    new Data::NPC {
+        {
+            {72, 16},
+            Data::EntityData::Type::NPC,
+            165,
+        },
+        9,
+    },
+    // 166
+    new Data::Door {
+        {
+            {24, 16},
+            Data::EntityData::Type::DOOR,
+            166,
         },
         {4, 1},
         1,
         0,
     },
-    // 186
+    // 167
+    new Data::Door {
+        {
+            {128, 96},
+            Data::EntityData::Type::DOOR,
+            167,
+        },
+        {4, 1},
+        1,
+        0,
+    },
+    // 168
     new Data::Door {
         {
             {120, 16},
             Data::EntityData::Type::DOOR,
-            186,
+            168,
         },
         {4, 0},
         2,
         0,
     },
-    // 187
+    // 169
     new Data::Door {
         {
             {16, 96},
             Data::EntityData::Type::DOOR,
-            187,
+            169,
         },
         {0, 1},
         10,
         0,
     },
-    // 188
+    // 170
     new Data::Enemy {
         {
             {97, 96},
             Data::EntityData::Type::ENEMY,
-            188,
+            170,
         },
         0,
     },
-    // 189
+    // 171
     new Data::NPC {
         {
             {72, 16},
             Data::EntityData::Type::NPC,
-            189,
+            171,
         },
         8,
     },
-    // 190
-    new Data::Enemy {
+    // 172
+    new Data::Door {
         {
-            {11, 96},
-            Data::EntityData::Type::ENEMY,
-            190,
+            {8, 24},
+            Data::EntityData::Type::DOOR,
+            172,
         },
+        {3, 2},
+        0,
         0,
     },
-    // 191
-    new Data::Enemy {
+    // 173
+    new Data::Checkpoint {
         {
-            {120, 96},
-            Data::EntityData::Type::ENEMY,
-            191,
+            {8, 40},
+            Data::EntityData::Type::CHECKPOINT,
+            173,
         },
-        0,
     },
-    // 192
+    // 174
     new Data::Collection {
         {
-            {72, 56},
+            {88, 24},
             Data::EntityData::Type::COLLECTION,
-            192,
+            174,
         },
+        6,
+    },
+    // 175
+    new Data::NPC {
+        {
+            {104, 96},
+            Data::EntityData::Type::NPC,
+            175,
+        },
+        99,
+    },
+    // 176
+    new Data::Door {
+        {
+            {16, 96},
+            Data::EntityData::Type::DOOR,
+            176,
+        },
+        {1, 3},
+        0,
         0,
     },
-    // 193
+    // 177
+    new Data::Checkpoint {
+        {
+            {128, 96},
+            Data::EntityData::Type::CHECKPOINT,
+            177,
+        },
+    },
+    // 178
+    new Data::Collection {
+        {
+            {64, 56},
+            Data::EntityData::Type::COLLECTION,
+            178,
+        },
+        5,
+    },
+    // 179
+    new Data::Door {
+        {
+            {8, 96},
+            Data::EntityData::Type::DOOR,
+            179,
+        },
+        {0, 4},
+        1,
+        0,
+    },
+    // 180
+    new Data::Checkpoint {
+        {
+            {32, 96},
+            Data::EntityData::Type::CHECKPOINT,
+            180,
+        },
+    },
+    // 181
+    new Data::Door {
+        {
+            {104, 16},
+            Data::EntityData::Type::DOOR,
+            181,
+        },
+        {2, 4},
+        10,
+        0,
+    },
+    // 182
+    new Data::Collection {
+        {
+            {32, 96},
+            Data::EntityData::Type::COLLECTION,
+            182,
+        },
+        16,
+    },
+    // 183
+    new Data::Collection {
+        {
+            {88, 96},
+            Data::EntityData::Type::COLLECTION,
+            183,
+        },
+        10,
+    },
+    // 184
+    new Data::NPC {
+        {
+            {72, 96},
+            Data::EntityData::Type::NPC,
+            184,
+        },
+        22,
+    },
+    // 185
     new Data::Door {
         {
             {72, 96},
             Data::EntityData::Type::DOOR,
-            193,
-        },
-        {3, 3},
-        0,
-        0,
-    },
-    // 194
-    new Data::Collection {
-        {
-            {40, 64},
-            Data::EntityData::Type::COLLECTION,
-            194,
-        },
-        5,
-    },
-    // 195
-    new Data::Collection {
-        {
-            {104, 64},
-            Data::EntityData::Type::COLLECTION,
-            195,
-        },
-        4,
-    },
-    // 196
-    new Data::NPC {
-        {
-            {48, 72},
-            Data::EntityData::Type::NPC,
-            196,
-        },
-        0,
-    },
-    // 197
-    new Data::Door {
-        {
-            {72, 56},
-            Data::EntityData::Type::DOOR,
-            197,
+            185,
         },
         {2, 4},
-        0,
+        9,
         0,
     },
-    // 198
-    new Data::Collection {
+    // 186
+    new Data::Door {
         {
-            {96, 56},
-            Data::EntityData::Type::COLLECTION,
-            198,
+            {72, 8},
+            Data::EntityData::Type::DOOR,
+            186,
         },
+        {5, 4},
         1,
+        0,
     },
-    // 199
-    new Data::Collection {
+    // 187
+    new Data::NPC {
         {
-            {104, 56},
-            Data::EntityData::Type::COLLECTION,
-            199,
+            {72, 56},
+            Data::EntityData::Type::NPC,
+            187,
         },
-        2,
+        14,
     },
-    // 200
+    // 188
+    new Data::Checkpoint {
+        {
+            {40, 96},
+            Data::EntityData::Type::CHECKPOINT,
+            188,
+        },
+    },
+    // 189
     new Data::Enemy {
         {
             {127, 64},
             Data::EntityData::Type::ENEMY,
-            200,
+            189,
         },
         1,
     },
-    // 201
+    // 190
     new Data::Enemy {
         {
             {128, 24},
             Data::EntityData::Type::ENEMY,
-            201,
+            190,
         },
         1,
     },
-    // 202
+    // 191
     new Data::Checkpoint {
         {
             {24, 8},
             Data::EntityData::Type::CHECKPOINT,
-            202,
+            191,
         },
     },
-    // 203
+    // 192
     new Data::Door {
         {
             {8, 8},
             Data::EntityData::Type::DOOR,
-            203,
+            192,
         },
         {0, 2},
         10,
         0,
     },
-    // 204
+    // 193
     new Data::Enemy {
         {
             {41, 16},
             Data::EntityData::Type::ENEMY,
-            204,
+            193,
         },
         1,
     },
-    // 205
+    // 194
     new Data::Door {
         {
             {128, 96},
             Data::EntityData::Type::DOOR,
-            205,
+            194,
         },
         {5, 4},
         0,
         0,
     },
-    // 206
+    // 195
     new Data::NPC {
         {
             {64, 48},
             Data::EntityData::Type::NPC,
-            206,
+            195,
         },
         13,
     },
-    // 207
+    // 196
     new Data::Enemy {
         {
             {83, 96},
             Data::EntityData::Type::ENEMY,
-            207,
+            196,
         },
         0,
     },
-    // 208
+    // 197
     new Data::Enemy {
         {
             {30, 64},
             Data::EntityData::Type::ENEMY,
-            208,
+            197,
         },
         1,
     },
-    // 209
+    // 198
+    new Data::Door {
+        {
+            {128, 16},
+            Data::EntityData::Type::DOOR,
+            198,
+        },
+        {0, 3},
+        0,
+        0,
+    },
+    // 199
     new Data::Door {
         {
             {8, 96},
             Data::EntityData::Type::DOOR,
-            209,
+            199,
         },
-        {3, 1},
+        {5, 0},
         1,
         0,
     },
-    // 210
+    // 200
     new Data::Door {
         {
-            {24, 40},
+            {56, 48},
             Data::EntityData::Type::DOOR,
-            210,
+            200,
         },
-        {2, 4},
+        {5, 2},
         0,
         0,
     },
-    // 211
+    // 201
     new Data::NPC {
         {
-            {136, 96},
+            {88, 96},
             Data::EntityData::Type::NPC,
-            211,
+            201,
         },
-        11,
+        12,
     },
-    // 212
-    new Data::Door {
-        {
-            {72, 96},
-            Data::EntityData::Type::DOOR,
-            212,
-        },
-        {3, 4},
-        0,
-        0,
-    },
-    // 213
-    new Data::Enemy {
-        {
-            {69, 48},
-            Data::EntityData::Type::ENEMY,
-            213,
-        },
-        1,
-    },
-    // 214
-    new Data::Door {
-        {
-            {72, 64},
-            Data::EntityData::Type::DOOR,
-            214,
-        },
-        {4, 4},
-        1,
-        0,
-    },
-    // 215
+    // 202
     new Data::Checkpoint {
         {
-            {136, 96},
+            {48, 96},
             Data::EntityData::Type::CHECKPOINT,
-            215,
+            202,
         },
     },
-    // 216
-    new Data::Collection {
+    // 203
+    new Data::NPC {
         {
-            {8, 96},
-            Data::EntityData::Type::COLLECTION,
-            216,
+            {48, 88},
+            Data::EntityData::Type::NPC,
+            203,
         },
-        4,
+        16,
+    },
+    // 204
+    new Data::NPC {
+        {
+            {88, 88},
+            Data::EntityData::Type::NPC,
+            204,
+        },
+        17,
+    },
+    // 205
+    new Data::NPC {
+        {
+            {128, 88},
+            Data::EntityData::Type::NPC,
+            205,
+        },
+        18,
+    },
+    // 206
+    new Data::NPC {
+        {
+            {240, 88},
+            Data::EntityData::Type::NPC,
+            206,
+        },
+        19,
+    },
+    // 207
+    new Data::NPC {
+        {
+            {288, 88},
+            Data::EntityData::Type::NPC,
+            207,
+        },
+        20,
     },
 };

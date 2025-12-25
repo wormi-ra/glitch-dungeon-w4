@@ -1,7 +1,6 @@
-
 #include "Entities.hpp"
 
-const Data::EntityData *Data::ENTITIES[] {
+const Data::EntityData *Data::ENTITIES[{{ entities|length }}] {
 {% for entity in entities %}
     // {{ loop.index - 1 }}
     new Data::{{ entity.type }} {

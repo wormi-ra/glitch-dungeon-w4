@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Room.hpp"
+#include "../Tile.hpp"
 
 namespace Glitch {
     static constexpr uint8_t SPELL_COUNT = 8;
@@ -17,6 +17,12 @@ namespace Glitch {
     };
 
     struct Physics {
+        enum Flags {
+            CAN_FLOAT =     0b00000001,
+            CAN_CLIMB =     0b00000010,
+            IS_INVISIBLE =  0b00000100,
+        };
+
         float jumpVelocity = 4.5f;
         float terminalVelocity = 7.0f;
         float originalGravAcc = 0.8f;
@@ -27,6 +33,7 @@ namespace Glitch {
         float gndRunDec = maxRunVelocity / 3.0f;
         float airRunAcc = maxRunVelocity / 3.0f;
         float airRunDec = maxRunVelocity / 3.0f;
+        uint8_t flags = 0x0;
     };
 
     class Glitch {

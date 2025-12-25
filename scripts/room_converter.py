@@ -8,6 +8,7 @@ from jinja2 import Environment, FileSystemLoader, select_autoescape
 import re
 
 BASE_PATH = "assets/rooms/"
+OUTPUT_DIR = "src/Data/"
 JINJA_ENV = Environment(
     loader=FileSystemLoader("scripts/templates/"),
     autoescape=select_autoescape(),
@@ -21,8 +22,8 @@ ENTITIES = []
 
 def convert_tile(tile):
     mapping = {
-        (0,0): 0,
-        (1,0): 0,
+        (0,0): -1,
+        (1,0): -1,
         (0,1): 0,
         (1,1): 1,
         (2,0): 2,
@@ -47,8 +48,12 @@ def convert_tile(tile):
     if "c" not in tile:
         tile["c"] = -1
     t = mapping[tile["tx"], tile["ty"]]
+    visible = True
+    if t < 0:
+        visible = False
+        t = 0
     c = tile["c"] + 1
-    return t | (c << 4)
+    return t | (c << 4) | (visible << 7)
 
 
 def convert_collection(entity):
@@ -68,8 +73,8 @@ def convert_collection(entity):
         19: 12,
         22: 13,
         23: 14,
-        24: 15,
-        30: 16
+        30: 15,
+        34: 16,
     }
     if entity["obj"]["collection_id"] is None:
         entity["obj"]["collection_id"] = 0
@@ -142,28 +147,33 @@ def generate_dungeon(file: TextIO):
     file.write((f"export const DUNGEON = [{',\n'.join(['['+', '.join(line)+']' for line in dungeon])}];\n"))
 
 
-def output_rooms(rooms: list):
+def output_rooms(rooms: list, file: TextIO):
     template = JINJA_ENV.get_template("room.jinja")
-    print(template.render(rooms=rooms))
+    file.write(template.render(rooms=rooms))
 
 
-def output_entities(entities: list):
+def output_entities(entities: list, file: TextIO):
     template = JINJA_ENV.get_template("entities.jinja")
-    print(template.render(entities=entities))
+    file.write(template.render(entities=entities))
 
 
 if __name__=="__main__":
     index = []
     rooms = []
-    for file in os.listdir(sys.argv[1]):
-        path = Path(sys.argv[1], file)
+    for file in sorted(os.listdir(BASE_PATH)):
+        path = Path(BASE_PATH, file)
         name = path.stem.upper()
+        if ("CHEAT" in name):
+            continue
+        print(f"    extern const RoomData {name};")
         index.append(name)
         with open(path) as file:
             room = json.load(file)
             convert = convert_room(room)
             convert["name"] = name.upper()
             rooms.append(convert)
-    output_rooms(rooms)
-    # output_entities(ENTITIES)
+    with open(f"{OUTPUT_DIR}/Rooms.cpp", 'w') as file:
+        output_rooms(rooms, file)
+    with open(f"{OUTPUT_DIR}/Entities.cpp", 'w') as file:
+        output_entities(ENTITIES, file)
     # generate_dungeon(sys.stdout)
