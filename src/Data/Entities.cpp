@@ -427,7 +427,7 @@ const Data::EntityData *Data::ENTITIES[213] {
         },
         {5, 5},
         0,
-        0,
+        1,
     },
     // 46
     new Data::Collection {

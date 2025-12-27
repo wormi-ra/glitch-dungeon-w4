@@ -63,20 +63,20 @@ void Game::start() {
     Data::interactedEntities[Data::EVENT_NPCS_0_5[1]] = true;
     Data::interactedEntities[Data::EVENT_NPCS_0_5[2]] = true;
     Game::setPalette(Game::player.glitch->getPalette());
-    // Game::loadRoom(0, 0);
-
-    Game::player.state |= Player::HAS_GRIMOIRE;
-    Game::state |= Game::GLITCHED;
-    Game::player.spellbook = {
-        Glitch::SPELLS[1],
-        Glitch::SPELLS[2],
-        Glitch::SPELLS[3],
-        Glitch::SPELLS[4],
-        Glitch::SPELLS[5],
-        Glitch::SPELLS[6],
-        Glitch::SPELLS[7],
-    };
     Game::loadRoom(0, 0);
+
+    // Game::player.state |= Player::HAS_GRIMOIRE;
+    // Game::state |= Game::GLITCHED;
+    // Game::player.spellbook = {
+    //     Glitch::SPELLS[1],
+    //     Glitch::SPELLS[2],
+    //     Glitch::SPELLS[3],
+    //     Glitch::SPELLS[4],
+    //     Glitch::SPELLS[5],
+    //     Glitch::SPELLS[6],
+    //     Glitch::SPELLS[7],
+    // };
+    // Game::loadRoom(0, 0);
     //  Game::loadRoom(4, 2);
 }
 
