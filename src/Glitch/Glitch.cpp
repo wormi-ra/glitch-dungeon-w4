@@ -6,6 +6,8 @@
 #include "Gold.hpp"
 #include "Negative.hpp"
 #include "Pink.hpp"
+#include "../GameObjects/Player.hpp"
+#include "../Room.hpp"
 
 const Glitch::Physics &Glitch::Glitch::getPhysics() const {
     return this->m_physics;
@@ -19,6 +21,10 @@ bool Glitch::Glitch::collidesWith(Tile::Type collision) const {
 
 bool Glitch::Glitch::isFallthrough(Tile::Type collision) const {
     return (collision == Tile::Type::FALLTHROUGH);
+}
+
+void Glitch::Glitch::transformPlayer(Player &, Room &) {
+    return;
 }
 
 static auto GLITCH_GREY = Glitch::Grey();

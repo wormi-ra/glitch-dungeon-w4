@@ -4,8 +4,15 @@
 #include "Graphics/Viewport.hpp"
 #include "Graphics/Spellbar.hpp"
 #include "GameObjects/Player.hpp"
-#include "Function.hpp"
 #include "Room.hpp"
+
+namespace func {
+    template <typename>
+    class function;
+}
+
+template <typename T>
+using Function = func::function<T>;
 
 namespace Game {
     struct Stats {
@@ -32,8 +39,10 @@ namespace Game {
     void updateCamera();
     void applyLoadRoom();
     const RoomData *getRoomData(uint8_t x, uint8_t y);
-    const RoomData &loadRoom(uint8_t x, uint8_t y, Function<void()> callback = nullptr);
-    const RoomData &moveRoom(int8_t x, int8_t y, Function<void()> callback = nullptr);
+    const RoomData &loadRoom(uint8_t x, uint8_t y);
+    const RoomData &moveRoom(int8_t x, int8_t y);
+    const RoomData &loadRoom(uint8_t x, uint8_t y, Function<void()> callback);
+    const RoomData &moveRoom(int8_t x, int8_t y, Function<void()> callback);
     
     extern Viewport gameView;
     extern Viewport hudView;

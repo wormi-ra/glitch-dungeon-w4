@@ -42,8 +42,12 @@ Room::~Room() {
 }
 
 void Room::onEnter() {
+    Game::textBox.setText(nullptr, 0);
     if (!Game::player.canUseSpellbook()) {
         Game::player.setSpell(static_cast<Glitch::Type>(this->data->glitch_sequence[0]), true);
+    }
+    if (!Game::currentRoom->data->can_use_spellbook) {
+        Game::textBox.setText("a dark force\nprevents you from\ncasting spells here");
     }
 }
 
@@ -78,7 +82,7 @@ void Room::draw() const {
     //     w4::text(this->data->bg_code, 16, 16);
     // }
     *DRAW_COLORS = 0x1234;
-    uint8_t glitch_id = static_cast<uint8_t>(Game::player.glitch->getType());
+    uint8_t glitch_id = uint8_t(Game::player.glitch->getType());
     for (uint16_t y = 0; y < this->data->height; y++) {
         for (uint16_t x = 0; x < this->data->width; x++) {
             auto tile = this->getTile(x, y);

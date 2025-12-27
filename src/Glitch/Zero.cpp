@@ -12,7 +12,7 @@ Glitch::Type Glitch::Zero::getType() const {
 }
 
 const char *Glitch::Zero::getName() const {
-    return "invisible";
+    return "invis";
 }
 
 const uint32_t *Glitch::Zero::getPalette() const {

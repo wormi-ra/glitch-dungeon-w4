@@ -2,7 +2,6 @@
 
 #include "DynamicArray.hpp"
 #include "GameObjects/IEntity.hpp"
-#include "Tile.hpp"
 
 class RoomData {
     public:

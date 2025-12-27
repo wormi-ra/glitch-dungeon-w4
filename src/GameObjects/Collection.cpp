@@ -89,6 +89,8 @@ void Collection::onCollect() {
     switch (this->data->collection_id) {
     case Collection::Item::GRIMOIRE:
         Game::player.state |= Player::HAS_GRIMOIRE;
+        Data::interactedEntities[Data::EVENT_CHECKPOINT_2_4] = false;
+        Data::interactedEntities[Data::EVENT_NPC_2_4] = false;
         break;
     case Collection::Item::GREEN_SPELL:
         Game::player.giveSpell(Glitch::Type::GREEN);
@@ -107,6 +109,9 @@ void Collection::onCollect() {
         break;
     case Collection::Item::PINK_SPELL:
         Game::player.giveSpell(Glitch::Type::PINK);
+        Data::interactedEntities[Data::EVENT_NPCS_0_5[0]] = false;
+        Data::interactedEntities[Data::EVENT_NPCS_0_5[1]] = false;
+        Data::interactedEntities[Data::EVENT_NPCS_0_5[2]] = false;
         break;
     case Collection::Item::NEGATIVE_SPELL:
         Game::player.giveSpell(Glitch::Type::NEGATIVE);
@@ -134,7 +139,7 @@ const char *Collection::getName() const {
     case Collection::Item::GOLD_SPELL:
         return "wall spell";
     case Collection::Item::ZERO_SPELL:
-        return "invisible spell";
+        return "invis spell";
     case Collection::Item::PINK_SPELL:
         return "memory spell";
     case Collection::Item::NEGATIVE_SPELL:

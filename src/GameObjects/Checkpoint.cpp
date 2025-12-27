@@ -12,7 +12,7 @@ Checkpoint::Checkpoint(const Data::Checkpoint *data)
     : GameObject(&Data::CHECKPOINT_SHEET), Entity(data) {
     this->position = Vector2<float>(data->position);
     this->bbox = {
-        {2, 2, 14, 16},
+        {4, 5, 12, 16},
     };
     this->active = Game::player.checkpointId == data->id;
     if (this->active) {
@@ -32,10 +32,14 @@ IEntity::Type Checkpoint::getType() const {
 }
 
 uint16_t Checkpoint::getDrawColor() const {
+    if (this->interacted())
+        return 0x0000;
     return 0x0234;
 }
 
 void Checkpoint::update() {
+    if (this->interacted())
+        return;
     GameObject::update();
     if (this->collidesWith(Game::player)) {
         if (!this->active) {

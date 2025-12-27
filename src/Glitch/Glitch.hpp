@@ -2,6 +2,9 @@
 
 #include "../Tile.hpp"
 
+class Player;
+class Room;
+
 namespace Glitch {
     static constexpr uint8_t SPELL_COUNT = 8;
 
@@ -46,10 +49,10 @@ namespace Glitch {
             virtual const Physics &getPhysics() const;
             virtual bool collidesWith(Tile::Type collision) const;
             virtual bool isFallthrough(Tile::Type collision) const;
+            virtual void transformPlayer(Player &player, Room &room);
 
         protected:
             Physics m_physics{};
-            // void transformPlayer(Player &player, Room &room, bool normalize = true, bool onlyVisual = false);
     };
 
     extern Glitch *const SPELLS[SPELL_COUNT];

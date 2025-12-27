@@ -5,9 +5,11 @@
 
 class Enemy : public Entity<Data::Enemy> {
     public:
+        bool horizontalCollision = false;
         Enemy(const Data::Enemy *data);
 
         virtual IEntity::Type getType() const override;
         virtual uint16_t getDrawColor() const override;
         virtual void update() override;
+        void applyCollisions();
 };

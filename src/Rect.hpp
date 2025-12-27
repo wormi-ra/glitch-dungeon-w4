@@ -38,10 +38,10 @@ struct Rect {
     constexpr explicit operator IntRect() const;
 
     constexpr bool intersects(const Rect<T, U> &other) const {
-        return (static_cast<U>(std::abs((this->position.x + static_cast<T>(this->size.x)/2)
-            - (other.position.x + static_cast<T>(other.size.x) / 2)) * 2) <= (this->size.x + other.size.x))
-            && (static_cast<U>(std::abs((this->position.y + static_cast<T>(this->size.y)/2)
-            - (other.position.y + static_cast<T>(other.size.y) / 2)) * 2) <= (this->size.y + other.size.y));
+        auto bbox1 = this->bbox();
+        auto bbox2 = other.bbox();
+        return (bbox1.lb <= bbox2.rb && bbox1.rb >= bbox2.lb &&
+            bbox1.tb <= bbox2.bb && bbox1.bb >= bbox2.tb);
     }
 
     constexpr bool contains(const Vector2<T> &point) const {

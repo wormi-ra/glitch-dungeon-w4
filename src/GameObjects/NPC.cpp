@@ -20,12 +20,16 @@ IEntity::Type NPC::getType() const {
 }
 
 uint16_t NPC::getDrawColor() const {
+    if (this->interacted())
+        return 0x0000;
     if (Game::roomPosition == Vector2<uint8_t> {5, 5})
         return 0x1230;
     return 0x1340;
 }
 
 void NPC::update() {
+    if (this->interacted())
+        return;
     GameObject::update();
     auto d = 16.0f;
 	auto dy = 8.0f;

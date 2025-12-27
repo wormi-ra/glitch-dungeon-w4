@@ -1,9 +1,9 @@
 #include "Door.hpp"
 #include "../Data/Sheets.hpp"
 #include "../Game.hpp"
-#include "../Input.hpp"
 #include "../utils.hpp"
 #include "Entity.hpp"
+#include "../Function.hpp"
 #include <cstring>
 
 static const anim_t DOOR_ANIM[] {0};
@@ -50,7 +50,6 @@ uint16_t Door::getDrawColor() const {
 }
 
 static void onEnter(const Data::Door *target) {
-    Game::player.velocity.x = 0;
     for (auto &entity : Game::currentRoom->entities) {
         if (entity->getType() == IEntity::Type::DOOR) {
             auto door = static_cast<const Entity<Data::Door> *>(entity);
@@ -63,40 +62,43 @@ static void onEnter(const Data::Door *target) {
 
 void Door::update() {
     GameObject::update();
-    if (this->collidesWith(Game::player)
-        && (Game::player.state & Player::PRESSED_DOWN)
-        && (Game::player.state & Player::ON_GROUND)) {
-        if (this->locked()) {
-            if (Game::player.artifacts >= this->data->num_artifacts) {
-                this->unlock();
+    if (this->collidesWith(Game::player)) {
+        Game::player.state |= Player::TOUCHING_DOOR;
+        if ((Game::player.state & Player::PRESSED_DOWN)
+            && (Game::player.state & Player::ON_GROUND)) {
+            Game::player.state &= ~Player::PRESSED_DOWN;
+            Game::player.velocity.x = 0;
+            if (this->locked()) {
+                if (Game::player.artifacts >= this->data->num_artifacts) {
+                    this->unlock();
+                } else {
+                    static char lockText[64] = "";
+                    strcpy(lockText, "door is locked\nneed ");
+                    strcat(lockText, itoa(this->data->num_artifacts - Game::player.artifacts));
+                    strcat(lockText, "\nspells more");
+                    // TODO play locked sound
+                    Game::textBox.setText(lockText);
+                }
             } else {
-                static char lockText[64] = "";
-                strcpy(lockText, "door is locked\nneed ");
-                strcat(lockText, itoa(this->data->num_artifacts - Game::player.artifacts));
-                strcat(lockText, "\nspells more");
-                // TODO play locked sound
-                Game::textBox.setText(lockText);
-            }
-        } else {
-            Game::player.state &= ~(Player::ON_GROUND);
-            auto target = this->data;
-            auto roomX = this->data->room.x;
-            auto roomY = this->data->room.y;
-            if (Game::state & Game::GLITCHED) {
-                if (Game::roomPosition == Vector2<uint8_t>(1, 0)) {
-                    if (this->data->door_id == 0) {
-                        roomX = 1;
-                        roomY = 0;
-                    }
-                    if (this->data->door_id == 2) {
-                        roomX = 2;
-                        roomY = 0;
+                auto target = this->data;
+                auto roomX = this->data->room.x;
+                auto roomY = this->data->room.y;
+                if (Game::state & Game::GLITCHED) {
+                    if (Game::roomPosition == Vector2<uint8_t>(1, 0)) {
+                        if (this->data->door_id == 0) {
+                            roomX = 1;
+                            roomY = 0;
+                        }
+                        if (this->data->door_id == 2) {
+                            roomX = 2;
+                            roomY = 0;
+                        }
                     }
                 }
+                Game::loadRoom(roomX, roomY, [target]() {
+                    onEnter(target);
+                });
             }
-            Game::loadRoom(roomX, roomY, [target]() {
-                onEnter(target);
-            });
         }
     }
 }

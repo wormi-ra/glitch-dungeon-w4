@@ -38,7 +38,7 @@ Vector2<int16_t> Input::mouseDelta() {
 }
 
 bool Input::isPressed(uint8_t key, Gamepad gamepad) {
-    return key & Input::m_gamepad[static_cast<uint8_t>(gamepad)];
+    return key & Input::m_gamepad[uint8_t(gamepad)];
 }
 
 bool Input::isPressedDown(uint8_t key, Gamepad gamepad) {
@@ -73,11 +73,11 @@ uint8_t Input::unclickedThisFrame() {
 }
 
 uint8_t Input::pressedThisFrame(Gamepad gamepad) {
-    auto id = static_cast<uint8_t>(gamepad);
+    auto id = uint8_t(gamepad);
     return Input::m_gamepad[id] & (Input::m_gamepad[id] ^ Input::m_previousGamepad[id]);
 }
 
 uint8_t Input::unpressedThisFrame(Gamepad gamepad) {
-    auto id = static_cast<uint8_t>(gamepad);
+    auto id = uint8_t(gamepad);
     return Input::m_previousGamepad[id] & (Input::m_gamepad[id] ^ Input::m_previousGamepad[id]);
 }

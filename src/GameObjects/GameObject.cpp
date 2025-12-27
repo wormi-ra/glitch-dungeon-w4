@@ -7,17 +7,17 @@
 bool GameObject::collidesWith(const GameObject &other, int32_t q) const {
     IntRect myRect = {
         Vector2<int32_t>{
-            static_cast<int32_t>(std::round(this->position.x)), 
-            static_cast<int32_t>(std::round(this->position.y))
+            int32_t(std::round(this->position.x)), 
+            int32_t(std::round(this->position.y))
         } + this->bbox.position,
         this->bbox.size,
     };
     IntRect otherRect = {
         Vector2<int32_t>{
-            static_cast<int32_t>(std::round(other.position.x)), 
-            static_cast<int32_t>(std::round(other.position.y))
+            int32_t(std::round(other.position.x)), 
+            int32_t(std::round(other.position.y))
         } + other.bbox.position + Vector2 {q, q},
-        other.bbox.size - Vector2 {static_cast<uint32_t>(q) * 2u, static_cast<uint32_t>(q) * 2u}
+        other.bbox.size - Vector2 {uint32_t(q) * 2u, uint32_t(q) * 2u}
     };
     return myRect.intersects(otherRect);
 }
@@ -33,7 +33,7 @@ void GameObject::draw(const Viewport &view) const {
         if (this->animation[this->currentFrame] == static_cast<anim_t>(0xFF)) {
             tileId = 0;
         } else {
-            tileId = static_cast<uint8_t>(abs(this->animation[this->currentFrame]));
+            tileId = uint8_t(abs(this->animation[this->currentFrame]));
         }
     }
     *DRAW_COLORS = this->getDrawColor();
@@ -56,6 +56,14 @@ void GameObject::setFacing(Facing facing) {
         this->flags |= BLIT_FLIP_X;
     } else {
         this->flags &= ~BLIT_FLIP_X;
+    }
+}
+
+GameObject::Facing GameObject::getFacing() const {
+    if (this->flags & BLIT_FLIP_X) {
+        return Facing::LEFT;
+    } else {
+        return Facing::RIGHT;
     }
 }
 

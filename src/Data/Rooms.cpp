@@ -129,7 +129,7 @@ const RoomData Data::ROOM_0_5 {
     .glitch_sequence = {},
     .glitch_time_limit = 240,
     .can_use_spellbook = true,
-    .entities = {34, 35, 36},
+    .entities = {34, 35, 36, 37, 38, 39},
     .data = {
         .len = 144,
         .data = ROOM_0_5_DATA,
@@ -146,7 +146,7 @@ const RoomData Data::ROOM_0_5_GLITCHED {
     .glitch_sequence = {},
     .glitch_time_limit = 240,
     .can_use_spellbook = true,
-    .entities = {37, 38, 39, 40, 41, 42, 43},
+    .entities = {40, 41, 42, 43, 44, 45, 46},
     .data = {
         .len = 148,
         .data = ROOM_0_5_GLITCHED_DATA,
@@ -163,7 +163,7 @@ const RoomData Data::ROOM_1_0 {
     .glitch_sequence = {0},
     .glitch_time_limit = 120,
     .can_use_spellbook = true,
-    .entities = {44, 45, 46, 47},
+    .entities = {47, 48, 49, 50},
     .data = {
         .len = 124,
         .data = ROOM_1_0_DATA,
@@ -180,7 +180,7 @@ const RoomData Data::ROOM_1_0_GLITCHED {
     .glitch_sequence = {0},
     .glitch_time_limit = 120,
     .can_use_spellbook = true,
-    .entities = {48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61},
+    .entities = {51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64},
     .data = {
         .len = 190,
         .data = ROOM_1_0_GLITCHED_DATA,
@@ -197,7 +197,7 @@ const RoomData Data::ROOM_1_1 {
     .glitch_sequence = {2},
     .glitch_time_limit = 120,
     .can_use_spellbook = true,
-    .entities = {62, 63, 64, 65},
+    .entities = {65, 66, 67, 68},
     .data = {
         .len = 162,
         .data = ROOM_1_1_DATA,
@@ -214,7 +214,7 @@ const RoomData Data::ROOM_1_2 {
     .glitch_sequence = {},
     .glitch_time_limit = 240,
     .can_use_spellbook = true,
-    .entities = {66, 67, 68},
+    .entities = {69, 70, 71},
     .data = {
         .len = 178,
         .data = ROOM_1_2_DATA,
@@ -231,7 +231,7 @@ const RoomData Data::ROOM_1_3 {
     .glitch_sequence = {},
     .glitch_time_limit = 240,
     .can_use_spellbook = true,
-    .entities = {69, 70, 71, 72},
+    .entities = {72, 73, 74, 75},
     .data = {
         .len = 208,
         .data = ROOM_1_3_DATA,
@@ -248,7 +248,7 @@ const RoomData Data::ROOM_1_4 {
     .glitch_sequence = {0},
     .glitch_time_limit = 240,
     .can_use_spellbook = true,
-    .entities = {73, 74, 75, 76},
+    .entities = {76, 77, 78, 79},
     .data = {
         .len = 142,
         .data = ROOM_1_4_DATA,
@@ -265,7 +265,7 @@ const RoomData Data::ROOM_1_5 {
     .glitch_sequence = {6, 2, 5},
     .glitch_time_limit = 240,
     .can_use_spellbook = false,
-    .entities = {77},
+    .entities = {80},
     .data = {
         .len = 154,
         .data = ROOM_1_5_DATA,
@@ -282,7 +282,7 @@ const RoomData Data::ROOM_2_0 {
     .glitch_sequence = {1},
     .glitch_time_limit = 120,
     .can_use_spellbook = true,
-    .entities = {78, 79, 80, 81},
+    .entities = {81, 82, 83, 84},
     .data = {
         .len = 132,
         .data = ROOM_2_0_DATA,
@@ -299,7 +299,7 @@ const RoomData Data::ROOM_2_1 {
     .glitch_sequence = {2},
     .glitch_time_limit = 240,
     .can_use_spellbook = true,
-    .entities = {82, 83, 84},
+    .entities = {85, 86, 87},
     .data = {
         .len = 142,
         .data = ROOM_2_1_DATA,
@@ -316,7 +316,7 @@ const RoomData Data::ROOM_2_2 {
     .glitch_sequence = {},
     .glitch_time_limit = 240,
     .can_use_spellbook = true,
-    .entities = {85, 86, 87, 88},
+    .entities = {88, 89, 90, 91},
     .data = {
         .len = 162,
         .data = ROOM_2_2_DATA,
@@ -333,7 +333,7 @@ const RoomData Data::ROOM_2_2_GLITCHED {
     .glitch_sequence = {},
     .glitch_time_limit = 240,
     .can_use_spellbook = true,
-    .entities = {89, 90, 91, 92},
+    .entities = {92, 93, 94, 95},
     .data = {
         .len = 188,
         .data = ROOM_2_2_GLITCHED_DATA,
@@ -350,7 +350,7 @@ const RoomData Data::ROOM_2_3 {
     .glitch_sequence = {4},
     .glitch_time_limit = 240,
     .can_use_spellbook = true,
-    .entities = {93, 94, 95},
+    .entities = {96, 97, 98},
     .data = {
         .len = 188,
         .data = ROOM_2_3_DATA,
@@ -367,7 +367,7 @@ const RoomData Data::ROOM_2_4 {
     .glitch_sequence = {0},
     .glitch_time_limit = 240,
     .can_use_spellbook = true,
-    .entities = {96, 97, 98, 99, 100, 101},
+    .entities = {99, 100, 101, 102, 103, 104, 105, 106},
     .data = {
         .len = 142,
         .data = ROOM_2_4_DATA,
@@ -401,7 +401,7 @@ const RoomData Data::ROOM_3_0 {
     .glitch_sequence = {1},
     .glitch_time_limit = 240,
     .can_use_spellbook = true,
-    .entities = {102, 103, 104},
+    .entities = {107, 108, 109},
     .data = {
         .len = 112,
         .data = ROOM_3_0_DATA,
@@ -418,7 +418,7 @@ const RoomData Data::ROOM_3_1 {
     .glitch_sequence = {5},
     .glitch_time_limit = 240,
     .can_use_spellbook = true,
-    .entities = {105, 106, 107, 108, 109, 110, 111, 112},
+    .entities = {110, 111, 112, 113, 114, 115, 116, 117},
     .data = {
         .len = 182,
         .data = ROOM_3_1_DATA,
@@ -435,7 +435,7 @@ const RoomData Data::ROOM_3_2 {
     .glitch_sequence = {0},
     .glitch_time_limit = 240,
     .can_use_spellbook = true,
-    .entities = {113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132},
+    .entities = {118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137},
     .data = {
         .len = 160,
         .data = ROOM_3_2_DATA,
@@ -452,7 +452,7 @@ const RoomData Data::ROOM_3_3 {
     .glitch_sequence = {1, 2},
     .glitch_time_limit = 240,
     .can_use_spellbook = true,
-    .entities = {133, 134, 135},
+    .entities = {138, 139, 140},
     .data = {
         .len = 180,
         .data = ROOM_3_3_DATA,
@@ -469,7 +469,7 @@ const RoomData Data::ROOM_3_3_GLITCHED {
     .glitch_sequence = {1, 2},
     .glitch_time_limit = 240,
     .can_use_spellbook = true,
-    .entities = {136, 137, 138, 139, 140, 141},
+    .entities = {141, 142, 143, 144, 145, 146},
     .data = {
         .len = 206,
         .data = ROOM_3_3_GLITCHED_DATA,
@@ -486,7 +486,7 @@ const RoomData Data::ROOM_3_4 {
     .glitch_sequence = {},
     .glitch_time_limit = 240,
     .can_use_spellbook = true,
-    .entities = {142, 143},
+    .entities = {147, 148},
     .data = {
         .len = 208,
         .data = ROOM_3_4_DATA,
@@ -503,7 +503,7 @@ const RoomData Data::ROOM_3_4_GLITCHED {
     .glitch_sequence = {},
     .glitch_time_limit = 240,
     .can_use_spellbook = true,
-    .entities = {144, 145},
+    .entities = {149, 150},
     .data = {
         .len = 234,
         .data = ROOM_3_4_GLITCHED_DATA,
@@ -520,7 +520,7 @@ const RoomData Data::ROOM_3_5 {
     .glitch_sequence = {},
     .glitch_time_limit = 240,
     .can_use_spellbook = true,
-    .entities = {146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158},
+    .entities = {151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163},
     .data = {
         .len = 142,
         .data = ROOM_3_5_DATA,
@@ -537,7 +537,7 @@ const RoomData Data::ROOM_4_0 {
     .glitch_sequence = {3},
     .glitch_time_limit = 120,
     .can_use_spellbook = true,
-    .entities = {159, 160, 161, 162, 163, 164, 165},
+    .entities = {164, 165, 166, 167, 168, 169, 170},
     .data = {
         .len = 214,
         .data = ROOM_4_0_DATA,
@@ -554,7 +554,7 @@ const RoomData Data::ROOM_4_1 {
     .glitch_sequence = {2},
     .glitch_time_limit = 120,
     .can_use_spellbook = true,
-    .entities = {166, 167, 168, 169, 170, 171},
+    .entities = {171, 172, 173, 174, 175, 176},
     .data = {
         .len = 90,
         .data = ROOM_4_1_DATA,
@@ -571,7 +571,7 @@ const RoomData Data::ROOM_4_2 {
     .glitch_sequence = {6},
     .glitch_time_limit = 240,
     .can_use_spellbook = true,
-    .entities = {172, 173, 174, 175},
+    .entities = {177, 178, 179, 180},
     .data = {
         .len = 180,
         .data = ROOM_4_2_DATA,
@@ -588,7 +588,7 @@ const RoomData Data::ROOM_4_3 {
     .glitch_sequence = {4},
     .glitch_time_limit = 240,
     .can_use_spellbook = true,
-    .entities = {176, 177, 178},
+    .entities = {181, 182, 183},
     .data = {
         .len = 212,
         .data = ROOM_4_3_DATA,
@@ -605,7 +605,7 @@ const RoomData Data::ROOM_4_4 {
     .glitch_sequence = {},
     .glitch_time_limit = 240,
     .can_use_spellbook = true,
-    .entities = {179, 180, 181},
+    .entities = {184, 185, 186},
     .data = {
         .len = 196,
         .data = ROOM_4_4_DATA,
@@ -622,7 +622,7 @@ const RoomData Data::ROOM_4_5 {
     .glitch_sequence = {},
     .glitch_time_limit = 240,
     .can_use_spellbook = true,
-    .entities = {182, 183, 184},
+    .entities = {187, 188, 189},
     .data = {
         .len = 58,
         .data = ROOM_4_5_DATA,
@@ -639,7 +639,7 @@ const RoomData Data::ROOM_5_0 {
     .glitch_sequence = {},
     .glitch_time_limit = 240,
     .can_use_spellbook = true,
-    .entities = {185, 186, 187, 188},
+    .entities = {190, 191, 192, 193},
     .data = {
         .len = 218,
         .data = ROOM_5_0_DATA,
@@ -656,7 +656,7 @@ const RoomData Data::ROOM_5_1 {
     .glitch_sequence = {},
     .glitch_time_limit = 240,
     .can_use_spellbook = true,
-    .entities = {189, 190, 191, 192},
+    .entities = {194, 195, 196, 197},
     .data = {
         .len = 124,
         .data = ROOM_5_1_DATA,
@@ -673,7 +673,7 @@ const RoomData Data::ROOM_5_2 {
     .glitch_sequence = {},
     .glitch_time_limit = 240,
     .can_use_spellbook = true,
-    .entities = {193, 194, 195, 196, 197},
+    .entities = {198, 199, 200, 201, 202},
     .data = {
         .len = 210,
         .data = ROOM_5_2_DATA,
@@ -690,7 +690,7 @@ const RoomData Data::ROOM_5_3 {
     .glitch_sequence = {},
     .glitch_time_limit = 240,
     .can_use_spellbook = true,
-    .entities = {198},
+    .entities = {203},
     .data = {
         .len = 194,
         .data = ROOM_5_3_DATA,
@@ -707,7 +707,7 @@ const RoomData Data::ROOM_5_4 {
     .glitch_sequence = {},
     .glitch_time_limit = 240,
     .can_use_spellbook = true,
-    .entities = {199, 200, 201, 202},
+    .entities = {204, 205, 206, 207},
     .data = {
         .len = 188,
         .data = ROOM_5_4_DATA,
@@ -724,7 +724,7 @@ const RoomData Data::ROOM_5_5 {
     .glitch_sequence = {0},
     .glitch_time_limit = 240,
     .can_use_spellbook = false,
-    .entities = {203, 204, 205, 206, 207},
+    .entities = {208, 209, 210, 211, 212},
     .data = {
         .len = 56,
         .data = ROOM_5_5_DATA,

@@ -31,6 +31,7 @@ class GameObject : public IDrawable {
         bool collidesWith(const GameObject &other, int32_t q = 0) const;
         void setAnimation(const anim_t *anim, uint8_t len, uint8_t speed = 8);
         void setFacing(Facing facing);
+        Facing getFacing() const;
         bool isReverse() const;
         virtual uint16_t getDrawColor() const = 0;
         virtual void update();

@@ -32,7 +32,7 @@ void Spellbar::draw(const Viewport &view) const {
         }
         w4::rect(rect.position.x, rect.position.y, rect.size.x, rect.size.y);
         *DRAW_COLORS = 0x1230;
-        Data::SPELL_ICONS.blitSub(view, static_cast<uint8_t>(spell->getType()) - 1, this->position + position + Vector2{2, 2});
+        Data::SPELL_ICONS.blitSub(view, uint8_t(spell->getType()) - 1, this->position + position + Vector2{2, 2});
         position.x += 16;
     }
     IntRect textRect = view.transform({this->position + Vector2{2, 20}, this->size}); 

@@ -1,6 +1,7 @@
 #include "Game.hpp"
 #include "Data/Entities.hpp"
 #include "Data/Rooms.hpp"
+#include "GameObjects/Player.hpp"
 #include "Glitch/Glitch.hpp"
 #include "Graphics/Spellbar.hpp"
 #include "Graphics/TextBox.hpp"
@@ -9,6 +10,7 @@
 #include "wasm4.hpp"
 #include "Input.hpp"
 #include "Time.hpp"
+#include "Function.hpp"
 #include <cstdint>
 #include <cstring>
 
@@ -55,20 +57,26 @@ static const uint32_t GRAYSCALE_PALETTE[] = {
 };
 
 void Game::start() {
+    Data::interactedEntities[Data::EVENT_CHECKPOINT_2_4] = true;
+    Data::interactedEntities[Data::EVENT_NPC_2_4] = true;
+    Data::interactedEntities[Data::EVENT_NPCS_0_5[0]] = true;
+    Data::interactedEntities[Data::EVENT_NPCS_0_5[1]] = true;
+    Data::interactedEntities[Data::EVENT_NPCS_0_5[2]] = true;
     Game::setPalette(Game::player.glitch->getPalette());
-    Game::loadRoom(0, 0);
+    // Game::loadRoom(0, 0);
 
-    // Game::player.state |= Player::HAS_GRIMOIRE;
-    // Game::state |= Game::GLITCHED;
-    // Game::player.spellbook = {
-    //     Glitch::SPELLS[1],
-    //     Glitch::SPELLS[2],
-    //     Glitch::SPELLS[3],
-    //     Glitch::SPELLS[4],
-    //     Glitch::SPELLS[5],
-    //     Glitch::SPELLS[6],
-    //     Glitch::SPELLS[7],
-    //  };
+    Game::player.state |= Player::HAS_GRIMOIRE;
+    Game::state |= Game::GLITCHED;
+    Game::player.spellbook = {
+        Glitch::SPELLS[1],
+        Glitch::SPELLS[2],
+        Glitch::SPELLS[3],
+        Glitch::SPELLS[4],
+        Glitch::SPELLS[5],
+        Glitch::SPELLS[6],
+        Glitch::SPELLS[7],
+    };
+    Game::loadRoom(0, 0);
     //  Game::loadRoom(4, 2);
 }
 
@@ -108,17 +116,21 @@ void Game::setPalette(const uint32_t *palette) {
 }
 
 void Game::applyLoadRoom() {
-    if (Game::currentRoom->data != Game::getRoomData(Game::roomPosition.x, Game::roomPosition.y)) {
+    if (Game::currentRoom == nullptr || Game::currentRoom->data != Game::getRoomData(Game::roomPosition.x, Game::roomPosition.y)) {
+        auto couldUseSpellbook = false;
         if (Game::currentRoom != nullptr) {
             delete Game::currentRoom;
+            couldUseSpellbook = Game::currentRoom->data->can_use_spellbook;
         }
         Game::currentRoom = new Room(Game::getRoomData(Game::roomPosition.x, Game::roomPosition.y));
+        if (!couldUseSpellbook) {
+            Game::player.setSpell(Glitch::Type::GREY, true);
+        }
         Game::currentRoom->onEnter();
         if (loadCallback != nullptr) {
             loadCallback();
             loadCallback = nullptr;
         }
-        Game::setPalette(Game::player.glitch->getPalette());
         if (Game::roomPosition == Vector2<uint8_t> {5, 5}) {
             Game::win();
         }
@@ -136,16 +148,17 @@ void Game::dismissTextbox() {
 void Game::updateCamera() {
     Vector2<int32_t> cameraMin = {0, 0};
     Vector2<int32_t> cameraMax = {
-        Game::currentRoom->data->width * 8 - static_cast<int32_t>(Game::gameView.size.x),
-        Game::currentRoom->data->height * 8 - static_cast<int32_t>(Game::gameView.size.y)
+        Game::currentRoom->data->width * 8 - int32_t(Game::gameView.size.x),
+        Game::currentRoom->data->height * 8 - int32_t(Game::gameView.size.y)
     };
-    Game::gameView.offset.x = -std::clamp(static_cast<int32_t>(std::round((Game::player.position.x + static_cast<float>(Game::player.sheet->tileWidth) / 2.0f))) - (SCREEN_SIZE / 2), cameraMin.x, cameraMax.x);
+    Game::gameView.offset.x = -std::clamp(int32_t(std::round((Game::player.position.x + float(Game::player.sheet->tileWidth) / 2.0f))) - (SCREEN_SIZE / 2), cameraMin.x, cameraMax.x);
 }
 
 void Game::win() {
     Game::player.position.x = 16;
     Game::player.setSpell(Glitch::Type::GREY, 1);
     Game::setPalette(GRAYSCALE_PALETTE);
+    textBox.setText(nullptr, 0);
     if (Game::state & BEAT_GAME)
         return;
     Game::state |= BEAT_GAME;
@@ -186,30 +199,39 @@ void Game::reset() {
     loadCallback = nullptr;
 }
 
+const RoomData &Game::loadRoom(uint8_t x, uint8_t y) {
+    return Game::loadRoom(x, y, nullptr);
+}
+
 const RoomData &Game::loadRoom(uint8_t x, uint8_t y, Function<void()> callback) {
     Vector2<uint8_t> newPosition = {x, y};
-    w4::tracef("%d %d", newPosition.x, newPosition.y);
+
+    if (loadCallback != nullptr)
+        return *Game::currentRoom->data;
     if (Game::currentRoom != nullptr && newPosition == Game::roomPosition) {
         callback();
         return *Game::currentRoom->data;
     }
     Game::roomPosition = newPosition;
-    if (Game::currentRoom == nullptr) {
-        Game::currentRoom = new Room(Game::getRoomData(Game::roomPosition.x, Game::roomPosition.y));
-    }
     loadCallback = callback;
-    Game::textBox.setText(nullptr, 0);
+    if (Game::currentRoom == nullptr) {
+        applyLoadRoom();
+    }
     return *Game::currentRoom->data;
 }
 
+const RoomData &Game::moveRoom(int8_t x, int8_t y) {
+    return Game::moveRoom(x, y, nullptr);
+}
+
 const RoomData &Game::moveRoom(int8_t x, int8_t y, Function<void()> callback) {
-    Vector2<int8_t> pos = Vector2<int8_t>(static_cast<int8_t>(Game::roomPosition.x) + x, static_cast<int8_t>(Game::roomPosition.y) + y);
+    Vector2<int8_t> pos = Vector2<int8_t>(int8_t(Game::roomPosition.x) + x, int8_t(Game::roomPosition.y) + y);
 
     pos.x = mod(pos.x, 6);
     pos.y = mod(pos.y, 6);
     return Game::loadRoom(
-        static_cast<uint8_t>(pos.x),
-        static_cast<uint8_t>(pos.y),
+        uint8_t(pos.x),
+        uint8_t(pos.y),
         callback
     );
 }

@@ -7,14 +7,17 @@
 
 class Player : public GameObject {
     public:
-        enum State : uint8_t {
-            HAS_GRIMOIRE =          0b00000001,
-            ON_GROUND =             0b00000010,
-            IS_JUMPING =            0b00000100,
-            HORIZONTAL_INPUT =      0b00001000,
-            HORIZONTAL_COLLISION =  0b00010000,
-            CLIMBING =              0b00100000,
-            PRESSED_DOWN =          0b01000000,
+        enum State : uint16_t {
+            HAS_GRIMOIRE =          (1 << 0),
+            ON_GROUND =             (1 << 1),
+            IS_JUMPING =            (1 << 2),
+            HORIZONTAL_INPUT =      (1 << 3),
+            HORIZONTAL_COLLISION =  (1 << 4),
+            CLIMBING =              (1 << 5),
+            PRESSED_DOWN =          (1 << 6),
+            TOUCHING_DOOR =         (1 << 7),
+            IS_STUCK =              (1 << 8),
+            CHECK_STUCK =           (1 << 9),
         };
 
         DynamicArray<Glitch::Glitch *> spellbook {};
@@ -24,7 +27,7 @@ class Player : public GameObject {
         float gravAcc = 0.8f;
         int32_t jumpTimer = 0;
         uint16_t artifacts = 0;
-        uint8_t state = 0;
+        uint16_t state = 0;
         uint8_t checkpointId = 0;
 
         Player();
@@ -48,6 +51,7 @@ class Player : public GameObject {
         void jump();
         void stopJump();
         bool tileCollide(Vector2<uint32_t> tile, FloatRect bbox) const;
+        void checkStuck();
         void applyCollisions();
         void applyGravity();
         void applyPhysics();

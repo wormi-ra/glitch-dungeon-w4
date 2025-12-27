@@ -30,3 +30,5 @@ const Data::EntityData *Data::ENTITIES[{{ entities|length }}] {
     },
 {% endfor%}
 };
+
+{{ "Bitfield<Data::ENTITY_COUNT> Data::interactedEntities {};" }}
