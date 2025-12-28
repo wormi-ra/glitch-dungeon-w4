@@ -1,20 +1,18 @@
 #include "../wasm4.hpp"
 #include "Sounds.hpp"
 
-const Audio::Sound Sounds::BLIP {
-    "Blip",
+const Audio::Sound Sounds::LAND {
     1,
     (Audio::Tone []){{
-            {{800, 400}},
-            {{1, 1, 0, 0}},
-            {{100, 100}},
-            TONE_MODE4 | TONE_PULSE1
+            {{200, 120}},
+            {{2, 1, 0, 0}},
+            {{50, 50}},
+            TONE_MODE4 | TONE_PULSE2
         }},
-    (uint32_t []){0}
+    (uint8_t []){0}
 };
 
 const Audio::Sound Sounds::JUMP {
-    "Jump",
     1,
     (Audio::Tone []){{
             {{440, 600}},
@@ -22,11 +20,10 @@ const Audio::Sound Sounds::JUMP {
             {{100, 100}},
             TONE_MODE2 | TONE_PULSE1
         }},
-    (uint32_t []){0}
+    (uint8_t []){0}
 };
 
 const Audio::Sound Sounds::CHECKPOINT {
-    "Checkpoint",
     2,
     (Audio::Tone []){
         {
@@ -42,10 +39,8 @@ const Audio::Sound Sounds::CHECKPOINT {
             TONE_TRIANGLE
         },
     },
-    (uint32_t []){0, 2}
+    (const uint8_t []){0, 2}
 };
-
-const Audio::Sound *Sounds::TEST = nullptr;
 
 // const Audio::Sound *Sounds::TEST = new Audio::Sound({
 //     "Checkpoint",
@@ -67,7 +62,7 @@ const Audio::Sound *Sounds::TEST = nullptr;
 //     (uint32_t []){0, 2}
 // });
 
-const Audio::LFO Sounds::LFO {
-    "LFO",
-    500, 1000, 2
-};
+// const Audio::LFO Sounds::LFO {
+//     "LFO",
+//     500, 1000, 2
+// };

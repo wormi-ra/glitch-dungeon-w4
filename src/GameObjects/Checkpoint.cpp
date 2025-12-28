@@ -3,6 +3,7 @@
 #include "GameObject.hpp"
 #include "../Data/Sheets.hpp"
 #include "../Game.hpp"
+#include "../Data/Sounds.hpp"
 
 static const anim_t CHECKPOINT_ANIM[] {1};
 
@@ -20,6 +21,11 @@ Checkpoint::Checkpoint(const Data::Checkpoint *data)
     } else {
         this->setAnimation(CHECKPOINT_ANIM, sizeof(CHECKPOINT_ANIM) / sizeof(anim_t));
     }
+}
+
+void Checkpoint::activate() {
+    this->active = true;
+    this->setAnimation(CHECKPOINT_ACTIVE_ANIM, sizeof(CHECKPOINT_ACTIVE_ANIM) / sizeof(anim_t));
 }
 
 void Checkpoint::deactivate() {
@@ -41,11 +47,14 @@ void Checkpoint::update() {
     if (this->interacted())
         return;
     GameObject::update();
+    if (!this->active && Game::player.customCheckpoint == nullptr && Game::player.checkpointId == this->getId()) {
+        this->activate();
+    }
     if (this->collidesWith(Game::player)) {
         if (!this->active) {
-            this->active = true;
-            this->setAnimation(CHECKPOINT_ACTIVE_ANIM, sizeof(CHECKPOINT_ACTIVE_ANIM) / sizeof(anim_t));
+            this->activate();
             Game::player.setCheckpoint(*this);
+            Audio::playSound(&Sounds::CHECKPOINT);
             Game::save();
         }
     }

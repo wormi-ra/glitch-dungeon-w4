@@ -6,5 +6,6 @@ namespace Glitch {
             virtual Type getType() const override;
             virtual const char *getName() const override;
             virtual const uint32_t *getPalette() const override;
+            virtual void onPressDown() override;
     };
 }

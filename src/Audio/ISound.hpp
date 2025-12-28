@@ -7,7 +7,8 @@ namespace Audio {
         public:
             virtual ~ISound() = default;
 
-            virtual const char *name() const = 0;
+            // virtual const char *name() const = 0;
             virtual void play(uint32_t frame, float volumeMultiplier = 1.0f) const = 0;
+            virtual bool isOver(uint32_t frame) const = 0;
     };
 }

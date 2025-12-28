@@ -1,15 +1,15 @@
 #include "Sound.hpp"
 
-const char *Audio::Sound::name() const {
-    return this->m_name;
+uint8_t Audio::Sound::length() const {
+    return this->m_count;
 }
 
-uint32_t Audio::Sound::length() const {
-    return this->m_length;
+bool Audio::Sound::isOver(uint32_t frame) const {
+    return frame >= this->m_length;
 }
 
 void Audio::Sound::play(uint32_t frame, float volumeMultiplier) const {
-    for (uint32_t i = 0 ; i < this->m_length ; i++) {
+    for (uint32_t i = 0 ; i < this->m_count ; i++) {
         if (m_offsets[i] == frame) {
             m_tones[i].play(volumeMultiplier);
         }

@@ -4,8 +4,9 @@
 #pragma once
 
 // #include <cstddef>
-// #include <cstring>
+#include <cstring>
 // #include <utility>
+// #include <memory>
 #include <iterator>
 
 #define LNI_VECTOR_MAX_SZ 1000000000
@@ -115,6 +116,7 @@ namespace lni {
 
     #pragma clang diagnostic push
     #pragma clang diagnostic ignored "-Wunused-variable"
+    #pragma clang diagnostic ignored "-Wsign-conversion"
 
     template <typename T>
     constexpr vector<T>::vector() noexcept {

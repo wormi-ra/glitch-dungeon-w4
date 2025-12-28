@@ -27,6 +27,10 @@ void Glitch::Glitch::transformPlayer(Player &, Room &) {
     return;
 }
 
+void Glitch::Glitch::onPressDown() {
+    return;
+}
+
 static auto GLITCH_GREY = Glitch::Grey();
 static auto GLITCH_RED = Glitch::Red();
 static auto GLITCH_GREEN = Glitch::Green();

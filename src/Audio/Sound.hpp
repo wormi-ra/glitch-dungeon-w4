@@ -7,22 +7,29 @@
 namespace Audio {
     class Sound : public ISound {
         public:
-            Sound(const char *name, uint32_t length, const Audio::Tone *tones, const uint32_t *offsets)
-                : m_name(name),
-                m_length(length),
-                m_tones(tones),
-                m_offsets(offsets)
+            Sound(uint8_t count, const Audio::Tone *tones, const uint8_t *offsets)
+                // : m_name(name),
+                : m_tones(tones),
+                m_offsets(offsets),
+                m_count(count)
             {
+                m_length = 0;
+                for (uint8_t i = 0; i < m_count; i++) {
+                    if (m_offsets[i] > m_length)
+                        m_length = m_offsets[i];
+                }
             }
 
-            uint32_t length() const;
-            const char *name() const;
-            virtual void play(uint32_t frame, float volumeMultiplier = 1.0f) const;
+            uint8_t length() const;
+            // virtual const char *name() const override;
+            virtual void play(uint32_t frame, float volumeMultiplier = 1.0f) const override;
+            virtual bool isOver(uint32_t frame) const override;
 
         private:
-            const char *m_name;
-            const uint32_t m_length;
+            // const char *m_name;
             const Audio::Tone *m_tones;
-            const uint32_t *m_offsets;
+            const uint8_t *m_offsets;
+            const uint8_t m_count;
+            uint8_t m_length;
     };
 }

@@ -6,6 +6,8 @@
 #include "../utils.hpp"
 #include "../Function.hpp"
 #include "GameObject.hpp"
+#include "../Audio/Queue.hpp"
+#include "../Data/Sounds.hpp"
 #include <cstdint>
 
 static const anim_t PLAYER_IDLE[] {
@@ -181,6 +183,7 @@ void Player::processInputs() {
     if (Input::isPressedDown(BUTTON_DOWN)) {
         this->state |= PRESSED_DOWN;
         this->state &= ~ON_GROUND;
+        this->glitch->onPressDown();
     }
     if (Input::isPressedDown(BUTTON_1))
         this->nextSpell();
@@ -226,6 +229,7 @@ void Player::stopMove() {
 void Player::startJump() {
     if (!(this->state & ON_GROUND))
         return;
+    Audio::playSound(&Sounds::JUMP);
     this->velocity.y = -this->glitch->getPhysics().jumpVelocity;
     this->jumpTimer = 0;
     this->state &= ~ON_GROUND;
@@ -430,10 +434,14 @@ void Player::applyCollisions() {
             }
         }
     }
+    if (this->velocity.y != 0)
+        this->state &= ~PLAYED_LAND_SOUND;
     if (!wasOnGround) {
-        if (this->state & ON_GROUND) {
-            // Play fall sound
-        } else {
+        if ((this->state & ON_GROUND) && !(this->state & PLAYED_LAND_SOUND)) {
+            Audio::playSound(&Sounds::LAND);
+            this->state |= PLAYED_LAND_SOUND;
+        }
+        if (!(this->state & ON_GROUND)) {
             this->state &= ~PRESSED_DOWN;
         }
     }
@@ -483,14 +491,24 @@ void Player::die() {
         return;
     Game::stats.deaths++;
     Game::textBox.setText(nullptr, 0);
+    Vector2<uint8_t> respawn;
+    if (Game::player.customCheckpoint != nullptr) {
+        respawn = customCheckpoint->room;
+    } else {
+        respawn = this->respawnRoom;
+    }
     // TODO Play death sound
-    Game::loadRoom(this->respawnRoom.x, this->respawnRoom.y, [this]() {
+    Game::loadRoom(respawn.x, respawn.y, [this]() {
         auto checkpoint = this->getCheckpoint();
 
         if (checkpoint != nullptr) {
             this->position = Vector2<float>(checkpoint->position);
         } else {
             this->position = {20,72};
+        }
+        if (Game::player.customCheckpoint != nullptr) {
+            delete Game::player.customCheckpoint;
+            Game::player.customCheckpoint = nullptr;
         }
         this->velocity = {0, 0};
         this->state &= ~CHECK_STUCK;

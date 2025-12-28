@@ -46,6 +46,7 @@ namespace Glitch {
             virtual Type getType() const = 0;
             virtual const char *getName() const = 0;
             virtual const uint32_t *getPalette() const = 0;
+            virtual void onPressDown();
             virtual const Physics &getPhysics() const;
             virtual bool collidesWith(Tile::Type collision) const;
             virtual bool isFallthrough(Tile::Type collision) const;

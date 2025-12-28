@@ -1559,52 +1559,52 @@ const Data::EntityData *Data::ENTITIES[213] {
         0,
     },
     // 166
-    new Data::Enemy {
-        {
-            {18, 96},
-            Data::EntityData::Type::ENEMY,
-            166,
-        },
-        0,
-    },
-    // 167
     new Data::Door {
         {
             {128, 96},
             Data::EntityData::Type::DOOR,
-            167,
+            166,
         },
         {4, 1},
         2,
         0,
     },
-    // 168
+    // 167
     new Data::Door {
         {
             {24, 16},
             Data::EntityData::Type::DOOR,
-            168,
+            167,
         },
         {3, 1},
         0,
         0,
     },
-    // 169
+    // 168
     new Data::Checkpoint {
         {
             {80, 96},
             Data::EntityData::Type::CHECKPOINT,
-            169,
+            168,
         },
     },
-    // 170
+    // 169
     new Data::NPC {
         {
             {72, 16},
             Data::EntityData::Type::NPC,
-            170,
+            169,
         },
         9,
+    },
+    // 170
+    new Data::Enemy {
+        {
+            {18, 96},
+            Data::EntityData::Type::ENEMY,
+            170,
+        },
+        0,
     },
     // 171
     new Data::Door {

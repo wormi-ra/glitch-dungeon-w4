@@ -18,6 +18,7 @@ class Player : public GameObject {
             TOUCHING_DOOR =         (1 << 7),
             IS_STUCK =              (1 << 8),
             CHECK_STUCK =           (1 << 9),
+            PLAYED_LAND_SOUND =     (1 << 10),
         };
 
         DynamicArray<Glitch::Glitch *> spellbook {};

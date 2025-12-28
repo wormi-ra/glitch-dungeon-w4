@@ -76,7 +76,7 @@ void Game::start() {
     //     Glitch::SPELLS[6],
     //     Glitch::SPELLS[7],
     // };
-    // Game::loadRoom(0, 0);
+    // Game::loadRoom(0, 5);
     //  Game::loadRoom(4, 2);
 }
 
@@ -85,6 +85,9 @@ void Game::update() {
     Game::player.update();
     Game::currentRoom->update();
     Game::textBox.update();
+    if (Game::player.customCheckpoint != nullptr && Game::player.customCheckpoint->room == Game::roomPosition) {
+        Game::player.customCheckpoint->update();
+    }
     Game::dismissTextbox();
     Game::applyLoadRoom();
     updateCamera();
@@ -98,6 +101,14 @@ void Game::draw() {
         Game::textBox.draw(Game::hudView);
     } else {
         Game::spellbar.draw(Game::hudView);
+        static char coordText[] = "0,0";
+        coordText[0] = Game::roomPosition.x + '0';
+        coordText[2] = Game::roomPosition.y + '0';
+        *DRAW_COLORS = 0x04;
+        w4::text(coordText, SCREEN_SIZE - FONT_SIZE * (sizeof(coordText) - 1) - 8, SCREEN_SIZE - FONT_SIZE - 8);
+    }
+    if (Game::player.customCheckpoint != nullptr && Game::player.customCheckpoint->room == Game::roomPosition) {
+        Game::player.customCheckpoint->draw(Game::gameView);
     }
     Game::player.draw(Game::gameView);
 }
