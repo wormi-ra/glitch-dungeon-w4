@@ -3,6 +3,7 @@
 #include "../Game.hpp"
 #include "GameObject.hpp"
 #include "Player.hpp"
+#include "../Data/Sounds.hpp"
 #include <cstring>
 
 static const anim_t COLLECTION_ANIMS[17][2] {
@@ -86,6 +87,7 @@ void Collection::onCollect() {
     Game::textBox.setText(getText);
     Data::interactedEntities[this->getId()] = true;
     Game::player.artifacts++;
+    Audio::playSound(&Sounds::PICKUP, 0.7f);
     switch (this->data->collection_id) {
     case Collection::Item::GRIMOIRE:
         Game::player.state |= Player::HAS_GRIMOIRE;

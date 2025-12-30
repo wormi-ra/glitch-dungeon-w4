@@ -4,6 +4,7 @@
 #include "Data/Sheets.hpp"
 #include "Data/Entities.hpp"
 #include "Glitch/Glitch.hpp"
+#include "Data/Sounds.hpp"
 #include "wasm4.hpp"
 #include <cstdint>
 
@@ -68,10 +69,10 @@ void Room::update() {
                 }
             } while (this->data->glitch_sequence[this->glitchIndex] == 0);
             auto spell = static_cast<Glitch::Type>(this->data->glitch_sequence[this->glitchIndex]);
-            Game::player.setSpell(spell, true);
-            if (spell != Glitch::Type::GREY) {
-                // TODO Play change spell sound
+            if (spell != Glitch::Type::GREY && spell != Game::player.glitch->getType()) {
+                Audio::playSound(&Sounds::SWITCH, 0.5f);
             }
+            Game::player.setSpell(spell, true);
         }
     }
 }

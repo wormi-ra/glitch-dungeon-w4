@@ -54,7 +54,7 @@ void Checkpoint::update() {
         if (!this->active) {
             this->activate();
             Game::player.setCheckpoint(*this);
-            Audio::playSound(&Sounds::CHECKPOINT);
+            Audio::playSound(&Sounds::CHECKPOINT, 0.5f);
             Game::save();
         }
     }

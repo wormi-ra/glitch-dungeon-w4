@@ -65,6 +65,7 @@ void Game::start() {
     Game::setPalette(Game::player.glitch->getPalette());
     Game::loadRoom(0, 0);
 
+    // Game::player.artifacts = 2;
     // Game::player.state |= Player::HAS_GRIMOIRE;
     // Game::state |= Game::GLITCHED;
     // Game::player.spellbook = {

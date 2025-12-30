@@ -63,9 +63,9 @@ void Player::normalize() {
 
 Glitch::Glitch &Player::setSpell(Glitch::Type spell, bool forced) {
     if (!this->canUseSpellbook() && !forced) {
+        Audio::playSound(&Sounds::ERROR, 0.5f);
         if (!Game::currentRoom->data->can_use_spellbook && Game::roomPosition != Vector2<uint8_t>(5, 5)) {
             Game::textBox.setText("a dark force\nprevents you from\ncasting spells here");
-            // TODO Play denied spell sound
         }
         return *this->glitch;
     }
@@ -78,7 +78,7 @@ Glitch::Glitch &Player::setSpell(Glitch::Type spell, bool forced) {
         this->gravAcc = this->glitch->getPhysics().originalGravAcc;
         Game::setPalette(this->glitch->getPalette());
         if (!forced) {
-            // TODO Play change spell sound
+            Audio::playSound(&Sounds::SWITCH, 0.5f);
             Game::stats.spells++;
         }
     }
@@ -229,7 +229,7 @@ void Player::stopMove() {
 void Player::startJump() {
     if (!(this->state & ON_GROUND))
         return;
-    Audio::playSound(&Sounds::JUMP);
+    Audio::playSound(&Sounds::JUMP, 0.5f);
     this->velocity.y = -this->glitch->getPhysics().jumpVelocity;
     this->jumpTimer = 0;
     this->state &= ~ON_GROUND;
@@ -438,7 +438,7 @@ void Player::applyCollisions() {
         this->state &= ~PLAYED_LAND_SOUND;
     if (!wasOnGround) {
         if ((this->state & ON_GROUND) && !(this->state & PLAYED_LAND_SOUND)) {
-            Audio::playSound(&Sounds::LAND);
+            Audio::playSound(&Sounds::LAND, 0.3f);
             this->state |= PLAYED_LAND_SOUND;
         }
         if (!(this->state & ON_GROUND)) {
@@ -497,7 +497,7 @@ void Player::die() {
     } else {
         respawn = this->respawnRoom;
     }
-    // TODO Play death sound
+    Audio::playSound(&Sounds::HURT, 0.7f);
     Game::loadRoom(respawn.x, respawn.y, [this]() {
         auto checkpoint = this->getCheckpoint();
 

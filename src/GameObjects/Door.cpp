@@ -4,6 +4,7 @@
 #include "../utils.hpp"
 #include "Entity.hpp"
 #include "../Function.hpp"
+#include "../Data/Sounds.hpp"
 #include <cstring>
 
 static const anim_t DOOR_ANIM[] {0};
@@ -39,7 +40,7 @@ void Door::unlock() {
     this->animation = DOOR_ANIM;
     this->animLength = sizeof(DOOR_ANIM) / sizeof(anim_t);
     Game::textBox.setText("door unlocked");
-    // TODO play unlock sound;
+    Audio::playSound(&Sounds::OPEN, 0.4f);
 }
 
 uint16_t Door::getDrawColor() const {
@@ -76,7 +77,7 @@ void Door::update() {
                     strcpy(lockText, "door is locked\nneed ");
                     strcat(lockText, itoa(this->data->num_artifacts - Game::player.artifacts));
                     strcat(lockText, "\nspells more");
-                    // TODO play locked sound
+                    Audio::playSound(&Sounds::LOCKED);
                     Game::textBox.setText(lockText);
                 }
             } else {
@@ -95,6 +96,7 @@ void Door::update() {
                         }
                     }
                 }
+                Audio::playSound(&Sounds::STAIRS, 0.3f);
                 Game::loadRoom(roomX, roomY, [target]() {
                     onEnter(target);
                 });

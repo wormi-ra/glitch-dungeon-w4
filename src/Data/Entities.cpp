@@ -160,31 +160,31 @@ const Data::EntityData *Data::ENTITIES[213] {
         0,
     },
     // 17
-    new Data::Enemy {
-        {
-            {82, 96},
-            Data::EntityData::Type::ENEMY,
-            17,
-        },
-        0,
-    },
-    // 18
     new Data::Checkpoint {
         {
             {32, 16},
             Data::EntityData::Type::CHECKPOINT,
-            18,
+            17,
         },
     },
-    // 19
+    // 18
     new Data::Door {
         {
             {16, 96},
             Data::EntityData::Type::DOOR,
-            19,
+            18,
         },
         {5, 1},
         10,
+        0,
+    },
+    // 19
+    new Data::Enemy {
+        {
+            {82, 96},
+            Data::EntityData::Type::ENEMY,
+            19,
+        },
         0,
     },
     // 20
