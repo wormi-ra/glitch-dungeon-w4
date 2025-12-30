@@ -67,7 +67,7 @@ const char *NPC::getText() const {
         case 2:
             return "when red, you can\nwalk off cliffs\nwithout falling";
         case 3:
-            return "press X or space or\nclick on your spell\nbar to cast a spell";
+            return "press X or\nclick on your spell\nbar to cast a spell";
         case 4:
             return "press down to\nplace a memory";
         case 5:
@@ -101,7 +101,7 @@ const char *NPC::getText() const {
         case 19:
             return Game::statsText;
         case 20:
-            return "thanks for playing\n:)!\npress R to restart";
+            return "thanks for playing\n:)!\nhold Z to restart";
         case 21:
             return "IT'S A SECRET\nTO EVERYBODY.";
         case 22:

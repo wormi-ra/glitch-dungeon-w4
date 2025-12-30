@@ -8,7 +8,6 @@ namespace Audio {
     class Sound : public ISound {
         public:
             Sound(uint8_t count, const Audio::Tone *tones, const uint8_t *offsets)
-                // : m_name(name),
                 : m_tones(tones),
                 m_offsets(offsets),
                 m_count(count)
@@ -21,12 +20,10 @@ namespace Audio {
             }
 
             uint8_t length() const;
-            // virtual const char *name() const override;
             virtual void play(uint32_t frame, float volumeMultiplier = 1.0f) const override;
             virtual bool isOver(uint32_t frame) const override;
 
         private:
-            // const char *m_name;
             const Audio::Tone *m_tones;
             const uint8_t *m_offsets;
             const uint8_t m_count;

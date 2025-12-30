@@ -27,6 +27,7 @@ class Input {
         static bool isPressed(uint8_t key, Gamepad gamepad = Gamepad::gamepad1);
         static bool isPressedDown(uint8_t key, Gamepad gamepad = Gamepad::gamepad1);
         static bool isPressedUp(uint8_t key, Gamepad gamepad = Gamepad::gamepad1);
+        static bool isHoldingDown(uint8_t key, uint16_t time, Gamepad gamepad = Gamepad::gamepad1);
         static Vector2<int16_t> getMouse();
         static bool isClicked(IntRect rect, uint8_t buttons);
         static bool isClickedDown(IntRect rect, uint8_t buttons);
@@ -38,6 +39,7 @@ class Input {
     private:
         static uint8_t m_gamepad[GAMEPAD_COUNT];
         static uint8_t m_previousGamepad[GAMEPAD_COUNT];
+        static uint16_t m_holdTimer[GAMEPAD_COUNT];
         static MouseData m_mouse;
         static MouseData m_previousMouse;
 

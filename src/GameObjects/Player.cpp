@@ -8,6 +8,7 @@
 #include "GameObject.hpp"
 #include "../Audio/Queue.hpp"
 #include "../Data/Sounds.hpp"
+#include "../Scene.hpp"
 #include <cstdint>
 
 static const anim_t PLAYER_IDLE[] {
@@ -30,6 +31,13 @@ Player::Player()
     this->setAnimation(PLAYER_IDLE, 1);
 }
 
+Player::~Player() {
+    if (this->customCheckpoint != nullptr) {
+        delete this->customCheckpoint;
+    }
+}
+
+
 uint16_t Player::getDrawColor() const {
     if (Game::roomPosition == Vector2<uint8_t>(5, 5))
         return 0x1023;
@@ -41,7 +49,7 @@ uint16_t Player::getDrawColor() const {
         case Glitch::Type::BLUE:
             return 0x1043;
         case Glitch::Type::PINK:
-            return 0x1043;
+            return (Game::stats.frames / 8) % 2 ? 0x1044 : 0x1033;
         default:
             return 0x1034;
     }
@@ -163,6 +171,22 @@ void Player::update() {
         this->velocity = {0, 0};
     this->applyAnimationFromState();
     this->applyOffscreenLogic();
+    this->state &= ~HORIZONTAL_INPUT;
+}
+
+void Player::draw(const Viewport &view) const {
+    GameObject::draw(view);
+    if (!(Game::state & Game::UNLOCKED_HAT))
+        return;
+    uint8_t tileId = 0;
+
+    if (this->animation != nullptr) {
+        tileId = uint8_t(std::abs(this->animation[this->currentFrame]));
+    }
+    auto hatOffset = this->isReverse() ? Vector2<float>(-1, 8) : Vector2<float>(-1, -7);
+    auto hatPosition = Vector2<int32_t>(this->position + hatOffset);
+    *DRAW_COLORS = 0x0103;
+    Data::HAT_SHEET.blitSub(view, tileId, hatPosition, this->flags);
 }
 
 void Player::processInputs() {
@@ -204,6 +228,10 @@ void Player::processInputs() {
         spellIndex = 5;
     if (spellIndex < this->spellbook.size())
         this->setSpell(this->spellbook.at(spellIndex)->getType());
+    if (Input::isHoldingDown(BUTTON_2, 60 * 2)) {
+        Scene::currentScene = Scene::RESET_MENU;
+        Game::setPalette(Game::GRAYSCALE_PALETTE);
+    }
 }
 
 void Player::moveHorizontal(float direction) {
@@ -522,7 +550,6 @@ void Player::applyPhysics() {
         this->stopMove();
     }
     this->applyCollisions();
-    this->state &= ~HORIZONTAL_INPUT;
     this->state &= ~TOUCHING_DOOR;
 }
 
@@ -531,7 +558,7 @@ void Player::applyAnimationFromState() {
         this->setAnimation(PLAYER_RUNNING, sizeof(PLAYER_RUNNING) / sizeof(anim_t));
     } else if (this->velocity.y != 0.0f) {
         this->setAnimation(PLAYER_JUMPING, sizeof(PLAYER_JUMPING) / sizeof(anim_t));
-    } else if (this->velocity.x != 0.0f) {
+    } else if (this->state & HORIZONTAL_INPUT) {
         this->setAnimation(PLAYER_RUNNING, sizeof(PLAYER_RUNNING) / sizeof(anim_t));
     } else {
         this->setAnimation(PLAYER_IDLE, sizeof(PLAYER_IDLE) / sizeof(anim_t));

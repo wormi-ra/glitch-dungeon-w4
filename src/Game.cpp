@@ -49,7 +49,7 @@ uint8_t Game::state = 0;
 
 static Function<void()> loadCallback = nullptr;
 
-static const uint32_t GRAYSCALE_PALETTE[] = {
+const uint32_t Game::GRAYSCALE_PALETTE[] = {
     0x000000,
     0x676767,
     0xb6b6b6,
@@ -57,16 +57,13 @@ static const uint32_t GRAYSCALE_PALETTE[] = {
 };
 
 void Game::start() {
-    Data::interactedEntities[Data::EVENT_CHECKPOINT_2_4] = true;
-    Data::interactedEntities[Data::EVENT_NPC_2_4] = true;
-    Data::interactedEntities[Data::EVENT_NPCS_0_5[0]] = true;
-    Data::interactedEntities[Data::EVENT_NPCS_0_5[1]] = true;
-    Data::interactedEntities[Data::EVENT_NPCS_0_5[2]] = true;
-    Game::setPalette(Game::player.glitch->getPalette());
-    Game::loadRoom(0, 0);
+    if (!Game::load()) {
+        Game::reset();
+    }
 
     // Game::player.artifacts = 2;
     // Game::player.state |= Player::HAS_GRIMOIRE;
+    // Game::state |= Game::UNLOCKED_HAT;
     // Game::state |= Game::GLITCHED;
     // Game::player.spellbook = {
     //     Glitch::SPELLS[1],
@@ -77,8 +74,6 @@ void Game::start() {
     //     Glitch::SPELLS[6],
     //     Glitch::SPELLS[7],
     // };
-    // Game::loadRoom(0, 5);
-    //  Game::loadRoom(4, 2);
 }
 
 void Game::update() {
@@ -115,11 +110,69 @@ void Game::draw() {
 }
 
 void Game::save() {
-
+    Game::Save save = {
+        .header = {
+            .magicNumber = Save::MAGIC_NUMBER,
+            .size = sizeof(Game::Save),
+        },
+        .interactedEntities = Data::interactedEntities,
+        .stats = Game::stats,
+        .spells = {},
+        .playerPosition = Game::player.position,
+        .roomPosition = Game::roomPosition,
+        .respawnRoom = Game::player.respawnRoom,
+        .artifacts = Game::player.artifacts,
+        .checkpointId = Game::player.checkpointId,
+        .gameState = Game::state,
+        .currentGlitch = Game::player.glitch->getType(),
+        .hasGrimoire = bool(Game::player.state & Player::HAS_GRIMOIRE),
+    };
+    uint8_t i = 0;
+    for (const auto &spell : Game::player.spellbook) {
+        save.spells[i] = spell->getType();
+        i++;
+    }
+    w4::diskw(&save, save.header.size);
 }
 
-void Game::load() {
-    
+bool Game::load() {
+    Game::Save save = {};
+    w4::diskr(&save, sizeof(Game::Save));
+    if (save.header.magicNumber != Save::MAGIC_NUMBER || save.header.size != sizeof(Game::Save)) {
+        w4::tracef("Failed to load save (%d, %d)", save.header.magicNumber, save.header.size);
+        return false;
+    }
+    Game::state = save.gameState & Game::UNLOCKED_HAT;
+    if (save.gameState & Game::BEAT_GAME) {
+        return false;
+    }
+    Data::interactedEntities = save.interactedEntities;
+    Game::stats = save.stats;
+    Game::player = Player();
+    Game::player.position = save.playerPosition;
+    Game::roomPosition = save.roomPosition;
+    Game::player.respawnRoom = save.respawnRoom;
+    Game::player.artifacts = save.artifacts;
+    Game::player.checkpointId = save.checkpointId;
+    Game::player.state = uint16_t(save.hasGrimoire ? Player::HAS_GRIMOIRE : 0);
+    for (auto spell : save.spells) {
+        if (spell != Glitch::Type::GREY)
+            Game::player.giveSpell(spell);
+    }
+    Game::applyLoadRoom();
+    Game::player.setSpell(save.currentGlitch, true);
+    return true;
+}
+
+void Game::clearSave() {
+    Game::Save save {
+        .header {
+            .magicNumber = Save::MAGIC_NUMBER,
+            .size = sizeof(Game::Save),
+        },
+    };
+    save.gameState = Game::state & Game::UNLOCKED_HAT;
+    w4::diskw(&save, save.header.size);
 }
 
 void Game::setPalette(const uint32_t *palette) {
@@ -195,6 +248,7 @@ void Game::win() {
         strcat(Game::statsText, itoa(time.milliseconds, 10, 3));
         strcat(Game::statsText, "ms");
     }
+    Game::save();
 }
 
 void Game::reset() {
@@ -204,10 +258,22 @@ void Game::reset() {
         Game::currentRoom = nullptr;
     }
     Data::interactedEntities = {};
+    Data::interactedEntities[Data::EVENT_CHECKPOINT_2_4] = true;
+    Data::interactedEntities[Data::EVENT_NPC_2_4] = true;
+    Data::interactedEntities[Data::EVENT_NPCS_0_5[0]] = true;
+    Data::interactedEntities[Data::EVENT_NPCS_0_5[1]] = true;
+    Data::interactedEntities[Data::EVENT_NPCS_0_5[2]] = true;
     Game::roomPosition = {0, 0};
     Game::stats = {};
     Game::textBox.setText(nullptr, 0);
     Game::state = Game::state & Game::UNLOCKED_HAT;
+    if (Game::player.customCheckpoint != nullptr) {
+        delete Game::player.customCheckpoint;
+        Game::player.customCheckpoint = nullptr;
+    }
+    Game::applyLoadRoom();
+    Game::player.setSpell(Glitch::Type::GREY, true);
+    Game::setPalette(Game::player.glitch->getPalette());
     loadCallback = nullptr;
 }
 

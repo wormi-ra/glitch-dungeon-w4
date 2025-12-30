@@ -32,6 +32,7 @@ class Player : public GameObject {
         uint8_t checkpointId = 0;
 
         Player();
+        ~Player();
 
         Glitch::Glitch &setSpell(Glitch::Type spell, bool forced = false);
         Glitch::Glitch &nextSpell();
@@ -41,8 +42,9 @@ class Player : public GameObject {
         void die();
         void setCheckpoint(Checkpoint &checkpoint);
         const Data::Checkpoint *getCheckpoint() const;
-        virtual uint16_t getDrawColor() const;
-        virtual void update();
+        virtual uint16_t getDrawColor() const override;
+        virtual void update() override;
+        virtual void draw(const Viewport &view) const override;
 
     protected:
         void processInputs();

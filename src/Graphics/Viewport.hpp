@@ -10,7 +10,10 @@ class Viewport {
         Vector2<uint32_t> size{SCREEN_SIZE, SCREEN_SIZE};
         Vector2<int32_t> offset{};
 
-        Viewport();
+        Viewport()
+            : position(), size({SCREEN_SIZE, SCREEN_SIZE}), offset()
+        {}
+
         Viewport(Vector2<int32_t> position, Vector2<uint32_t> size)
             : position(position), size(size)
         {}

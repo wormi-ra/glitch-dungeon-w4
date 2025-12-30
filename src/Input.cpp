@@ -6,12 +6,19 @@
 
 uint8_t Input::m_gamepad[GAMEPAD_COUNT] = {0, 0, 0, 0};
 uint8_t Input::m_previousGamepad[GAMEPAD_COUNT] = {0, 0, 0, 0};
+uint16_t Input::m_holdTimer[GAMEPAD_COUNT] = {0, 0, 0, 0};
 MouseData Input::m_mouse = {{0}, 0};
 MouseData Input::m_previousMouse = {{0}, 0};
 
+
 void Input::update() {
     for (uint8_t i = 0; i < GAMEPAD_COUNT ; i++) {
-        Input::m_previousGamepad[i] = Input::m_gamepad[i];
+        if (Input::m_previousGamepad[i] == Input::m_gamepad[i]) {
+            Input::m_holdTimer[i]++;
+        } else {
+            Input::m_previousGamepad[i] = Input::m_gamepad[i];
+            Input::m_holdTimer[i] = 0;
+        }
     }
     Input::m_previousMouse = Input::m_mouse;
     Input::m_gamepad[0] = *GAMEPAD1;
@@ -47,6 +54,15 @@ bool Input::isPressedDown(uint8_t key, Gamepad gamepad) {
 
 bool Input::isPressedUp(uint8_t key, Gamepad gamepad) {
     return key & Input::unpressedThisFrame(gamepad);
+}
+
+bool Input::isHoldingDown(uint8_t key, uint16_t time, Gamepad gamepad) {
+    auto result = Input::isPressed(key, gamepad)
+        && ((Input::m_previousGamepad[uint8_t(gamepad)] & key) == (Input::m_gamepad[uint8_t(gamepad)] & key))
+        && Input::m_holdTimer[uint8_t(gamepad)] >= time;
+    if (result)
+        Input::m_holdTimer[uint8_t(gamepad)] = 0;
+    return result;
 }
 
 bool Input::isClicked(IntRect rect, uint8_t buttons) {

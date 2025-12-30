@@ -81,12 +81,13 @@ void Collection::draw(const Viewport &view) const {
 }
 
 void Collection::onCollect() {
+    Game::player.artifacts++;
+    Game::save();
     static char getText[32] = "";
     strcpy(getText, "item get:\n");
     strcat(getText, this->getName());
     Game::textBox.setText(getText);
     Data::interactedEntities[this->getId()] = true;
-    Game::player.artifacts++;
     Audio::playSound(&Sounds::PICKUP, 0.7f);
     switch (this->data->collection_id) {
     case Collection::Item::GRIMOIRE:
@@ -125,7 +126,6 @@ void Collection::onCollect() {
     default:
         break;
     }
-    Game::save();
 }
 
 const char *Collection::getName() const {
